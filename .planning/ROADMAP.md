@@ -31,10 +31,13 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. Supabase database connects successfully with authentication configured
   4. Git repository deploys automatically to Netlify staging environment
   5. Images uploaded to CMS are automatically compressed and optimized
-**Plans**: TBD
+**Plans:** 4 plans
 
 Plans:
-- [ ] 01-01: TBD during plan-phase
+- [ ] 01-01-PLAN.md — Next.js 16 project init with TypeScript, Tailwind v4, and project structure
+- [ ] 01-02-PLAN.md — Sanity CMS setup with member/blog schemas and image optimization
+- [ ] 01-03-PLAN.md — Supabase database with RLS policies and privacy-first architecture
+- [ ] 01-04-PLAN.md — Netlify deployment, SEO configuration, and spam protection utilities
 
 ### Phase 2: Landing & Information
 **Goal**: Visitor can understand what Checkmate & Connect is and find basic community information
@@ -122,7 +125,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation & Infrastructure | 0/? | Not started | - |
+| 1. Foundation & Infrastructure | 0/4 | Planned | - |
 | 2. Landing & Information | 0/? | Not started | - |
 | 3. Member Submission System | 0/? | Not started | - |
 | 4. Admin Authentication & Dashboard | 0/? | Not started | - |
