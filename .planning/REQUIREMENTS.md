@@ -119,9 +119,79 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 **Coverage:**
 - v1 requirements: 48 total
-- Mapped to phases: [pending roadmap creation]
-- Unmapped: [pending roadmap creation]
+- Mapped to phases: 48/48 (100%)
+- Unmapped: 0 (none)
+
+### Requirements to Phase Mapping
+
+| Requirement | Phase | Status |
+|-------------|-------|--------|
+| FOUND-01 | Phase 1 | Pending |
+| FOUND-02 | Phase 1 | Pending |
+| FOUND-03 | Phase 1 | Pending |
+| FOUND-04 | Phase 1 | Pending |
+| FOUND-05 | Phase 1 | Pending |
+| FOUND-06 | Phase 1 | Pending |
+| FOUND-07 | Phase 1 | Pending |
+| FOUND-08 | Phase 1 | Pending |
+| FOUND-09 | Phase 1 | Pending |
+| FOUND-10 | Phase 1 | Pending |
+| LAND-01 | Phase 2 | Pending |
+| LAND-02 | Phase 2 | Pending |
+| LAND-03 | Phase 2 | Pending |
+| LAND-04 | Phase 2 | Pending |
+| LAND-05 | Phase 2 | Pending |
+| LAND-06 | Phase 2 | Pending |
+| LAND-07 | Phase 2 | Pending |
+| LAND-08 | Phase 2 | Pending |
+| SUBMIT-01 | Phase 3 | Pending |
+| SUBMIT-02 | Phase 3 | Pending |
+| SUBMIT-03 | Phase 3 | Pending |
+| SUBMIT-04 | Phase 3 | Pending |
+| SUBMIT-05 | Phase 3 | Pending |
+| SUBMIT-06 | Phase 3 | Pending |
+| ADMIN-01 | Phase 4 | Pending |
+| ADMIN-02 | Phase 4 | Pending |
+| ADMIN-08 | Phase 4 | Pending |
+| ADMIN-09 | Phase 4 | Pending |
+| DIR-01 | Phase 5 | Pending |
+| DIR-02 | Phase 5 | Pending |
+| DIR-03 | Phase 5 | Pending |
+| DIR-04 | Phase 5 | Pending |
+| DIR-05 | Phase 5 | Pending |
+| ADMIN-03 | Phase 5 | Pending |
+| ADMIN-04 | Phase 5 | Pending |
+| ADMIN-05 | Phase 5 | Pending |
+| ADMIN-06 | Phase 5 | Pending |
+| ADMIN-07 | Phase 5 | Pending |
+| LAUNCH-01 | Phase 6 | Pending |
+| LAUNCH-02 | Phase 6 | Pending |
+| LAUNCH-03 | Phase 6 | Pending |
+| LAUNCH-04 | Phase 6 | Pending |
+| LAUNCH-05 | Phase 6 | Pending |
+| LAUNCH-06 | Phase 6 | Pending |
+| LAUNCH-07 | Phase 6 | Pending |
+
+### Phase to Requirements Mapping
+
+**Phase 1: Foundation & Infrastructure** (10 requirements)
+- FOUND-01, FOUND-02, FOUND-03, FOUND-04, FOUND-05, FOUND-06, FOUND-07, FOUND-08, FOUND-09, FOUND-10
+
+**Phase 2: Landing & Information** (8 requirements)
+- LAND-01, LAND-02, LAND-03, LAND-04, LAND-05, LAND-06, LAND-07, LAND-08
+
+**Phase 3: Member Submission System** (6 requirements)
+- SUBMIT-01, SUBMIT-02, SUBMIT-03, SUBMIT-04, SUBMIT-05, SUBMIT-06
+
+**Phase 4: Admin Authentication & Dashboard** (4 requirements)
+- ADMIN-01, ADMIN-02, ADMIN-08, ADMIN-09
+
+**Phase 5: Member Directory & Management** (13 requirements)
+- DIR-01, DIR-02, DIR-03, DIR-04, DIR-05, ADMIN-03, ADMIN-04, ADMIN-05, ADMIN-06, ADMIN-07
+
+**Phase 6: Launch Preparation** (7 requirements)
+- LAUNCH-01, LAUNCH-02, LAUNCH-03, LAUNCH-04, LAUNCH-05, LAUNCH-06, LAUNCH-07
 
 ---
 *Requirements defined: 2026-02-14*
-*Last updated: 2026-02-14 after initial definition*
+*Last updated: 2026-02-14 after roadmap creation*
