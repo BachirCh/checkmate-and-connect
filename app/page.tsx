@@ -1,6 +1,7 @@
 import Hero from '@/components/Hero';
 import EventDetails from '@/components/EventDetails';
 import CommunityStats from '@/components/CommunityStats';
+import MeetupWidget from '@/components/MeetupWidget';
 import Footer from '@/components/Footer';
 
 // Calculate next Wednesday at 6pm Casablanca time (UTC+1)
@@ -65,6 +66,7 @@ export default function Home() {
       <Hero />
       <EventDetails />
       <CommunityStats />
+      <MeetupWidget />
       <Footer />
     </>
   );
