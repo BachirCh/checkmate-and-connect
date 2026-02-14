@@ -65,10 +65,11 @@ Plans:
   3. Form submission creates pending member entry in Sanity CMS
   4. Visitor receives confirmation message after successful submission
   5. Form includes spam protection (reCAPTCHA v3 + honeypot + rate limiting)
-**Plans**: TBD
+**Plans:** 2 plans
 
 Plans:
-- [ ] 03-01: TBD during plan-phase
+- [ ] 03-01-PLAN.md — Member submission form with validation, spam protection, Sanity write client, and Server Action
+- [ ] 03-02-PLAN.md — Confirmation page and end-to-end flow verification
 
 ### Phase 4: Admin Authentication & Dashboard
 **Goal**: Admins can securely log in and access management interfaces
