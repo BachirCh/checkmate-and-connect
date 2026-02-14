@@ -1,4 +1,8 @@
-// Supabase browser client
-// TODO: Configured in Plan 03
+import { createBrowserClient } from '@supabase/ssr';
 
-export const supabaseClient = null;
+export function createClient() {
+  return createBrowserClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+  );
+}
