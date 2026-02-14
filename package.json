@@ -17,6 +17,7 @@
     "next-sanity": "^12.1.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-google-recaptcha-v3": "^1.11.0",
     "sanity": "^5.9.0",
     "sanity-plugin-media": "^4.1.1"
   },
