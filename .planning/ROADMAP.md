@@ -34,10 +34,10 @@ Decimal phases appear between their surrounding integers in numeric order.
 **Plans:** 4 plans
 
 Plans:
-- [ ] 01-01-PLAN.md — Next.js 16 project init with TypeScript, Tailwind v4, and project structure
-- [ ] 01-02-PLAN.md — Sanity CMS setup with member/blog schemas and image optimization
-- [ ] 01-03-PLAN.md — Supabase database with RLS policies and privacy-first architecture
-- [ ] 01-04-PLAN.md — Netlify deployment, SEO configuration, and spam protection utilities
+- [x] 01-01-PLAN.md — Next.js 16 project init with TypeScript, Tailwind v4, and project structure
+- [x] 01-02-PLAN.md — Sanity CMS setup with member/blog schemas and image optimization
+- [x] 01-03-PLAN.md — Supabase database with RLS policies and privacy-first architecture
+- [x] 01-04-PLAN.md — Netlify deployment, SEO configuration, and spam protection utilities
 
 ### Phase 2: Landing & Information
 **Goal**: Visitor can understand what Checkmate & Connect is and find basic community information
@@ -49,10 +49,11 @@ Plans:
   3. Visitor can see where meetups happen (Commons, Casablanca, Morocco with location details)
   4. Visitor can view embedded Meetup widget showing next event
   5. Landing page loads fast on mobile 3G connection (Core Web Vitals green)
-**Plans**: TBD
+**Plans:** 2 plans
 
 Plans:
-- [ ] 02-01: TBD during plan-phase
+- [ ] 02-01-PLAN.md — Landing page layout, hero, event details, community stats, footer, SEO metadata, and JSON-LD structured data
+- [ ] 02-02-PLAN.md — Meetup widget embed and visual verification of complete landing page
 
 ### Phase 3: Member Submission System
 **Goal**: Visitors can apply to join the member directory through a spam-protected form
@@ -125,7 +126,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation & Infrastructure | 0/4 | Planned | - |
+| 1. Foundation & Infrastructure | 4/4 | ✅ Complete | 2026-02-14 |
 | 2. Landing & Information | 0/? | Not started | - |
 | 3. Member Submission System | 0/? | Not started | - |
 | 4. Admin Authentication & Dashboard | 0/? | Not started | - |
