@@ -5,33 +5,34 @@
 See: .planning/PROJECT.md (updated 2026-02-14)
 
 **Core value:** Easy to share and explain - when someone asks "what's C&C?", send them a link that clearly shows what the community is, when and where they meet, and who's part of it.
-**Current focus:** Phase 1 - Foundation & Infrastructure
+**Current focus:** Phase 2 - Landing & Information Pages
 
 ## Current Position
 
-Phase: 1 of 6 (Foundation & Infrastructure)
-Plan: 4 of 4 in current phase
-Status: Phase complete
-Last activity: 2026-02-14 - Completed Plan 01-04 (Netlify Deployment and Infrastructure)
+Phase: 2 of 6 (Landing & Information Pages)
+Plan: 1 of 2 in current phase
+Status: In progress
+Last activity: 2026-02-14 - Completed Plan 02-01 (Landing Page with SEO and JSON-LD)
 
-Progress: [████░░░░░░] 40%
+Progress: [█████░░░░░] 50%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 4
+- Total plans completed: 5
 - Average duration: 4 min
-- Total execution time: 0.28 hours
+- Total execution time: 0.33 hours
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 01-foundation-infrastructure | 4 | 17 min | 4 min |
+| 02-landing-information | 1 | 3 min | 3 min |
 
 **Recent Trend:**
-- Last 5 plans: 01-01 (6 min), 01-03 (2 min), 01-02 (6 min), 01-04 (3 min)
-- Trend: Improving
+- Last 5 plans: 01-03 (2 min), 01-02 (6 min), 01-04 (3 min), 02-01 (3 min)
+- Trend: Stable
 
 *Updated after each plan completion*
 
@@ -64,6 +65,9 @@ Recent decisions affecting current work:
 - 01-04: Three-layer spam protection: reCAPTCHA v3 + honeypot + rate limiting
 - 01-04: In-memory rate limiting sufficient for MVP (Redis/Upstash for production scale)
 - 01-04: RecaptchaProvider wraps form pages, not entire app
+- [Phase 02-landing-information]: Inter font with CSS variable integration for Tailwind v4 theme
+- [Phase 02-landing-information]: Dynamic next Wednesday calculation for JSON-LD Event startDate
+- [Phase 02-landing-information]: Emoji icons for event detail cards (no external icon library needed)
 
 ### Pending Todos
 
@@ -82,9 +86,9 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-02-14 (plan execution)
-Stopped at: Completed 01-04-PLAN.md - Netlify Deployment and Infrastructure (Phase 1 Complete)
+Stopped at: Completed 02-01-PLAN.md - Landing Page with SEO and JSON-LD
 Resume file: None
 
 ---
 *State initialized: 2026-02-14*
-*Last updated: 2026-02-14T18:01:00Z*
+*Last updated: 2026-02-14T22:22:00Z*
