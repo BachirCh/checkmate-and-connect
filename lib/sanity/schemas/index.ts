@@ -1,4 +1,4 @@
-// Sanity schema definitions
-// TODO: Defined in Plan 02
+import member from './member';
+import blogPost from './blogPost';
 
-export const schemas: any[] = [];
+export const schemas = [member, blogPost];
