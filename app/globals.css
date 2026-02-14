@@ -1,7 +1,14 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: var(--font-inter);
+  /* Circular-like font stack - using system fonts as fallback */
+  --font-sans: ui-rounded, "SF Pro Rounded", "SF Compact Rounded", -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+
+  /* Dark mode colors - black and white branding */
+  --color-background: #000000;
+  --color-foreground: #ffffff;
+  --color-muted: #1a1a1a;
+  --color-accent: #333333;
 }
 
 html {
@@ -9,6 +16,6 @@ html {
 }
 
 body {
-  background-color: white;
-  color: rgb(17 24 39);
+  background-color: #000000;
+  color: #ffffff;
 }

@@ -2,7 +2,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="w-full bg-gray-900 text-gray-400 py-8">
+    <footer className="w-full bg-black text-gray-500 py-8 border-t border-gray-800">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
           <div className="text-center sm:text-left">
@@ -12,7 +12,7 @@ export default function Footer() {
 
           <div className="flex gap-6">
             <a
-              href="https://www.meetup.com/checkmate-and-connect"
+              href="https://www.meetup.com/checkmate-connect-club-casablanca-chapter/"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-white transition-colors"

@@ -1,6 +1,7 @@
 import Hero from '@/components/Hero';
 import EventDetails from '@/components/EventDetails';
 import CommunityStats from '@/components/CommunityStats';
+import MemberHighlights from '@/components/MemberHighlights';
 import MeetupWidget from '@/components/MeetupWidget';
 import Footer from '@/components/Footer';
 
@@ -66,6 +67,7 @@ export default function Home() {
       <Hero />
       <EventDetails />
       <CommunityStats />
+      <MemberHighlights />
       <MeetupWidget />
       <Footer />
     </>
