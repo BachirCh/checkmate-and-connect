@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-02-14)
 
 **Core value:** Easy to share and explain - when someone asks "what's C&C?", send them a link that clearly shows what the community is, when and where they meet, and who's part of it.
-**Current focus:** Phase 2 - Landing & Information Pages
+**Current focus:** Phase 3 - Member Submission System
 
 ## Current Position
 
-Phase: 2 of 6 (Landing & Information Pages)
-Plan: 2 of 2 in current phase
-Status: Phase complete
-Last activity: 2026-02-14 - Completed Plan 02-02 (Meetup Integration & Visual Design)
+Phase: 3 of 6 (Member Submission System)
+Plan: 1 of 2 in current phase
+Status: In progress
+Last activity: 2026-02-14 - Completed Plan 03-01 (Member Submission Form)
 
-Progress: [██████░░░░] 60%
+Progress: [███████░░░] 70%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 6
-- Average duration: 7 min
-- Total execution time: 0.68 hours
+- Total plans completed: 7
+- Average duration: 6 min
+- Total execution time: 0.73 hours
 
 **By Phase:**
 
@@ -29,9 +29,10 @@ Progress: [██████░░░░] 60%
 |-------|-------|-------|----------|
 | 01-foundation-infrastructure | 4 | 17 min | 4 min |
 | 02-landing-information | 2 | 24 min | 12 min |
+| 03-member-submission-system | 1 | 3 min | 3 min |
 
 **Recent Trend:**
-- Last 5 plans: 01-02 (6 min), 01-04 (3 min), 02-01 (3 min), 02-02 (21 min)
+- Last 5 plans: 01-04 (3 min), 02-01 (3 min), 02-02 (21 min), 03-01 (3 min)
 - Trend: Stable
 
 *Updated after each plan completion*
@@ -73,6 +74,9 @@ Recent decisions affecting current work:
 - [Plan 02-02]: Lazy-loaded Meetup widget iframe for performance on 3G networks
 - [Plan 02-02]: MemberHighlights component with grayscale-to-color hover effect pattern
 - [Plan 02-02]: User-approved landing page design (refinements deferred to later phase)
+- [Plan 03-01]: Separate client/server Zod schemas for File validation (instanceof works in browser, not Node.js)
+- [Plan 03-01]: Next.js redirect() must be called outside try/catch (throws internally)
+- [Plan 03-01]: serverActions bodySizeLimit increased to 10mb for photo uploads
 
 ### Pending Todos
 
@@ -91,9 +95,9 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-02-14 (plan execution)
-Stopped at: Completed 02-02-PLAN.md - Meetup Integration & Visual Design (Phase 2 complete)
+Stopped at: Completed 03-01-PLAN.md - Member Submission Form
 Resume file: None
 
 ---
 *State initialized: 2026-02-14*
-*Last updated: 2026-02-14T22:52:00Z*
+*Last updated: 2026-02-14T23:35:49Z*
