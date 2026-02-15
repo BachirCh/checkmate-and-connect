@@ -20,7 +20,8 @@ export const memberSubmissionSchema = z.object({
       (file) => ['image/jpeg', 'image/png', 'image/webp'].includes(file.type),
       'Photo must be JPEG, PNG, or WebP'
     ),
-  recaptchaToken: z.string().min(1, 'reCAPTCHA verification required'),
+  // recaptchaToken is added programmatically in onSubmit, not a form field
+  recaptchaToken: z.string().optional(),
   _honey: z.string().optional(),
 });
 
