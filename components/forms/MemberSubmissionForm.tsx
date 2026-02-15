@@ -45,11 +45,8 @@ export default function MemberSubmissionForm() {
     formData.append('recaptchaToken', recaptchaToken);
     formData.append('_honey', data._honey || '');
 
-    // Submit via form action
-    const form = document.getElementById('member-submission-form') as HTMLFormElement;
-    if (form) {
-      form.requestSubmit();
-    }
+    // Call the server action directly with our FormData
+    formAction(formData);
   };
 
   // Merge client-side and server-side errors
