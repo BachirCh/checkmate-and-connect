@@ -80,10 +80,11 @@ Plans:
   2. Only authenticated admins can access admin dashboard routes
   3. Unauthenticated users are redirected to login when accessing admin URLs
   4. System supports 2-3 admin user accounts
-**Plans**: TBD
+**Plans:** 2 plans
 
 Plans:
-- [ ] 04-01: TBD during plan-phase
+- [ ] 04-01-PLAN.md — Admin roles SQL migration, auth server actions (login/logout), and Data Access Layer
+- [ ] 04-02-PLAN.md — Route protection (proxy.ts), login page UI, and mobile-responsive dashboard shell
 
 ### Phase 5: Member Directory & Management
 **Goal**: Visitors can browse approved members in public directory; admins can manage member submissions through approval workflow
