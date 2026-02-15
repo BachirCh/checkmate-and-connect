@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
@@ -18,6 +18,7 @@ export default function MemberSubmissionForm() {
     submitMemberAction,
     null,
   );
+  const [isTransitioning, startTransition] = useTransition();
 
   const {
     register,
@@ -40,7 +41,7 @@ export default function MemberSubmissionForm() {
     //   return;
     // }
     // const recaptchaToken = await executeRecaptcha('member_submission');
-    console.log("tttt");
+
     // Create FormData and append all fields
     const formData = new FormData();
     formData.append("name", data.name);
@@ -51,8 +52,10 @@ export default function MemberSubmissionForm() {
     formData.append("recaptchaToken", "disabled-for-testing"); // Placeholder
     formData.append("_honey", data._honey || "");
 
-    // Call the server action directly with our FormData
-    formAction(formData);
+    // Call the server action inside a transition
+    startTransition(() => {
+      formAction(formData);
+    });
   };
 
   // Merge client-side and server-side errors
@@ -170,10 +173,10 @@ export default function MemberSubmissionForm() {
 
         <button
           type="submit"
-          disabled={isPending}
+          disabled={isPending || isTransitioning}
           className="w-full h-12 sm:h-14 px-6 bg-white text-black font-medium rounded hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-black disabled:opacity-50 disabled:cursor-not-allowed touch-manipulation transition-colors"
         >
-          {isPending ? "Submitting..." : "Submit Application"}
+          {isPending || isTransitioning ? "Submitting..." : "Submit Application"}
         </button>
 
         <p className="text-sm text-gray-400 text-center">
