@@ -27,13 +27,13 @@ export default function MemberSubmissionForm() {
   const photoValue = watch('photo');
 
   const onSubmit = async (data: MemberSubmissionData) => {
-    // Get reCAPTCHA token before submission
-    if (!executeRecaptcha) {
-      console.error('reCAPTCHA not available');
-      return;
-    }
-
-    const recaptchaToken = await executeRecaptcha('member_submission');
+    // Get reCAPTCHA token before submission (TEMPORARILY DISABLED)
+    // TODO: Re-enable after configuring reCAPTCHA properly
+    // if (!executeRecaptcha) {
+    //   console.error('reCAPTCHA not available');
+    //   return;
+    // }
+    // const recaptchaToken = await executeRecaptcha('member_submission');
 
     // Create FormData and append all fields
     const formData = new FormData();
@@ -42,7 +42,7 @@ export default function MemberSubmissionForm() {
     formData.append('company', data.company || '');
     formData.append('linkedIn', data.linkedIn || '');
     formData.append('photo', data.photo);
-    formData.append('recaptchaToken', recaptchaToken);
+    formData.append('recaptchaToken', 'disabled-for-testing'); // Placeholder
     formData.append('_honey', data._honey || '');
 
     // Call the server action directly with our FormData

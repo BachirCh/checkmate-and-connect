@@ -31,14 +31,15 @@ export async function submitMemberAction(prevState: any, formData: FormData) {
       };
     }
 
-    // SPAM PROTECTION LAYER 3: reCAPTCHA verification
-    const recaptchaResult = await verifyRecaptcha(recaptchaToken, 'member_submission');
-    if (!recaptchaResult.success || recaptchaResult.score < 0.5) {
-      return {
-        success: false,
-        error: 'reCAPTCHA verification failed. Please try again.',
-      };
-    }
+    // SPAM PROTECTION LAYER 3: reCAPTCHA verification (TEMPORARILY DISABLED)
+    // TODO: Re-enable after configuring reCAPTCHA properly
+    // const recaptchaResult = await verifyRecaptcha(recaptchaToken, 'member_submission');
+    // if (!recaptchaResult.success || recaptchaResult.score < 0.5) {
+    //   return {
+    //     success: false,
+    //     error: 'reCAPTCHA verification failed. Please try again.',
+    //   };
+    // }
 
     // Validate text fields with Zod
     const validationResult = serverMemberSubmissionSchema.safeParse({
