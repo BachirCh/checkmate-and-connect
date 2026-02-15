@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-02-14)
 
 **Core value:** Easy to share and explain - when someone asks "what's C&C?", send them a link that clearly shows what the community is, when and where they meet, and who's part of it.
-**Current focus:** Phase 3 - Member Submission System
+**Current focus:** Phase 4 - Admin Authentication Dashboard
 
 ## Current Position
 
-Phase: 3 of 6 (Member Submission System)
-Plan: 2 of 2 in current phase
-Status: Phase complete
-Last activity: 2026-02-15 - Completed Plan 03-02 (Confirmation Page)
+Phase: 4 of 6 (Admin Authentication Dashboard)
+Plan: 1 of 2 in current phase
+Status: In progress
+Last activity: 2026-02-15 - Completed Plan 04-01 (Admin Role Infrastructure)
 
-Progress: [████████░░] 80%
+Progress: [█████████░] 90%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 8
-- Average duration: 5 min
-- Total execution time: 0.77 hours
+- Total plans completed: 9
+- Average duration: 4 min
+- Total execution time: 0.80 hours
 
 **By Phase:**
 
@@ -30,9 +30,10 @@ Progress: [████████░░] 80%
 | 01-foundation-infrastructure | 4 | 17 min | 4 min |
 | 02-landing-information | 2 | 24 min | 12 min |
 | 03-member-submission-system | 2 | 4 min | 2 min |
+| 04-admin-authentication-dashboard | 1 | 2 min | 2 min |
 
 **Recent Trend:**
-- Last 5 plans: 02-01 (3 min), 02-02 (21 min), 03-01 (3 min), 03-02 (1 min)
+- Last 5 plans: 02-02 (21 min), 03-01 (3 min), 03-02 (1 min), 04-01 (2 min)
 - Trend: Stable
 
 *Updated after each plan completion*
@@ -78,6 +79,11 @@ Recent decisions affecting current work:
 - [Plan 03-01]: Next.js redirect() must be called outside try/catch (throws internally)
 - [Plan 03-01]: serverActions bodySizeLimit increased to 10mb for photo uploads
 - [Phase 03-02]: Dark theme confirmation styling - black bg, white text, gray-800 borders for visual consistency
+- [Plan 04-01]: Custom Access Token Hook injects role from user_roles into JWT claims for RLS policies
+- [Plan 04-01]: getUser() validates JWT against auth server, getSession() only reads local JWT (security)
+- [Plan 04-01]: Login action enforces admin role check and signs out non-admins immediately
+- [Plan 04-01]: verifySession wrapped in React cache() for per-request memoization
+- [Plan 04-01]: server-only import prevents accidental client-side DAL usage
 
 ### Pending Todos
 
@@ -96,9 +102,9 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-02-15 (plan execution)
-Stopped at: Completed 03-02-PLAN.md - Confirmation Page
+Stopped at: Completed 04-01-PLAN.md - Admin Role Infrastructure
 Resume file: None
 
 ---
 *State initialized: 2026-02-14*
-*Last updated: 2026-02-15T09:59:28Z*
+*Last updated: 2026-02-15T10:35:20Z*
