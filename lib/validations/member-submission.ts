@@ -7,10 +7,12 @@ export const memberSubmissionSchema = z.object({
   company: z.string().max(100, 'Company must be less than 100 characters').optional().or(z.literal('')),
   linkedIn: z
     .string()
-    .url('LinkedIn URL must be a valid URL')
-    .regex(/linkedin\.com/, 'LinkedIn URL must be from linkedin.com')
     .optional()
-    .or(z.literal('')),
+    .or(z.literal(''))
+    .refine(
+      (val) => !val || val === '' || (val.startsWith('http') && val.includes('linkedin.com')),
+      'LinkedIn URL must be a valid URL from linkedin.com'
+    ),
   photo: z
     .instanceof(File, { message: 'Photo is required' })
     .refine((file) => file.size <= 5 * 1024 * 1024, 'Photo must be less than 5MB')
@@ -31,10 +33,12 @@ export const serverMemberSubmissionSchema = z.object({
   company: z.string().max(100, 'Company must be less than 100 characters').optional().or(z.literal('')),
   linkedIn: z
     .string()
-    .url('LinkedIn URL must be a valid URL')
-    .regex(/linkedin\.com/, 'LinkedIn URL must be from linkedin.com')
     .optional()
-    .or(z.literal('')),
+    .or(z.literal(''))
+    .refine(
+      (val) => !val || val === '' || (val.startsWith('http') && val.includes('linkedin.com')),
+      'LinkedIn URL must be a valid URL from linkedin.com'
+    ),
   recaptchaToken: z.string().min(1, 'reCAPTCHA verification required'),
   _honey: z.string().optional(),
 });
