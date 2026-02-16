@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-02-14)
 
 **Core value:** Easy to share and explain - when someone asks "what's C&C?", send them a link that clearly shows what the community is, when and where they meet, and who's part of it.
-**Current focus:** Phase 4 - Admin Authentication Dashboard
+**Current focus:** Phase 5 - Member Directory & Management
 
 ## Current Position
 
-Phase: 4 of 6 (Admin Authentication Dashboard)
-Plan: 1 of 2 in current phase
-Status: In progress
-Last activity: 2026-02-15 - Completed Plan 04-01 (Admin Role Infrastructure)
+Phase: 5 of 6 (Member Directory & Management)
+Plan: 1 of 3 complete
+Status: In progress - public member directory built
+Last activity: 2026-02-16 - Completed Plan 05-01 (Public Member Directory)
 
-Progress: [█████████░] 90%
+Progress: [██████░░░░░░░░░░░░░░] 33% (Phase 5)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 9
-- Average duration: 4 min
-- Total execution time: 0.80 hours
+- Total plans completed: 12
+- Average duration: 4.8 min
+- Total execution time: 1.00 hours
 
 **By Phase:**
 
@@ -30,10 +30,11 @@ Progress: [█████████░] 90%
 | 01-foundation-infrastructure | 4 | 17 min | 4 min |
 | 02-landing-information | 2 | 24 min | 12 min |
 | 03-member-submission-system | 2 | 4 min | 2 min |
-| 04-admin-authentication-dashboard | 1 | 2 min | 2 min |
+| 04-admin-authentication-dashboard | 2 | 9 min | 4.5 min |
+| 05-member-directory-management | 1 | 2 min | 2 min |
 
 **Recent Trend:**
-- Last 5 plans: 02-02 (21 min), 03-01 (3 min), 03-02 (1 min), 04-01 (2 min)
+- Last 5 plans: 03-01 (3 min), 03-02 (1 min), 04-01 (2 min), 04-02 (7 min), 05-01 (2 min)
 - Trend: Stable
 
 *Updated after each plan completion*
@@ -84,6 +85,16 @@ Recent decisions affecting current work:
 - [Plan 04-01]: Login action enforces admin role check and signs out non-admins immediately
 - [Plan 04-01]: verifySession wrapped in React cache() for per-request memoization
 - [Plan 04-01]: server-only import prevents accidental client-side DAL usage
+- [Plan 04-02]: Next.js 16 proxy.ts (replaces middleware.ts) for route protection with Node.js runtime
+- [Plan 04-02]: React 19 useActionState hook for progressive enhancement in login form
+- [Plan 04-02]: Responsive admin layout with hamburger menu collapse on mobile
+- [Phase 04 Resolution]: Custom Access Token Hook puts role in JWT claims, NOT app_metadata (must decode JWT to access role)
+- [Phase 04 Resolution]: Both login action AND verifySession must decode JWT for consistent role verification
+- [Phase 04 Resolution]: RLS policies require GRANT SELECT to supabase_auth_admin for user_roles table access
+- [Plan 05-01]: Server Components for member directory fetching (eliminates loading states, better SEO)
+- [Plan 05-01]: Sanity CDN auto-format delivers WebP/AVIF based on browser capabilities
+- [Plan 05-01]: Mobile-first responsive grid (2/3/4 column breakpoints) for member directory
+- [Plan 05-01]: status=="approved" filter enforced in all GROQ queries for privacy compliance
 
 ### Pending Todos
 
@@ -101,10 +112,11 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-02-15 (plan execution)
-Stopped at: Completed 04-01-PLAN.md - Admin Role Infrastructure
+Last session: 2026-02-16 (plan execution)
+Stopped at: Completed 05-01-PLAN.md - Public Member Directory
 Resume file: None
+Next action: Execute Plan 05-02 (Admin Member Management) with /gsd:execute-phase 05
 
 ---
 *State initialized: 2026-02-14*
-*Last updated: 2026-02-15T10:35:20Z*
+*Last updated: 2026-02-16T16:52:00Z*
