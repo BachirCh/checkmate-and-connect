@@ -99,12 +99,13 @@ Plans:
   6. Admin can edit existing member profiles
   7. Admin can remove members from directory
   8. Directory page is mobile-responsive and includes member count
-**Plans**: 3 plans
+**Plans**: 4 plans
 
 Plans:
 - [ ] 05-01-PLAN.md — Public member directory with responsive grid and Sanity CDN image optimization
 - [ ] 05-02-PLAN.md — Admin member management with Server Actions and real-time dashboard statistics
 - [ ] 05-03-PLAN.md — End-to-end verification of public directory and admin approval workflow
+- [ ] 05-04-PLAN.md — Edit Member UI (gap closure: wire editMember Server Action to admin interface)
 
 ### Phase 6: Launch Preparation
 **Goal**: Site is production-ready, verified on real devices, and validated against pre-launch checklist
@@ -134,7 +135,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 | 2. Landing & Information | 2/2 | ✅ Complete | 2026-02-14 |
 | 3. Member Submission System | 0/? | Not started | - |
 | 4. Admin Authentication & Dashboard | 2/2 | ✅ Complete | 2026-02-15 |
-| 5. Member Directory & Management | 0/3 | Not started | - |
+| 5. Member Directory & Management | 0/4 | Not started | - |
 | 6. Launch Preparation | 0/? | Not started | - |
 
 ---
