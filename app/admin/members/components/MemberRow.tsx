@@ -39,6 +39,7 @@ export default function MemberRow({ member }: MemberRowProps) {
   );
 
   return (
+    <>
     <tr className="border-b border-gray-800 hover:bg-gray-900 transition-colors">
       {/* Photo */}
       <td className="p-4">
@@ -117,13 +118,13 @@ export default function MemberRow({ member }: MemberRowProps) {
         )}
       </td>
     </tr>
-    <>
-      {/* Edit Modal */}
-      <EditMemberModal
-        member={member}
-        open={editOpen}
-        onClose={() => setEditOpen(false)}
-      />
+
+    {/* Edit Modal */}
+    <EditMemberModal
+      member={member}
+      open={editOpen}
+      onClose={() => setEditOpen(false)}
+    />
     </>
   );
 }
