@@ -15,7 +15,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [ ] **Phase 1: Foundation & Infrastructure** - Technical stack and development environment
 - [ ] **Phase 2: Landing & Information** - Public-facing landing page with community details
 - [ ] **Phase 3: Member Submission System** - Form for visitors to apply for directory inclusion
-- [ ] **Phase 4: Admin Authentication & Dashboard** - Secure access to management interfaces
+- [x] **Phase 4: Admin Authentication & Dashboard** - Secure access to management interfaces
 - [ ] **Phase 5: Member Directory & Management** - Public directory and admin approval workflow
 - [ ] **Phase 6: Launch Preparation** - Pre-launch validation and quality assurance
 
@@ -83,8 +83,8 @@ Plans:
 **Plans:** 2 plans
 
 Plans:
-- [ ] 04-01-PLAN.md — Admin roles SQL migration, auth server actions (login/logout), and Data Access Layer
-- [ ] 04-02-PLAN.md — Route protection (proxy.ts), login page UI, and mobile-responsive dashboard shell
+- [x] 04-01-PLAN.md — Admin roles SQL migration, auth server actions (login/logout), and Data Access Layer
+- [x] 04-02-PLAN.md — Route protection (proxy.ts), login page UI, and mobile-responsive dashboard shell
 
 ### Phase 5: Member Directory & Management
 **Goal**: Visitors can browse approved members in public directory; admins can manage member submissions through approval workflow
@@ -99,10 +99,12 @@ Plans:
   6. Admin can edit existing member profiles
   7. Admin can remove members from directory
   8. Directory page is mobile-responsive and includes member count
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
-- [ ] 05-01: TBD during plan-phase
+- [ ] 05-01-PLAN.md — Public member directory with responsive grid and Sanity CDN image optimization
+- [ ] 05-02-PLAN.md — Admin member management with Server Actions and real-time dashboard statistics
+- [ ] 05-03-PLAN.md — End-to-end verification of public directory and admin approval workflow
 
 ### Phase 6: Launch Preparation
 **Goal**: Site is production-ready, verified on real devices, and validated against pre-launch checklist
@@ -131,10 +133,10 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 | 1. Foundation & Infrastructure | 4/4 | ✅ Complete | 2026-02-14 |
 | 2. Landing & Information | 2/2 | ✅ Complete | 2026-02-14 |
 | 3. Member Submission System | 0/? | Not started | - |
-| 4. Admin Authentication & Dashboard | 0/? | Not started | - |
-| 5. Member Directory & Management | 0/? | Not started | - |
+| 4. Admin Authentication & Dashboard | 2/2 | ✅ Complete | 2026-02-15 |
+| 5. Member Directory & Management | 0/3 | Not started | - |
 | 6. Launch Preparation | 0/? | Not started | - |
 
 ---
 *Roadmap created: 2026-02-14*
-*Last updated: 2026-02-14*
+*Last updated: 2026-02-16*
