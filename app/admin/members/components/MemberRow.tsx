@@ -1,8 +1,9 @@
 'use client';
 
-import { useActionState } from 'react';
+import { useActionState, useState } from 'react';
 import { approveMember, rejectMember, deleteMember } from '@/app/actions/members';
 import { urlFor } from '@/lib/sanity/imageUrl';
+import EditMemberModal from './EditMemberModal';
 
 type Member = {
   _id: string;
@@ -22,6 +23,8 @@ type MemberRowProps = {
 };
 
 export default function MemberRow({ member }: MemberRowProps) {
+  const [editOpen, setEditOpen] = useState(false);
+
   const [approveState, approveAction, approvePending] = useActionState(
     async () => await approveMember(member._id),
     null
@@ -85,6 +88,12 @@ export default function MemberRow({ member }: MemberRowProps) {
               </form>
             </>
           )}
+          <button
+            onClick={() => setEditOpen(true)}
+            className="px-3 py-1 text-sm bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
+          >
+            Edit
+          </button>
           <form action={deleteAction}>
             <button
               type="submit"
@@ -108,5 +117,13 @@ export default function MemberRow({ member }: MemberRowProps) {
         )}
       </td>
     </tr>
+    <>
+      {/* Edit Modal */}
+      <EditMemberModal
+        member={member}
+        open={editOpen}
+        onClose={() => setEditOpen(false)}
+      />
+    </>
   );
 }
