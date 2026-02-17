@@ -37,7 +37,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     // Fetch blog post slugs from Sanity
     const blogPosts = await client.fetch<Array<{ slug: string; _updatedAt: string }>>(
-      `*[_type == "post" && defined(slug.current)] | order(_updatedAt desc) {
+      `*[_type == "blogPost" && defined(slug.current) && defined(publishedAt)] | order(_updatedAt desc) {
         "slug": slug.current,
         _updatedAt
       }`
