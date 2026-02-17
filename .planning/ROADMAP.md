@@ -140,6 +140,17 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 | 5. Member Directory & Management | 0/4 | Complete    | 2026-02-16 |
 | 6. Launch Preparation | 0/? | Not started | - |
 
+### Phase 7: Add blog functionality
+
+**Goal:** Visitors can read published blog posts with rich content, share on social media, and blog pages are SEO-optimized for search engines
+**Depends on:** Phase 6
+**Plans:** 3 plans
+
+Plans:
+- [ ] 07-01-PLAN.md — Blog listing and detail pages with Portable Text rendering
+- [ ] 07-02-PLAN.md — Social sharing, JSON-LD structured data, and sitemap bug fix
+- [ ] 07-03-PLAN.md — Webhook revalidation endpoint and end-to-end verification
+
 ---
 *Roadmap created: 2026-02-14*
 *Last updated: 2026-02-16*
