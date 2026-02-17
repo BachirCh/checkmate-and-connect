@@ -13,7 +13,7 @@ export const membersQuery = `*[_type == "member" && status == "approved"] | orde
   approvedAt
 }`;
 
-export const blogPostsQuery = `*[_type == "blogPost"] | order(publishedAt desc) {
+export const blogPostsQuery = `*[_type == "blogPost" && defined(publishedAt)] | order(publishedAt desc) {
   _id,
   title,
   slug,
