@@ -1,0 +1,76 @@
+name: Backup Verification
+
+# Purpose: Automated monthly verification that backups can be created successfully
+# This workflow tests backup creation but NOT restoration (too complex for automation)
+# Manual quarterly restoration tests should be performed per docs/backup-restoration-runbook.md
+
+on:
+  # Run on the 1st of every month at midnight UTC
+  schedule:
+    - cron: '0 0 1 * *'
+
+  # Allow manual trigger from GitHub Actions UI for testing
+  workflow_dispatch:
+
+jobs:
+  verify-backups:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install Supabase CLI
+        run: npm install -g supabase
+
+      - name: Install Sanity CLI
+        run: npm install -g @sanity/cli
+
+      - name: Authenticate Sanity
+        run: |
+          # SANITY_TOKEN should be set in GitHub Secrets with Viewer role
+          # Create token at: https://sanity.io/manage → API → Tokens
+          echo "Sanity CLI will use SANITY_AUTH_TOKEN environment variable"
+        env:
+          SANITY_AUTH_TOKEN: ${{ secrets.SANITY_TOKEN }}
+
+      - name: Create backups directory
+        run: mkdir -p backups/{supabase,sanity}
+
+      - name: Run backup verification script
+        run: bash scripts/verify-backups.sh
+        env:
+          SUPABASE_PROJECT_REF: ${{ secrets.SUPABASE_PROJECT_REF }}
+          SANITY_AUTH_TOKEN: ${{ secrets.SANITY_TOKEN }}
+
+      - name: Upload backup artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: backups-${{ github.run_number }}
+          path: backups/
+          retention-days: 30
+        # Upload artifacts even if verification script fails (partial backups useful for debugging)
+        if: always()
+
+# TODO: Configure required GitHub secrets before workflow will run successfully
+# Required secrets (Settings → Secrets and variables → Actions):
+# 1. SUPABASE_PROJECT_REF - Your Supabase project reference ID
+#    - Find in: Supabase Dashboard → Project Settings → General → Reference ID
+# 2. SANITY_TOKEN - Sanity authentication token with Viewer role
+#    - Create at: https://sanity.io/manage → [Your Project] → API → Tokens → Add token
+#    - Permissions: Viewer (read-only access sufficient for exports)
+#    - Description: "GitHub Actions backup verification"
+
+# Artifacts stored for 30 days allows:
+# - Verification that backups are being created on schedule
+# - Download and test restoration manually if needed
+# - Audit trail of backup history
+
+# Note: This workflow tests CREATION of backups, not RESTORATION
+# Restoration testing requires manual procedures documented in:
+# docs/backup-restoration-runbook.md (quarterly testing schedule)
