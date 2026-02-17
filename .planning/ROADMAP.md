@@ -119,10 +119,12 @@ Plans:
   5. Contact form spam protection tested with simulated attacks
   6. Performance validated (Core Web Vitals green, mobile 3G load time under 3 seconds)
   7. Google Search Console configured and initial indexing confirmed
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
-- [ ] 06-01: TBD during plan-phase
+- [ ] 06-01-PLAN.md — Performance & device testing with Lighthouse CI and physical device validation
+- [ ] 06-02-PLAN.md — Backup & recovery verification for Supabase and Sanity with restoration testing
+- [ ] 06-03-PLAN.md — SEO & production launch verification with Google Search Console setup
 
 ## Progress
 
