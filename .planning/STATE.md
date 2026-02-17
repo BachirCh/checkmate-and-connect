@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-02-14)
 
 **Core value:** Easy to share and explain - when someone asks "what's C&C?", send them a link that clearly shows what the community is, when and where they meet, and who's part of it.
-**Current focus:** Phase 5 - Member Directory & Management
+**Current focus:** Phase 7 - Add Blog Functionality
 
 ## Current Position
 
-Phase: 6 of 6 (Launch Preparation)
-Plan: 1 of 4 complete (06-02a)
-Status: In Progress - automated backup scripts implemented
-Last activity: 2026-02-17 - Completed Plan 06-02a (Backup Scripts)
+Phase: 7 of 7 (Add Blog Functionality)
+Plan: 1 of 3 complete (07-01)
+Status: In Progress - public blog pages implemented
+Last activity: 2026-02-17 - Completed Plan 07-01 (Public Blog Pages)
 
-Progress: [█████░░░░░░░░░░░░░░░] 25% (Phase 6)
+Progress: [███████░░░░░░░░░░░░░] 33% (Phase 7)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 16
-- Average duration: 4.9 min
-- Total execution time: 1.34 hours
+- Total plans completed: 17
+- Average duration: 4.8 min
+- Total execution time: 1.37 hours
 
 **By Phase:**
 
@@ -33,9 +33,10 @@ Progress: [█████░░░░░░░░░░░░░░░] 25% (Ph
 | 04-admin-authentication-dashboard | 2 | 9 min | 4.5 min |
 | 05-member-directory-management | 4 | 21 min | 5 min |
 | 06-launch-preparation | 1 | 2 min | 2 min |
+| 07-add-blog-functionality | 1 | 2 min | 2 min |
 
 **Recent Trend:**
-- Last 5 plans: 05-01 (2 min), 05-02 (2 min), 05-03 (15 min), 05-04 (2 min), 06-02a (2 min)
+- Last 5 plans: 05-02 (2 min), 05-03 (15 min), 05-04 (2 min), 06-02a (2 min), 07-01 (2 min)
 - Trend: Stable (verification checkpoints take longer, automated scripts fast)
 
 *Updated after each plan completion*
@@ -109,6 +110,15 @@ Recent decisions affecting current work:
 - [Plan 06-02a]: 30-day retention policy for Sanity backups with automatic cleanup prevents storage bloat
 - [Plan 06-02a]: Backup size validation (>1KB) catches empty/failed backups before declaring success
 - [Plan 06-02a]: Backup verification orchestrator designed for GitHub Actions integration with prerequisite checks
+- [Phase 07-01]: Portable Text components defined outside component to avoid recreation on every render
+- [Phase 07-01]: BlogPostContent uses 'use client' directive (PortableText requires client-side)
+- [Phase 07-01]: Cover images optimized to 16:9 (800x450) for cards, 2:1 (1200x600) for detail pages, OG images 1200x630
+
+### Roadmap Evolution
+
+[Phases added or modified after initial roadmap creation]
+
+- Phase 7 added: Add blog functionality
 
 ### Pending Todos
 
@@ -127,10 +137,10 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-02-17 (plan execution)
-Stopped at: Completed 06-02a-PLAN.md - Backup Scripts (Phase 6 in progress)
+Stopped at: Completed 07-01-PLAN.md - Public Blog Pages
 Resume file: None
-Next action: Continue Phase 6 with Plan 06-02b (Backup Automation & Restoration Runbook)
+Next action: Continue Phase 7 with Plan 07-02 (Blog Enhancements)
 
 ---
 *State initialized: 2026-02-14*
-*Last updated: 2026-02-17T10:59:25Z*
+*Last updated: 2026-02-17T18:09:03Z*
