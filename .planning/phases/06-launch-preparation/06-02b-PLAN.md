@@ -182,6 +182,10 @@ GitHub Actions workflow configured to run monthly backup verification with artif
 </task>
 
 <task type="checkpoint:human-verify" gate="blocking">
+  <name>Task 3: Verify backup restoration procedures and runbook accuracy</name>
+  <action>
+Human verification of complete backup and disaster recovery system for both Supabase and Sanity with automated verification and comprehensive runbook.
+  </action>
   <what-built>
 Complete backup and disaster recovery system for both Supabase and Sanity with automated verification and comprehensive runbook.
   </what-built>
@@ -281,6 +285,12 @@ sanity dataset list
 
 **CRITICAL:** If restoration fails, the backup system is not production-ready. Fix issues before launch.
   </how-to-verify>
+  <verify>
+Test backup creation and restoration procedures for both Supabase and Sanity per instructions in how-to-verify section.
+  </verify>
+  <done>
+Both Supabase and Sanity backup systems validated with successful restoration testing, runbook procedures verified as accurate, and GitHub secrets configured for automated workflow.
+  </done>
   <resume-signal>
 Type "approved" if both backup systems work and restoration procedures are verified, OR describe restoration failures that need fixing.
   </resume-signal>
