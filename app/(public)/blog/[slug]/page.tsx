@@ -3,6 +3,7 @@ import { blogPostBySlugQuery } from '@/lib/sanity/queries';
 import { urlFor } from '@/lib/sanity/imageUrl';
 import { notFound } from 'next/navigation';
 import BlogPostContent from '@/components/BlogPostContent';
+import ShareButton from '@/components/ShareButton';
 import type { Metadata } from 'next';
 
 type Props = {
@@ -67,10 +68,50 @@ export default async function BlogPostPage({ params }: Props) {
     notFound();
   }
 
+  // Generate full URL for sharing
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://example.com';
+  const fullUrl = `${baseUrl}/blog/${slug}`;
+
+  // Create JSON-LD structured data for SEO
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: post.title,
+    description: post.excerpt || '',
+    image: post.coverImage
+      ? urlFor(post.coverImage).width(1200).height(630).url()
+      : undefined,
+    datePublished: post.publishedAt,
+    author: {
+      '@type': 'Person',
+      name: post.author,
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Checkmate & Connect',
+      url: baseUrl,
+    },
+  };
+
   return (
     <main className="min-h-screen bg-black text-white">
+      {/* JSON-LD structured data for SEO */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
       <article className="max-w-3xl mx-auto px-4 py-16">
         <BlogPostContent post={post} />
+
+        {/* Social sharing button */}
+        <div className="mt-8 pt-8 border-t border-gray-800">
+          <ShareButton
+            title={post.title}
+            text={post.excerpt || post.title}
+            url={fullUrl}
+          />
+        </div>
       </article>
     </main>
   );
