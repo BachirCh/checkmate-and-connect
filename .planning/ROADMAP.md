@@ -151,6 +151,17 @@ Plans:
 - [ ] 07-02-PLAN.md — Social sharing, JSON-LD structured data, and sitemap bug fix
 - [ ] 07-03-PLAN.md — Webhook revalidation endpoint and end-to-end verification
 
+### Phase 8: Event Submission & Management
+
+**Goal:** Community members can submit events (no auth required) with hybrid time model (one-time datetime or recurring pattern), admins review and approve via workflow, visitors see upcoming events (future one-time + recurring) and all events (complete history)
+**Depends on:** Phase 7
+**Plans:** 3 plans
+
+Plans:
+- [ ] 08-01-PLAN.md — Event schema with hybrid time model and public submission form with spam protection
+- [ ] 08-02-PLAN.md — Admin event approval workflow with filterable table and dashboard statistics
+- [ ] 08-03-PLAN.md — Public events listing with upcoming/all sections and time-based filtering
+
 ---
 *Roadmap created: 2026-02-14*
 *Last updated: 2026-02-16*
