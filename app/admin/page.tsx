@@ -6,15 +6,30 @@ export default async function AdminDashboard() {
   // Verify admin session (redirects if not authenticated/authorized)
   const session = await verifySession();
 
-  // Fetch real member statistics in parallel
+  // Fetch member and event statistics in parallel
   const weekAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
-  const [pendingCount, approvedCount, recentCount] = await Promise.all([
-    client.fetch<number>(`count(*[_type == "member" && status == "pending"])`),
-    client.fetch<number>(`count(*[_type == "member" && status == "approved"])`),
-    client.fetch<number>(`count(*[_type == "member" && approvedAt > $weekAgo])`, {
-      weekAgo,
-    }),
+  const [memberStats, eventStats] = await Promise.all([
+    // Member queries
+    Promise.all([
+      client.fetch<number>(`count(*[_type == "member" && status == "pending"])`),
+      client.fetch<number>(`count(*[_type == "member" && status == "approved"])`),
+      client.fetch<number>(`count(*[_type == "member" && approvedAt > $weekAgo])`, {
+        weekAgo,
+      }),
+    ]),
+    // Event queries
+    Promise.all([
+      client.fetch<number>(`count(*[_type == "event" && status == "pending"])`),
+      client.fetch<number>(`count(*[_type == "event" && status == "approved"])`),
+      client.fetch<number>(
+        `count(*[_type == "event" && defined(submittedAt) && submittedAt > $weekAgo])`,
+        { weekAgo }
+      ),
+    ]),
   ]);
+
+  const [pendingCount, approvedCount, recentCount] = memberStats;
+  const [pendingEvents, approvedEvents, recentEvents] = eventStats;
 
   return (
     <div className="space-y-8">
@@ -67,6 +82,34 @@ export default async function AdminDashboard() {
           </Link>
         </div>
       )}
+
+      {/* Events Section */}
+      <section>
+        <h2 className="text-2xl font-bold mb-4">Events</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+          <div className="bg-gray-900 p-6 rounded-lg border border-gray-800">
+            <p className="text-gray-400 text-sm mb-2">Pending Review</p>
+            <p className="text-4xl font-bold">{pendingEvents}</p>
+          </div>
+          <div className="bg-gray-900 p-6 rounded-lg border border-gray-800">
+            <p className="text-gray-400 text-sm mb-2">Approved</p>
+            <p className="text-4xl font-bold">{approvedEvents}</p>
+          </div>
+          <div className="bg-gray-900 p-6 rounded-lg border border-gray-800">
+            <p className="text-gray-400 text-sm mb-2">Recent Submissions</p>
+            <p className="text-4xl font-bold">{recentEvents}</p>
+            <p className="text-gray-500 text-xs mt-1">Last 7 days</p>
+          </div>
+        </div>
+        {pendingEvents > 0 && (
+          <Link
+            href="/admin/events?status=pending"
+            className="inline-block px-4 py-2 bg-white text-black rounded hover:bg-gray-200 transition-colors"
+          >
+            Review {pendingEvents} Pending {pendingEvents === 1 ? 'Event' : 'Events'}
+          </Link>
+        )}
+      </section>
     </div>
   );
 }
