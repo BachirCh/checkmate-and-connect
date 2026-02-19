@@ -9,19 +9,19 @@ See: .planning/PROJECT.md (updated 2026-02-14)
 
 ## Current Position
 
-Phase: 7 of 7 (Add Blog Functionality)
-Plan: 3 of 3 complete (07-03)
-Status: Complete - All blog functionality implemented and verified
-Last activity: 2026-02-18 - Completed Plan 07-03 (Webhook Revalidation)
+Phase: 8 of 8 (Event Submission & Management)
+Plan: 3 of 3 complete (08-03)
+Status: Complete - Public events listing with dual sections implemented
+Last activity: 2026-02-19 - Completed Plan 08-03 (Public Events Listing)
 
-Progress: [████████████████████] 100% (Phase 7)
+Progress: [████████████████████] 100% (Phase 8)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 19
-- Average duration: 4.4 min
-- Total execution time: 1.40 hours
+- Total plans completed: 22
+- Average duration: 5.3 min
+- Total execution time: 1.97 hours
 
 **By Phase:**
 
@@ -34,13 +34,14 @@ Progress: [████████████████████] 100% (P
 | 05-member-directory-management | 4 | 21 min | 5 min |
 | 06-launch-preparation | 1 | 2 min | 2 min |
 | 07-add-blog-functionality | 3 | 4 min | 1.3 min |
+| 08-event-submission-management | 3 | 34 min | 11.3 min |
 
 **Recent Trend:**
-- Last 5 plans: 05-04 (2 min), 06-02a (2 min), 07-01 (2 min), 07-02 (1 min), 07-03 (1 min)
-- Trend: Stable (verification checkpoints take longer, automated scripts fast)
+- Last 5 plans: 07-01 (2 min), 07-02 (1 min), 07-03 (1 min), 08-01 (5 min), 08-02 (6 min)
+- Trend: Phase 8 longer due to full-stack feature implementation (form + admin + public pages)
 
 *Updated after each plan completion*
-| Phase 07 P03 | 1 | 3 tasks | 2 files |
+| Phase 08 P03 | 23 | 3 tasks | 3 files |
 
 ## Accumulated Context
 
@@ -120,12 +121,22 @@ Recent decisions affecting current work:
 - [Plan 07-03]: Webhook configuration deferred to production deployment (user choice during checkpoint)
 - [Plan 07-03]: Signature verification using next-sanity parseBody for HMAC validation
 - [Plan 07-03]: Dual path revalidation - always /blog listing, conditionally /blog/[slug] detail page
+- [Plan 08-01]: Event schema includes eventType field ('one-time' or 'recurring') with conditional datetime/pattern fields
+- [Plan 08-01]: Server Action handles file upload with Sanity asset API before document creation
+- [Plan 08-01]: Events default to 'pending' status matching member privacy pattern
+- [Plan 08-02]: Admin event management with status filtering (all/pending/approved/rejected)
+- [Plan 08-02]: Dual path revalidation on approval - /admin/events and /events for immediate visibility
+- [Plan 08-02]: Event statistics displayed in admin dashboard (total, pending, approved counts)
+- [Plan 08-03]: GROQ now() function for server-side datetime filtering ensures consistent timezone handling
+- [Plan 08-03]: Recurring events always appear in Upcoming Events section (no end date logic)
+- [Plan 08-03]: Event time display conditional on eventType (pattern text for recurring, formatted datetime for one-time)
 
 ### Roadmap Evolution
 
 [Phases added or modified after initial roadmap creation]
 
 - Phase 7 added: Add blog functionality
+- Phase 8 added: Event Submission & Management
 
 ### Pending Todos
 
@@ -143,11 +154,11 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-02-18 (plan execution)
-Stopped at: Completed 07-03-PLAN.md - Webhook Revalidation (Phase 7 COMPLETE)
+Last session: 2026-02-19 (plan execution)
+Stopped at: Completed 08-03-PLAN.md - Public Events Listing (Phase 8 COMPLETE)
 Resume file: None
-Next action: Phase 7 complete. All blog functionality implemented and verified.
+Next action: Phase 8 complete. All event submission and management functionality implemented.
 
 ---
 *State initialized: 2026-02-14*
-*Last updated: 2026-02-18T16:41:15Z*
+*Last updated: 2026-02-19T14:31:00Z*
