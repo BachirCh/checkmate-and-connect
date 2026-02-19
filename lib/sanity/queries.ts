@@ -33,3 +33,37 @@ export const blogPostBySlugQuery = `*[_type == "blogPost" && slug.current == $sl
   publishedAt,
   author
 }`;
+
+export const upcomingEventsQuery = `*[
+  _type == "event"
+  && status == "approved"
+  && (
+    eventType == "recurring"
+    || dateTime(eventDateTime) > dateTime(now())
+  )
+] | order(eventDateTime asc) {
+  _id,
+  title,
+  slug,
+  image,
+  description,
+  eventType,
+  eventDateTime,
+  recurrencePattern,
+  author
+}`;
+
+export const allEventsQuery = `*[
+  _type == "event"
+  && status == "approved"
+] | order(eventDateTime desc) {
+  _id,
+  title,
+  slug,
+  image,
+  description,
+  eventType,
+  eventDateTime,
+  recurrencePattern,
+  author
+}`;
