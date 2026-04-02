@@ -1,5 +1,5 @@
 import { client } from '@/lib/sanity/client';
-import MemberGrid from '@/components/MemberGrid';
+import TeamSection from '@/components/TeamSection';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -41,16 +41,16 @@ export default async function MembersPage() {
           <h1 className="text-4xl sm:text-5xl font-bold mb-4">
             Member Directory
           </h1>
-          <p className="text-gray-400 text-lg">
+          <p className="text-[#9ca3af] text-lg">
             {members.length > 0
-              ? `${members.length} approved member${members.length === 1 ? '' : 's'}`
+              ? `Showing ${members.length} member${members.length === 1 ? '' : 's'}`
               : 'No approved members yet. Check back soon!'}
           </p>
         </div>
 
         {/* Member Grid */}
         {members.length > 0 ? (
-          <MemberGrid members={members} />
+          <TeamSection members={members} />
         ) : (
           <div className="text-center py-16">
             <p className="text-gray-400 text-lg">

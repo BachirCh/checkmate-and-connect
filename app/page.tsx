@@ -1,3 +1,4 @@
+import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import EventDetails from '@/components/EventDetails';
 import CommunityStats from '@/components/CommunityStats';
@@ -64,6 +65,7 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(eventSchema) }}
       />
+      <Navbar />
       <Hero />
       <EventDetails />
       <CommunityStats />

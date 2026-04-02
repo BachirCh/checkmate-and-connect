@@ -1,5 +1,4 @@
 import { Metadata } from 'next';
-import { RecaptchaProvider } from '@/components/RecaptchaProvider';
 import EventSubmissionForm from '@/components/forms/EventSubmissionForm';
 
 export const metadata: Metadata = {
@@ -9,7 +8,6 @@ export const metadata: Metadata = {
 
 export default function EventSubmitPage() {
   return (
-    <RecaptchaProvider>
       <main className="min-h-screen bg-black text-white">
         <div className="container mx-auto px-4 py-16">
           <div className="max-w-2xl mx-auto text-center mb-12">
@@ -25,6 +23,5 @@ export default function EventSubmitPage() {
           <EventSubmissionForm />
         </div>
       </main>
-    </RecaptchaProvider>
   );
 }

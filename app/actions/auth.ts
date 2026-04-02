@@ -52,8 +52,24 @@ export async function login(prevState: any, formData: FormData) {
       };
     }
 
-    // Check if user has admin role in app_metadata
-    const role = userData.user.app_metadata?.role;
+    // Get the session to access JWT token
+    const { data: sessionData } = await supabase.auth.getSession();
+
+    if (!sessionData.session?.access_token) {
+      await supabase.auth.signOut();
+      return {
+        message: 'Unauthorized: Admin access required',
+      };
+    }
+
+    // Decode JWT to get custom claims
+    // JWT format: header.payload.signature
+    const token = sessionData.session.access_token;
+    const base64Payload = token.split('.')[1];
+    const payload = JSON.parse(Buffer.from(base64Payload, 'base64').toString());
+
+    // The custom_access_token_hook adds role to claims
+    const role = payload.role;
 
     if (role !== 'admin') {
       // Sign out non-admin users

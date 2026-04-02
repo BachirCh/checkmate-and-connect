@@ -25,13 +25,19 @@
 
 ### Required Tools
 ```bash
-# Supabase CLI
+# PostgreSQL client tools (preferred backup engine, Docker-independent)
+# macOS (Homebrew):
+brew install libpq
+brew link --force libpq
+
+# Supabase CLI (fallback backup engine; may require Docker for db dump in some environments)
 npm install -g supabase
 
 # Sanity CLI (should already be installed)
 npm install -g @sanity/cli
 
 # Verify installations
+pg_dump --version
 supabase --version
 sanity --version
 ```
@@ -67,30 +73,43 @@ supabase db dump --project-ref "$SUPABASE_PROJECT_REF" --list
 Download a backup file to your local machine:
 
 ```bash
-# Create backups directory
-mkdir -p backups/supabase
+# Required env vars
+export SUPABASE_PROJECT_REF="your-project-ref-here"
+export SUPABASE_DB_PASSWORD="your-db-password-here"
 
-# Download backup (latest or specific timestamp)
-supabase db dump --project-ref "$SUPABASE_PROJECT_REF" --output backups/supabase/backup.sql
+# Default engine selection:
+# - Uses pg_dump when available
+# - Falls back to supabase db dump if pg_dump is unavailable
+bash scripts/backup-supabase.sh
+
+# Optional: force engine
+SUPABASE_BACKUP_ENGINE=pg_dump bash scripts/backup-supabase.sh
+SUPABASE_BACKUP_ENGINE=supabase_cli bash scripts/backup-supabase.sh
+
+# Optional custom output directory
+BACKUP_DIR=backups/supabase/manual bash scripts/backup-supabase.sh
 ```
 
-**Note:** File size should be several MB for a database with user data.
+**Note:** Backup script default scope is schema + data (roles are excluded). File size should be several MB for a database with user data.
 
 ### Verify Backup Integrity
 
 Check that the backup file is valid and complete:
 
 ```bash
+# Get latest backup file
+BACKUP_FILE=$(ls -t backups/supabase/*.sql | head -n 1)
+
 # Check file size (should be >1KB, typically several MB)
-ls -lh backups/supabase/backup.sql
+ls -lh "$BACKUP_FILE"
 
 # Verify SQL content - check for key tables
-grep -i "CREATE TABLE" backups/supabase/backup.sql
-grep -i "user_roles" backups/supabase/backup.sql
-grep -i "profiles" backups/supabase/backup.sql
+grep -i "CREATE TABLE" "$BACKUP_FILE"
+grep -i "user_roles" "$BACKUP_FILE"
+grep -i "profiles" "$BACKUP_FILE"
 
 # Count INSERT statements (indicates data, not just schema)
-grep -c "INSERT INTO" backups/supabase/backup.sql
+grep -c "INSERT INTO" "$BACKUP_FILE"
 ```
 
 **Warning signs:**
@@ -109,8 +128,11 @@ supabase start
 # Get local database URL (shown in start output)
 # Default: postgresql://postgres:postgres@localhost:54322/postgres
 
+# Get latest backup file
+BACKUP_FILE=$(ls -t backups/supabase/*.sql | head -n 1)
+
 # Restore backup to local database
-psql postgresql://postgres:postgres@localhost:54322/postgres < backups/supabase/backup.sql
+psql postgresql://postgres:postgres@localhost:54322/postgres < "$BACKUP_FILE"
 ```
 
 **Note:** This may show errors for objects that already exist - this is normal if the backup includes CREATE statements.
@@ -130,14 +152,18 @@ psql postgresql://postgres:postgres@localhost:54322/postgres < backups/supabase/
 
 ```bash
 # 1. Create a backup of CURRENT production state
-supabase db dump --project-ref "$SUPABASE_PROJECT_REF" --output backups/supabase/pre-restore-backup-$(date +%Y%m%d-%H%M%S).sql
+SUPABASE_PROJECT_REF="$SUPABASE_PROJECT_REF" \
+SUPABASE_DB_PASSWORD="[PASSWORD]" \
+BACKUP_DIR=backups/supabase/pre-restore \
+bash scripts/backup-supabase.sh
 
 # 2. Get production database connection string
 # From Supabase Dashboard: Settings → Database → Connection string (Direct connection)
 # Format: postgresql://postgres:[PASSWORD]@db.[PROJECT-REF].supabase.co:5432/postgres
 
 # 3. Restore backup to production
-psql "postgresql://postgres:[PASSWORD]@db.[PROJECT-REF].supabase.co:5432/postgres" < backups/supabase/backup.sql
+BACKUP_FILE=$(ls -t backups/supabase/*.sql | head -n 1)
+psql "postgresql://postgres:[PASSWORD]@db.[PROJECT-REF].supabase.co:5432/postgres" < "$BACKUP_FILE"
 ```
 
 **Alternative: Point-in-Time Recovery (PITR)**
@@ -536,11 +562,14 @@ This runbook references automated backup scripts in the repository:
 **Usage:**
 ```bash
 # Run individual backups
-bash scripts/backup-supabase.sh
+SUPABASE_PROJECT_REF=xxx SUPABASE_DB_PASSWORD=yyy bash scripts/backup-supabase.sh
 bash scripts/backup-sanity.sh
 
 # Run full backup verification
-bash scripts/verify-backups.sh
+SUPABASE_PROJECT_REF=xxx SUPABASE_DB_PASSWORD=yyy bash scripts/verify-backups.sh
+
+# Optional engine override
+SUPABASE_BACKUP_ENGINE=pg_dump SUPABASE_PROJECT_REF=xxx SUPABASE_DB_PASSWORD=yyy bash scripts/verify-backups.sh
 ```
 
 **Automation:**

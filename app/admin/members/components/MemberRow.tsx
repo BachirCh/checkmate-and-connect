@@ -39,7 +39,6 @@ export default function MemberRow({ member }: MemberRowProps) {
   );
 
   return (
-    <>
     <tr className="border-b border-gray-800 hover:bg-gray-900 transition-colors">
       {/* Photo */}
       <td className="p-4">
@@ -116,15 +115,14 @@ export default function MemberRow({ member }: MemberRowProps) {
         {deleteState?.error && (
           <p className="text-xs text-red-400 mt-1">{deleteState.error}</p>
         )}
+
+        {/* Edit Modal — must be inside <td> to avoid <tbody> > <div> nesting error */}
+        <EditMemberModal
+          member={member}
+          open={editOpen}
+          onClose={() => setEditOpen(false)}
+        />
       </td>
     </tr>
-
-    {/* Edit Modal */}
-    <EditMemberModal
-      member={member}
-      open={editOpen}
-      onClose={() => setEditOpen(false)}
-    />
-    </>
   );
 }

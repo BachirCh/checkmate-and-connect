@@ -6,18 +6,42 @@
 #          One-command backup verification for both data stores
 #
 # Prerequisites:
-#   - Supabase CLI installed: npm install -g supabase
 #   - Sanity CLI installed and authenticated: npm install -g @sanity/cli && sanity login
 #   - SUPABASE_PROJECT_REF environment variable set
+#   - SUPABASE_DB_PASSWORD environment variable set
+#   - At least one Supabase backup engine available:
+#       - pg_dump
+#       - supabase CLI (or local npx supabase)
 #
 # Usage:
-#   SUPABASE_PROJECT_REF=xxx bash scripts/verify-backups.sh
+#   SUPABASE_PROJECT_REF=xxx SUPABASE_DB_PASSWORD=yyy bash scripts/verify-backups.sh
+#   SUPABASE_BACKUP_ENGINE=pg_dump SUPABASE_PROJECT_REF=xxx SUPABASE_DB_PASSWORD=yyy bash scripts/verify-backups.sh
 #
 # This script is used by GitHub Actions for scheduled backup verification.
 # It runs both backup scripts and validates that backups were created successfully.
 #
 
-set -e
+set -euo pipefail
+
+SUPABASE_BACKUP_ENGINE="${SUPABASE_BACKUP_ENGINE:-auto}"
+
+has_supabase_cli() {
+  if command -v supabase >/dev/null 2>&1; then
+    return 0
+  fi
+
+  if command -v npx >/dev/null 2>&1 && npx --no-install supabase --version >/dev/null 2>&1; then
+    return 0
+  fi
+
+  return 1
+}
+
+if [ "$SUPABASE_BACKUP_ENGINE" != "auto" ] && [ "$SUPABASE_BACKUP_ENGINE" != "pg_dump" ] && [ "$SUPABASE_BACKUP_ENGINE" != "supabase_cli" ]; then
+  echo "ERROR: Invalid SUPABASE_BACKUP_ENGINE '$SUPABASE_BACKUP_ENGINE'"
+  echo "Valid values: auto, pg_dump, supabase_cli"
+  exit 1
+fi
 
 echo "==========================================="
 echo "=== Backup Verification Started =========="
@@ -27,14 +51,36 @@ echo ""
 
 # Check prerequisites
 echo "Checking prerequisites..."
+echo "  Supabase backup engine mode: $SUPABASE_BACKUP_ENGINE"
 
-# Verify Supabase CLI is installed
-if ! command -v supabase >/dev/null 2>&1; then
-  echo "ERROR: Supabase CLI is not installed"
-  echo "Install with: npm install -g supabase"
-  exit 1
+# Verify Supabase backup tooling
+if [ "$SUPABASE_BACKUP_ENGINE" = "pg_dump" ]; then
+  if ! command -v pg_dump >/dev/null 2>&1; then
+    echo "ERROR: pg_dump is required when SUPABASE_BACKUP_ENGINE=pg_dump"
+    echo "Install PostgreSQL client tools and ensure pg_dump is in PATH"
+    exit 1
+  fi
+  echo "  ✓ pg_dump available"
+elif [ "$SUPABASE_BACKUP_ENGINE" = "supabase_cli" ]; then
+  if ! has_supabase_cli; then
+    echo "ERROR: Supabase CLI is required when SUPABASE_BACKUP_ENGINE=supabase_cli"
+    echo "Install with: npm install -g supabase"
+    exit 1
+  fi
+  echo "  ✓ Supabase CLI available"
+else
+  if command -v pg_dump >/dev/null 2>&1; then
+    echo "  ✓ pg_dump available (preferred)"
+  elif has_supabase_cli; then
+    echo "  ✓ Supabase CLI available (fallback)"
+  else
+    echo "ERROR: No Supabase backup engine available"
+    echo "Install one of:"
+    echo "  - PostgreSQL client tools (pg_dump)"
+    echo "  - Supabase CLI: npm install -g supabase"
+    exit 1
+  fi
 fi
-echo "  ✓ Supabase CLI installed"
 
 # Verify Sanity CLI is installed
 if ! command -v sanity >/dev/null 2>&1; then
@@ -47,10 +93,17 @@ echo "  ✓ Sanity CLI installed"
 # Verify SUPABASE_PROJECT_REF is set
 if [ -z "$SUPABASE_PROJECT_REF" ]; then
   echo "ERROR: SUPABASE_PROJECT_REF environment variable is not set"
-  echo "Usage: SUPABASE_PROJECT_REF=xxx bash scripts/verify-backups.sh"
+  echo "Usage: SUPABASE_PROJECT_REF=xxx SUPABASE_DB_PASSWORD=yyy bash scripts/verify-backups.sh"
   exit 1
 fi
 echo "  ✓ SUPABASE_PROJECT_REF is set"
+
+if [ -z "${SUPABASE_DB_PASSWORD:-}" ]; then
+  echo "ERROR: SUPABASE_DB_PASSWORD environment variable is not set"
+  echo "Usage: SUPABASE_PROJECT_REF=xxx SUPABASE_DB_PASSWORD=yyy bash scripts/verify-backups.sh"
+  exit 1
+fi
+echo "  ✓ SUPABASE_DB_PASSWORD is set"
 
 echo ""
 echo "All prerequisites verified!"

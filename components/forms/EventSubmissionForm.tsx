@@ -4,7 +4,6 @@ import { useState } from "react";
 import { useActionState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 import {
   eventSubmissionSchema,
   type EventSubmissionData,
@@ -14,7 +13,6 @@ import FormField from "./FormField";
 import ImageUpload from "./ImageUpload";
 
 export default function EventSubmissionForm() {
-  const { executeRecaptcha } = useGoogleReCaptcha();
   const [state, formAction, isPending] = useActionState(
     submitEventAction,
     null,
@@ -36,13 +34,6 @@ export default function EventSubmissionForm() {
   const eventTypeValue = watch("eventType");
 
   const onSubmit = async (data: EventSubmissionData) => {
-    // Get reCAPTCHA token before submission
-    if (!executeRecaptcha) {
-      console.error('reCAPTCHA not available');
-      return;
-    }
-    const recaptchaToken = await executeRecaptcha('event_submission');
-
     // Create FormData and append all fields
     const formData = new FormData();
     formData.append("title", data.title);
@@ -54,7 +45,7 @@ export default function EventSubmissionForm() {
     if (data.image && data.image.size > 0) {
       formData.append("image", data.image);
     }
-    formData.append("recaptchaToken", recaptchaToken);
+    formData.append("recaptchaToken", "");
     formData.append("_honey", data._honey || "");
 
     // Call the server action inside a transition

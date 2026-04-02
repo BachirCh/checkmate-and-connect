@@ -139,6 +139,8 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 | 4. Admin Authentication & Dashboard | 2/2 | ✅ Complete | 2026-02-15 |
 | 5. Member Directory & Management | 0/4 | Complete    | 2026-02-16 |
 | 6. Launch Preparation | 0/? | Not started | - |
+| 7. Add blog functionality | 3/3 | ✅ Complete | 2026-02-18 |
+| 8. Event Submission & Management | 3/3 | ✅ Complete | 2026-02-18 |
 
 ### Phase 7: Add blog functionality
 
@@ -155,13 +157,13 @@ Plans:
 
 **Goal:** Community members can submit events (no auth required) with hybrid time model (one-time datetime or recurring pattern), admins review and approve via workflow, visitors see upcoming events (future one-time + recurring) and all events (complete history)
 **Depends on:** Phase 7
-**Plans:** 3 plans
+**Plans:** 3/3 plans complete
 
 Plans:
-- [ ] 08-01-PLAN.md — Event schema with hybrid time model and public submission form with spam protection
-- [ ] 08-02-PLAN.md — Admin event approval workflow with filterable table and dashboard statistics
-- [ ] 08-03-PLAN.md — Public events listing with upcoming/all sections and time-based filtering
+- [x] 08-01-PLAN.md — Event schema with hybrid time model and public submission form with spam protection
+- [x] 08-02-PLAN.md — Admin event approval workflow with filterable table and dashboard statistics
+- [x] 08-03-PLAN.md — Public events listing with upcoming/all sections and time-based filtering
 
 ---
 *Roadmap created: 2026-02-14*
-*Last updated: 2026-02-16*
+*Last updated: 2026-02-18*

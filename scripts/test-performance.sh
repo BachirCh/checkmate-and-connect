@@ -10,6 +10,11 @@ set -e
 BASE_URL="${1:-http://localhost:3000}"
 REPORTS_DIR="performance-reports"
 TIMESTAMP=$(date +%Y%m%d-%H%M%S)
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROJECT_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
+
+# Make locally installed CLIs (node_modules/.bin) available when script is run directly via bash.
+export PATH="${PROJECT_ROOT}/node_modules/.bin:${PATH}"
 
 # Colors for output
 GREEN='\033[0;32m'
@@ -20,10 +25,18 @@ NC='\033[0m' # No Color
 echo -e "${BLUE}=== Checkmate & Connect Performance Testing ===${NC}\n"
 
 # Check if Lighthouse CLI is installed
-if ! command -v lighthouse &> /dev/null; then
+LIGHTHOUSE_BIN="$(command -v lighthouse || true)"
+if [ -z "${LIGHTHOUSE_BIN}" ]; then
     echo -e "${YELLOW}Lighthouse CLI not found. Install with:${NC}"
     echo "npm install --save-dev @lhci/cli lighthouse chrome-launcher"
     echo "or: npm install -g @lhci/cli lighthouse"
+    exit 1
+fi
+
+if ! command -v node &> /dev/null; then
+    echo -e "${YELLOW}Node.js runtime not found in PATH.${NC}"
+    echo "If you use nvm/fnm/asdf, load it in this shell first, then re-run:"
+    echo "bash scripts/test-performance.sh"
     exit 1
 fi
 
@@ -40,13 +53,13 @@ declare -a PAGES=(
 echo -e "${BLUE}Testing pages with Fast 3G throttling...${NC}\n"
 
 for PAGE_CONFIG in "${PAGES[@]}"; do
-    IFS=':' read -r PATH SLUG <<< "$PAGE_CONFIG"
-    URL="${BASE_URL}${PATH}"
+    IFS=':' read -r PAGE_PATH SLUG <<< "$PAGE_CONFIG"
+    URL="${BASE_URL}${PAGE_PATH}"
     OUTPUT="${REPORTS_DIR}/${SLUG}-${TIMESTAMP}.html"
 
     echo -e "${GREEN}Testing: ${URL}${NC}"
 
-    lighthouse "$URL" \
+    "${LIGHTHOUSE_BIN}" "$URL" \
         --output=html \
         --output-path="$OUTPUT" \
         --preset=desktop \

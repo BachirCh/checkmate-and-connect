@@ -48,14 +48,14 @@ export async function submitEventAction(prevState: any, formData: FormData) {
       };
     }
 
-    // SPAM PROTECTION LAYER 3: reCAPTCHA verification
-    const recaptchaResult = await verifyRecaptcha(recaptchaToken, 'event_submission');
-    if (!recaptchaResult.success) {
-      return {
-        success: false,
-        error: 'Verification failed. Please try again.',
-      };
-    }
+    // reCAPTCHA disabled for now
+    // const recaptchaResult = await verifyRecaptcha(recaptchaToken, 'event_submission');
+    // if (!recaptchaResult.success) {
+    //   return {
+    //     success: false,
+    //     error: 'Verification failed. Please try again.',
+    //   };
+    // }
 
     // Validate required fields
     if (!title || title.length < 5 || title.length > 100) {

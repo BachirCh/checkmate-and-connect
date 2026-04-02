@@ -5,7 +5,7 @@
 See: .planning/PROJECT.md (updated 2026-02-14)
 
 **Core value:** Easy to share and explain - when someone asks "what's C&C?", send them a link that clearly shows what the community is, when and where they meet, and who's part of it.
-**Current focus:** Phase 7 - Add Blog Functionality
+**Current focus:** Phase 8 - Event Submission & Management (Complete)
 
 ## Current Position
 

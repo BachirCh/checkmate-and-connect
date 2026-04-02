@@ -1,14 +1,22 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:is(.dark *));
+
 @theme {
-  /* Circular-like font stack - using system fonts as fallback */
-  --font-sans: ui-rounded, "SF Pro Rounded", "SF Compact Rounded", -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  /* Poppins for body text */
+  --font-sans: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+
+  /* Montserrat for headings */
+  --font-heading: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
 
   /* Dark mode colors - black and white branding */
   --color-background: #000000;
   --color-foreground: #ffffff;
   --color-muted: #1a1a1a;
   --color-accent: #333333;
+  --color-muted-foreground: #9ca3af;
+  --color-surface: #1a1a1a;
+  --color-border: #333333;
 }
 
 html {
@@ -18,4 +26,9 @@ html {
 body {
   background-color: #000000;
   color: #ffffff;
+}
+
+/* Apply Montserrat to all headings globally */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
 }

@@ -1,3 +1,7 @@
+/**
+ * @deprecated This component has been replaced by TeamSection (using shadcn/ui patterns).
+ * Will be removed after successful deployment. Use TeamSection instead.
+ */
 import MemberCard from './MemberCard';
 
 type Member = {

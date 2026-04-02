@@ -36,8 +36,18 @@ export const verifySession = cache(async (): Promise<AdminSession> => {
     redirect('/admin/login');
   }
 
-  // Get role from app_metadata (populated by custom_access_token_hook)
-  const role = user.app_metadata?.role;
+  // Get the session to access JWT token
+  const { data: sessionData } = await supabase.auth.getSession();
+
+  if (!sessionData.session?.access_token) {
+    redirect('/admin/login');
+  }
+
+  // Decode JWT to get custom claims (role is injected by custom_access_token_hook)
+  const token = sessionData.session.access_token;
+  const base64Payload = token.split('.')[1];
+  const payload = JSON.parse(Buffer.from(base64Payload, 'base64').toString());
+  const role = payload.role;
 
   // If not admin, redirect to login
   if (role !== 'admin') {

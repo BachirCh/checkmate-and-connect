@@ -46,6 +46,7 @@ jobs:
         run: bash scripts/verify-backups.sh
         env:
           SUPABASE_PROJECT_REF: ${{ secrets.SUPABASE_PROJECT_REF }}
+          SUPABASE_DB_PASSWORD: ${{ secrets.SUPABASE_DB_PASSWORD }}
           SANITY_AUTH_TOKEN: ${{ secrets.SANITY_TOKEN }}
 
       - name: Upload backup artifacts
@@ -61,7 +62,9 @@ jobs:
 # Required secrets (Settings → Secrets and variables → Actions):
 # 1. SUPABASE_PROJECT_REF - Your Supabase project reference ID
 #    - Find in: Supabase Dashboard → Project Settings → General → Reference ID
-# 2. SANITY_TOKEN - Sanity authentication token with Viewer role
+# 2. SUPABASE_DB_PASSWORD - Supabase Postgres database password
+#    - Find in: Supabase Dashboard → Project Settings → Database
+# 3. SANITY_TOKEN - Sanity authentication token with Viewer role
 #    - Create at: https://sanity.io/manage → [Your Project] → API → Tokens → Add token
 #    - Permissions: Viewer (read-only access sufficient for exports)
 #    - Description: "GitHub Actions backup verification"
