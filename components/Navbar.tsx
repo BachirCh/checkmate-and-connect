@@ -1,94 +1,119 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { LogoLink } from '@/components/brand/Logo';
+import { ButtonLink } from '@/components/ui/Button';
+import { Container } from '@/components/ui/Container';
+import { site } from '@/lib/site';
 
-const navLinks = [
-  { href: '/events', label: 'Events' },
+/**
+ * Only routes that actually exist appear here.
+ *
+ * The Figma nav shows "Events" and "About"; /events was deleted and its
+ * listings live on Meetup, so RSVP points there instead of to a page that
+ * would duplicate — and go stale against — the real source.
+ */
+const LINKS = [
+  { href: '/about', label: 'About' },
   { href: '/members', label: 'Members' },
-  { href: '/blog', label: 'Blog' },
 ];
 
 export default function Navbar() {
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [open, setOpen] = useState(false);
   const pathname = usePathname();
 
+  // Close the drawer on navigation
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
+
+  // Don't let the page scroll behind an open drawer
+  useEffect(() => {
+    document.body.style.overflow = open ? 'hidden' : '';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [open]);
+
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setOpen(false);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [open]);
+
   return (
-    <nav className="sticky top-0 z-50 w-full bg-black/95 backdrop-blur-sm border-b border-[#333333]">
-      <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
-        {/* Brand */}
-        <Link href="/" className="text-lg font-bold text-white tracking-tight font-heading">
-          Checkmate &amp; Connect
-        </Link>
-
-        {/* Desktop nav links */}
-        <div className="hidden md:flex items-center gap-8">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className={`text-sm font-medium transition-colors ${
-                pathname === link.href
-                  ? 'text-white'
-                  : 'text-[#9ca3af] hover:text-white'
-              }`}
-            >
-              {link.label}
-            </Link>
-          ))}
-          <Link
-            href="/join"
-            className="bg-white text-black text-sm font-semibold px-5 py-2 rounded-lg hover:bg-gray-200 transition-colors"
-          >
-            Join Us
-          </Link>
-        </div>
-
-        {/* Mobile hamburger */}
-        <button
-          onClick={() => setMenuOpen(!menuOpen)}
-          className="md:hidden p-2 text-white"
-          aria-label="Toggle menu"
+    <header className="relative z-50 border-b border-hairline bg-canvas">
+      <Container>
+        <nav
+          className="flex h-24 items-center justify-between"
+          aria-label="Primary"
         >
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            {menuOpen ? (
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-            ) : (
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-            )}
-          </svg>
-        </button>
-      </div>
+          <LogoLink />
 
-      {/* Mobile menu */}
-      {menuOpen && (
-        <div className="md:hidden border-t border-[#333333] bg-black">
-          <div className="px-4 py-4 space-y-3">
-            {navLinks.map((link) => (
+          {/* Desktop */}
+          <div className="hidden items-center gap-7 md:flex">
+            {LINKS.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                onClick={() => setMenuOpen(false)}
-                className={`block text-sm font-medium ${
-                  pathname === link.href
-                    ? 'text-white'
-                    : 'text-[#9ca3af] hover:text-white'
-                }`}
+                aria-current={pathname === link.href ? 'page' : undefined}
+                className="text-ui font-medium text-secondary transition-colors hover:text-ink aria-[current=page]:text-ink"
               >
                 {link.label}
               </Link>
             ))}
-            <Link
-              href="/join"
-              onClick={() => setMenuOpen(false)}
-              className="block w-full text-center bg-white text-black text-sm font-semibold px-5 py-2 rounded-lg hover:bg-gray-200 transition-colors"
-            >
-              Join Us
-            </Link>
+            <ButtonLink href={site.social.meetup} className="ml-2">
+              RSVP
+            </ButtonLink>
           </div>
+
+          {/* Mobile */}
+          <button
+            type="button"
+            onClick={() => setOpen((v) => !v)}
+            aria-expanded={open}
+            aria-controls="mobile-menu"
+            className="grid h-12 w-12 place-items-center rounded-pill border border-line md:hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lime"
+          >
+            <span className="sr-only">{open ? 'Close menu' : 'Open menu'}</span>
+            <span aria-hidden className="relative block h-4 w-5">
+              <span
+                className={`absolute left-0 block h-0.5 w-5 bg-ink transition-transform ${open ? 'top-1/2 rotate-45' : 'top-0.5'}`}
+              />
+              <span
+                className={`absolute left-0 block h-0.5 w-5 bg-ink transition-transform ${open ? 'top-1/2 -rotate-45' : 'bottom-0.5'}`}
+              />
+            </span>
+          </button>
+        </nav>
+      </Container>
+
+      {open ? (
+        <div
+          id="mobile-menu"
+          className="absolute inset-x-0 top-full border-b border-hairline bg-canvas md:hidden"
+        >
+          <Container className="flex flex-col gap-6 py-8">
+            {LINKS.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="font-display text-3xl font-bold tracking-[-0.02em] text-ink"
+              >
+                {link.label}
+              </Link>
+            ))}
+            <ButtonLink href={site.social.meetup} className="mt-2 w-full">
+              RSVP on Meetup
+            </ButtonLink>
+          </Container>
         </div>
-      )}
-    </nav>
+      ) : null}
+    </header>
   );
 }

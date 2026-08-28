@@ -1,0 +1,29 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "checkmate-and-connect",
+  "main": ".open-next/worker.js",
+  "compatibility_date": "2026-07-01",
+  // nodejs_compat is required by the OpenNext adapter: it runs Next's Node.js
+  // runtime rather than the Edge runtime.
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+
+  // Custom domains. These must be claimed by this Worker for checkmate.ma to
+  // serve the app — the old static Worker (checkmate-website) currently holds
+  // them and has to be detached first, or the deploy will refuse the route.
+  "routes": [
+    { "pattern": "checkmate.ma", "custom_domain": true },
+    { "pattern": "www.checkmate.ma", "custom_domain": true }
+  ],
+
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS",
+    // Serves /certificate/<slug>/ from that folder's index.html, which is how
+    // the 55 hackathon certificate links keep resolving.
+    "html_handling": "auto-trailing-slash"
+  },
+
+  "observability": {
+    "enabled": true
+  }
+}

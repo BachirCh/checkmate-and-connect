@@ -1,52 +1,60 @@
 import type { Metadata } from 'next';
-import { Montserrat, Poppins } from 'next/font/google';
+import { Outfit, Figtree } from 'next/font/google';
+import { site } from '@/lib/site';
 import './globals.css';
 
-const montserrat = Montserrat({
+const outfit = Outfit({
   subsets: ['latin'],
-  variable: '--font-montserrat',
+  weight: ['500', '600', '700'],
+  variable: '--font-outfit',
   display: 'swap',
 });
 
-const poppins = Poppins({
+const figtree = Figtree({
   subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700'],
-  variable: '--font-poppins',
+  weight: ['400', '500', '600'],
+  variable: '--font-figtree',
   display: 'swap',
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://checkmateconnect.com'),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || site.url),
   title: {
-    template: '%s | Checkmate & Connect',
-    default: 'Checkmate & Connect - Chess & Entrepreneurship Community',
+    template: `%s | ${site.name}`,
+    default: `${site.name} — Casablanca's weekly startup community`,
   },
-  description: 'Join 200+ members every Wednesday at 6pm at Commons in Casablanca for chess and entrepreneurship meetups.',
-  keywords: ['chess', 'entrepreneurship', 'Casablanca', 'community', 'networking', 'Morocco', 'Commons'],
+  description: site.description,
+  keywords: [
+    'Casablanca startup community',
+    'Morocco startups',
+    'founders Casablanca',
+    'networking Casablanca',
+    'startup meetup Morocco',
+    'Commons Zerktouni',
+    'Checkmate & Connect',
+  ],
+  alternates: {
+    canonical: '/',
+  },
   openGraph: {
-    title: 'Checkmate & Connect - Chess & Entrepreneurship Community',
-    description: 'Join 200+ members every Wednesday at 6pm at Commons in Casablanca for chess and entrepreneurship meetups.',
+    title: `${site.name} — Casablanca's weekly startup community`,
+    description: site.description,
     type: 'website',
-    locale: 'en_US',
-    siteName: 'Checkmate & Connect',
-    images: [
-      {
-        url: '/og-image.png',
-        width: 1200,
-        height: 630,
-        alt: 'Checkmate & Connect',
-      },
-    ],
+    locale: site.locale,
+    siteName: site.name,
+    url: site.url,
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: site.name }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Checkmate & Connect - Chess & Entrepreneurship Community',
-    description: 'Join 200+ members every Wednesday at 6pm at Commons in Casablanca for chess and entrepreneurship meetups.',
+    title: `${site.name} — Casablanca's weekly startup community`,
+    description: site.description,
     images: ['/og-image.png'],
   },
   robots: {
     index: true,
     follow: true,
+    googleBot: { index: true, follow: true, 'max-image-preview': 'large' },
   },
 };
 
@@ -56,8 +64,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${montserrat.variable} ${poppins.variable}`} suppressHydrationWarning>
-      <body className="font-sans antialiased">{children}</body>
+    <html
+      lang="en"
+      className={`${outfit.variable} ${figtree.variable}`}
+      suppressHydrationWarning
+    >
+      <body className="bg-canvas text-ink font-sans antialiased">{children}</body>
     </html>
   );
 }

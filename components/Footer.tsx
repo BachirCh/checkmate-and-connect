@@ -1,61 +1,108 @@
 import Link from 'next/link';
+import { Logo } from '@/components/brand/Logo';
+import { Container } from '@/components/ui/Container';
+import { Icon } from '@/components/ui/Icon';
+import { site } from '@/lib/site';
+
+const COLUMNS = [
+  {
+    heading: 'Community',
+    links: [
+      { label: 'About', href: '/about' },
+      { label: 'Members', href: '/members' },
+      { label: 'Join the directory', href: '/join' },
+    ],
+  },
+  {
+    heading: 'Follow',
+    links: [
+      { label: 'Meetup', href: site.social.meetup },
+      { label: 'LinkedIn', href: site.social.linkedin },
+      { label: 'Instagram', href: site.social.instagram },
+    ],
+  },
+];
 
 export default function Footer() {
-  const currentYear = new Date().getFullYear();
-
   return (
-    <footer className="w-full bg-black text-gray-500 py-12 border-t border-[#333333]">
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-          {/* Brand */}
+    <footer className="pb-16 pt-0">
+      <Container>
+        <div className="h-px w-full bg-hairline" />
+
+        <div className="flex flex-col gap-12 pt-12 md:flex-row md:justify-between">
           <div>
-            <p className="font-semibold text-white text-lg mb-2 font-heading">Checkmate & Connect</p>
-            <p className="text-sm text-[#9ca3af]">
-              Chess & Entrepreneurship Community in Casablanca
-            </p>
+            <Logo size={22.18} />
+            <p className="mt-5 text-ui text-muted">{site.tagline}</p>
           </div>
 
-          {/* Navigation */}
-          <div>
-            <p className="font-medium text-white text-sm mb-3">Navigate</p>
-            <div className="flex flex-col gap-2">
-              <Link href="/events" className="text-sm hover:text-white transition-colors">Events</Link>
-              <Link href="/members" className="text-sm hover:text-white transition-colors">Members</Link>
-              <Link href="/blog" className="text-sm hover:text-white transition-colors">Blog</Link>
-              <Link href="/join" className="text-sm hover:text-white transition-colors">Join Us</Link>
-            </div>
-          </div>
-
-          {/* Social & Legal */}
-          <div>
-            <p className="font-medium text-white text-sm mb-3">Connect</p>
-            <div className="flex flex-col gap-2">
-              <a
-                href="https://www.meetup.com/checkmate-connect-club-casablanca-chapter/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-sm hover:text-white transition-colors"
-              >
-                Meetup
-              </a>
-              <a
-                href="https://www.instagram.com/checkmateandconnect"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-sm hover:text-white transition-colors"
-              >
-                Instagram
-              </a>
-              <Link href="/privacy" className="text-sm hover:text-white transition-colors">Privacy Policy</Link>
-              <Link href="/terms" className="text-sm hover:text-white transition-colors">Terms of Service</Link>
-            </div>
+          <div className="flex gap-16 md:gap-20">
+            {COLUMNS.map((column) => (
+              <nav key={column.heading} aria-label={column.heading}>
+                <h2 className="font-sans text-eyebrow font-semibold uppercase text-faint">
+                  {column.heading}
+                </h2>
+                <ul className="mt-6 flex flex-col gap-4">
+                  {column.links.map((link) => {
+                    const external = link.href.startsWith('http');
+                    return (
+                      <li key={link.href}>
+                        <Link
+                          href={link.href}
+                          className="text-ui text-secondary transition-colors hover:text-ink"
+                          {...(external
+                            ? { target: '_blank', rel: 'noopener noreferrer' }
+                            : {})}
+                        >
+                          {link.label}
+                        </Link>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </nav>
+            ))}
           </div>
         </div>
 
-        <div className="border-t border-[#333333] pt-6 text-center">
-          <p className="text-sm text-[#9ca3af]">&copy; {currentYear} Checkmate & Connect. All rights reserved.</p>
+        <div className="mt-14 flex flex-col-reverse gap-6 sm:flex-row sm:items-center sm:justify-between">
+          <p className="text-micro text-faint">
+            © {new Date().getFullYear()} {site.name} · Casablanca
+          </p>
+          <div className="flex gap-5">
+            <SocialIcon
+              href={site.social.linkedin}
+              icon="linkedin-logo"
+              label={`${site.name} on LinkedIn`}
+            />
+            <SocialIcon
+              href={site.social.instagram}
+              icon="instagram-logo"
+              label={`${site.name} on Instagram`}
+            />
+          </div>
         </div>
-      </div>
+      </Container>
     </footer>
+  );
+}
+
+function SocialIcon({
+  href,
+  icon,
+  label,
+}: {
+  href: string;
+  icon: 'linkedin-logo' | 'instagram-logo';
+  label: string;
+}) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="text-secondary transition-colors hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-lime rounded-badge"
+    >
+      <Icon name={icon} size={22} title={label} />
+    </a>
   );
 }

@@ -10,6 +10,22 @@ type WebhookBody = {
   };
 };
 
+/**
+ * Which paths to rebuild when a document type changes.
+ *
+ * The homepage renders logos, past-event photos and testimonials, so any of
+ * those three invalidate it. `upcomingPost` has no display yet — it is listed
+ * with an empty path set deliberately, so that adding one later is a one-line
+ * change rather than a debugging session.
+ */
+const PATHS_BY_TYPE: Record<string, string[]> = {
+  logo: ['/'],
+  pastEvent: ['/'],
+  testimonial: ['/'],
+  upcomingPost: [],
+  member: ['/members'],
+};
+
 export async function POST(req: NextRequest) {
   try {
     // Parse and validate webhook signature
@@ -34,25 +50,23 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Only revalidate for blogPost document types
-    if (body._type !== 'blogPost') {
+    const paths = body._type ? PATHS_BY_TYPE[body._type] : undefined;
+
+    if (!paths) {
       return NextResponse.json(
-        { message: 'No revalidation needed' },
+        { message: `No revalidation configured for type "${body._type}"` },
         { status: 200 }
       );
     }
 
-    // Revalidate blog listing page (always)
-    await revalidatePath('/blog');
-
-    // Revalidate specific post detail page if slug exists
-    if (body.slug?.current) {
-      await revalidatePath(`/blog/${body.slug.current}`);
+    for (const path of paths) {
+      await revalidatePath(path);
     }
 
     return NextResponse.json(
       {
-        revalidated: true,
+        revalidated: paths.length > 0,
+        paths,
         now: Date.now(),
       },
       { status: 200 }
