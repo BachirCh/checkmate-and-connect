@@ -1,64 +1,109 @@
-import { client } from '@/lib/sanity/client';
-import TeamSection from '@/components/TeamSection';
 import type { Metadata } from 'next';
+import { MemberGrid, type DirectoryMember } from '@/components/members/MemberGrid';
+import { ButtonLink } from '@/components/ui/Button';
+import { Container } from '@/components/ui/Container';
+import { PageHeader } from '@/components/ui/PageHeader';
+import { JsonLd } from '@/components/seo/JsonLd';
+import { client } from '@/lib/sanity/client';
+import { site } from '@/lib/site';
+
+export const revalidate = 86400;
+
+const title = 'Members';
+const description =
+  'Founders, investors, engineers and designers who show up on Wednesdays in Casablanca. Browse the Checkmate & Connect member directory.';
 
 export const metadata: Metadata = {
-  title: 'Member Directory | Checkmate & Connect',
-  description: 'Browse our community of entrepreneurs, chess enthusiasts, and strategic thinkers in Casablanca.',
-};
-
-type Member = {
-  _id: string;
-  name: string;
-  slug: { current: string };
-  photo: any;
-  jobTitle: string;
-  company?: string;
-  linkedIn?: string;
-  approvedAt: string;
+  title,
+  description,
+  alternates: { canonical: '/members' },
+  openGraph: {
+    title: `${title} | ${site.name}`,
+    description,
+    url: `${site.url}/members`,
+    type: 'website',
+  },
 };
 
 export default async function MembersPage() {
-  // Fetch approved members from Sanity - CRITICAL: status filter for privacy compliance
-  const query = `*[_type == "member" && status == "approved"] | order(approvedAt desc) {
-    _id,
-    name,
-    slug,
-    photo,
-    jobTitle,
-    company,
-    linkedIn,
-    approvedAt
-  }`;
+  // The status filter is a privacy control, not a display preference: members
+  // opt in through /join and only appear once an organiser approves them.
+  const members: DirectoryMember[] = await client.fetch(
+    `*[_type == "member" && status == "approved"] | order(approvedAt desc) {
+      _id, name, photo, jobTitle, company, linkedIn
+    }`
+  );
 
-  const members: Member[] = await client.fetch(query);
+  const count = members.length;
 
   return (
-    <main className="min-h-screen bg-black text-white">
-      <div className="max-w-7xl mx-auto px-4 py-16">
-        {/* Page Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl sm:text-5xl font-bold mb-4">
-            Member Directory
-          </h1>
-          <p className="text-[#9ca3af] text-lg">
-            {members.length > 0
-              ? `Showing ${members.length} member${members.length === 1 ? '' : 's'}`
-              : 'No approved members yet. Check back soon!'}
-          </p>
-        </div>
+    <>
+      <JsonLd
+        graphs={[
+          {
+            '@context': 'https://schema.org',
+            '@type': 'CollectionPage',
+            name: `${title} | ${site.name}`,
+            description,
+            url: `${site.url}/members`,
+            isPartOf: { '@id': `${site.url}/#organization` },
+            ...(count > 0 && {
+              mainEntity: {
+                '@type': 'ItemList',
+                numberOfItems: count,
+                itemListElement: members.slice(0, 50).map((m, i) => ({
+                  '@type': 'ListItem',
+                  position: i + 1,
+                  item: {
+                    '@type': 'Person',
+                    name: m.name,
+                    jobTitle: m.jobTitle,
+                    ...(m.company && { worksFor: { '@type': 'Organization', name: m.company } }),
+                    ...(m.linkedIn && { sameAs: [m.linkedIn] }),
+                  },
+                })),
+              },
+            }),
+          },
+        ]}
+      />
 
-        {/* Member Grid */}
-        {members.length > 0 ? (
-          <TeamSection members={members} />
-        ) : (
-          <div className="text-center py-16">
-            <p className="text-gray-400 text-lg">
-              No approved members yet. Check back soon!
-            </p>
+      <main>
+        <PageHeader
+          eyebrow="The community"
+          title="The people in the room."
+          lead={
+            count > 0
+              ? `${count} member${count === 1 ? '' : 's'} have added themselves to the directory. It is opt-in, so this is a slice of the community rather than all ${site.stats.members} of it.`
+              : 'The directory is opt-in and nobody has been listed yet. Add yourself and be the first.'
+          }
+        >
+          <div className="mt-10">
+            <ButtonLink href="/join">Add yourself</ButtonLink>
           </div>
-        )}
-      </div>
-    </main>
+        </PageHeader>
+
+        <section className="pb-24">
+          <Container>
+            {count > 0 ? (
+              <MemberGrid members={members} />
+            ) : (
+              <div className="rounded-card border border-line bg-surface px-6 py-16 text-center md:px-20">
+                <h2 className="font-display text-[clamp(24px,3.5vw,32px)] font-bold tracking-[-0.02em]">
+                  Nobody listed yet.
+                </h2>
+                <p className="mx-auto mt-4 max-w-[520px] text-body text-secondary">
+                  The directory fills up as people add themselves. It takes a
+                  minute and an organiser reviews each one.
+                </p>
+                <div className="mt-8 flex justify-center">
+                  <ButtonLink href="/join">Add yourself</ButtonLink>
+                </div>
+              </div>
+            )}
+          </Container>
+        </section>
+      </main>
+    </>
   );
 }

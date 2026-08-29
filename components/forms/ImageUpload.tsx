@@ -59,43 +59,54 @@ export default function ImageUpload({
   };
 
   return (
-    <div className="space-y-2">
-      <label htmlFor={name} className="block text-sm font-medium text-white">
+    <div>
+      <label htmlFor={name} className="block text-caption font-medium text-ink">
         {label}
-        {required && (
-          <abbr title="required" aria-label="required" className="ml-1 text-white no-underline">
+        {required ? (
+          <abbr
+            title="required"
+            aria-label="required"
+            className="ml-1 text-lime no-underline"
+          >
             *
           </abbr>
-        )}
+        ) : null}
       </label>
 
-      <input
-        type="file"
-        id={name}
-        name={name}
-        accept="image/jpeg,image/png,image/webp"
-        onChange={handleChange}
-        className="block w-full text-base text-white file:mr-4 file:py-3 file:px-4 file:rounded file:border-0 file:text-sm file:font-medium file:bg-white file:text-black hover:file:bg-gray-200 file:cursor-pointer file:touch-manipulation border border-gray-800 rounded bg-black touch-manipulation"
-        aria-describedby={error ? `${name}-error` : undefined}
-      />
+      <p className="mt-1.5 text-micro text-muted">JPEG, PNG or WebP, up to 5MB.</p>
 
-      <p className="text-sm text-gray-400">JPEG, PNG, or WebP. Maximum 5MB.</p>
-
-      {preview && (
-        <div className="mt-4">
-          <img
-            src={preview}
-            alt="Preview"
-            className="w-32 h-32 rounded-full object-cover border-2 border-gray-800"
-          />
+      <div className="mt-2.5 flex items-center gap-5">
+        {/* Square preview matching the directory grid, so people see the crop
+            they will actually get rather than a circle that lies about it. */}
+        <div className="h-20 w-20 shrink-0 overflow-hidden rounded-input border border-line bg-raised">
+          {preview ? (
+            <img src={preview} alt="" className="h-full w-full object-cover" />
+          ) : (
+            <div
+              aria-hidden
+              className="grid h-full w-full place-items-center text-micro text-muted"
+            >
+              No photo
+            </div>
+          )}
         </div>
-      )}
 
-      {error && (
-        <p id={`${name}-error`} role="alert" className="text-sm text-red-400">
+        <input
+          type="file"
+          id={name}
+          name={name}
+          accept="image/jpeg,image/png,image/webp"
+          onChange={handleChange}
+          className="block w-full text-caption text-secondary file:mr-4 file:cursor-pointer file:rounded-pill file:border-0 file:bg-raised file:px-5 file:py-2.5 file:font-sans file:text-ui file:font-medium file:text-ink hover:file:bg-line file:touch-manipulation focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lime"
+          aria-describedby={error ? `${name}-error` : undefined}
+        />
+      </div>
+
+      {error ? (
+        <p id={`${name}-error`} role="alert" className="mt-2 text-micro text-[#ff6b6b]">
           {error}
         </p>
-      )}
+      ) : null}
     </div>
   );
 }

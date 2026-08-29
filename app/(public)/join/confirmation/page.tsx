@@ -1,87 +1,69 @@
-import Link from 'next/link';
 import type { Metadata } from 'next';
+import { MarkShape } from '@/components/brand/MarkShape';
+import { ButtonLink } from '@/components/ui/Button';
+import { Container } from '@/components/ui/Container';
+import { site } from '@/lib/site';
 
 export const metadata: Metadata = {
-  title: 'Application Submitted | Checkmate & Connect',
+  title: 'Application submitted',
+  // A confirmation page has no value in search and can only ever be reached
+  // by submitting the form, so keep it out of the index.
+  robots: { index: false, follow: false },
 };
+
+const STEPS = [
+  'An organiser reviews your submission.',
+  'Once approved, your profile appears in the member directory.',
+  `Come and meet people on Wednesday at ${site.event.venueName}.`,
+];
 
 export default function ConfirmationPage() {
   return (
-    <main className="min-h-screen bg-black text-white px-4 py-12">
-      <div className="max-w-2xl mx-auto">
-        {/* Success Icon */}
-        <div className="flex justify-center mb-8">
-          <svg
-            className="w-16 h-16 text-green-500"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-            aria-hidden="true"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+    <main>
+      <section className="py-24">
+        <Container>
+          <div className="relative isolate overflow-hidden rounded-card border border-line bg-surface px-6 py-16 md:px-16 md:py-20">
+            <MarkShape
+              origin="top-right"
+              className="-z-10 right-0 top-0 w-[420px] text-lime opacity-10 md:w-[560px]"
             />
-          </svg>
-        </div>
 
-        {/* Main Heading */}
-        <h1 className="text-4xl font-bold text-center mb-4">
-          Application Submitted!
-        </h1>
+            <p className="text-eyebrow font-semibold uppercase text-lime">
+              Application received
+            </p>
 
-        {/* Confirmation Text */}
-        <p className="text-gray-300 text-center text-lg mb-12">
-          Thank you for applying to join the Checkmate & Connect member directory.
-        </p>
+            <h1 className="mt-6 max-w-[16ch] font-display text-[clamp(32px,5vw,56px)] font-bold leading-[1.07] tracking-[-0.02em]">
+              You&rsquo;re in the queue.
+            </h1>
 
-        {/* What Happens Next Section */}
-        <div className="border border-gray-800 rounded-lg p-8 mb-8">
-          <h2 className="text-2xl font-semibold mb-6">What happens next?</h2>
+            <p className="mt-6 max-w-[560px] text-body text-secondary">
+              Thanks for adding yourself to the directory. Nothing else is needed
+              from you right now.
+            </p>
 
-          <ol className="space-y-4">
-            <li className="flex gap-4">
-              <span className="flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full bg-gray-900 text-white font-semibold">
-                1
-              </span>
-              <span className="text-gray-300 pt-1">
-                Our team will review your submission
-              </span>
-            </li>
+            <ol className="mt-12 max-w-[560px] space-y-6 border-t border-line pt-10">
+              {STEPS.map((step, i) => (
+                <li key={step} className="flex gap-4">
+                  <span
+                    aria-hidden
+                    className="grid h-8 w-8 shrink-0 place-items-center rounded-pill border border-line font-display text-caption font-semibold text-secondary"
+                  >
+                    {i + 1}
+                  </span>
+                  <span className="pt-1 text-body text-secondary">{step}</span>
+                </li>
+              ))}
+            </ol>
 
-            <li className="flex gap-4">
-              <span className="flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full bg-gray-900 text-white font-semibold">
-                2
-              </span>
-              <span className="text-gray-300 pt-1">
-                Once approved, your profile will appear in the member directory
-              </span>
-            </li>
-
-            <li className="flex gap-4">
-              <span className="flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full bg-gray-900 text-white font-semibold">
-                3
-              </span>
-              <span className="text-gray-300 pt-1">
-                Connect with other members at our weekly Wednesday meetups
-              </span>
-            </li>
-          </ol>
-        </div>
-
-        {/* Call to Action */}
-        <div className="text-center">
-          <Link
-            href="/"
-            className="inline-block bg-white text-black px-8 py-3 rounded-lg font-semibold hover:bg-gray-200 transition-colors"
-          >
-            Return to Homepage
-          </Link>
-        </div>
-      </div>
+            <div className="mt-12 flex flex-col gap-3.5 sm:flex-row">
+              <ButtonLink href="/">Back to the homepage</ButtonLink>
+              <ButtonLink href="/members" variant="secondary">
+                See the directory
+              </ButtonLink>
+            </div>
+          </div>
+        </Container>
+      </section>
     </main>
   );
 }

@@ -9,7 +9,7 @@ import {
   type MemberSubmissionData,
 } from "@/lib/validations/member-submission";
 import { submitMemberAction } from "@/app/(public)/join/actions";
-import FormField from "./FormField";
+import FormField, { fieldClass } from "./FormField";
 import ImageUpload from "./ImageUpload";
 
 export default function MemberSubmissionForm() {
@@ -66,11 +66,11 @@ export default function MemberSubmissionForm() {
   };
 
   return (
-    <div className="max-w-2xl mx-auto">
+    <div>
       {state?.error && (
         <div
           role="alert"
-          className="mb-6 p-4 bg-red-900/20 border border-red-800 rounded text-red-400"
+          className="mb-8 rounded-input border border-[#ff6b6b]/40 bg-[#ff6b6b]/10 p-4 text-caption text-[#ff6b6b]"
         >
           {state.error}
         </div>
@@ -80,7 +80,7 @@ export default function MemberSubmissionForm() {
         id="member-submission-form"
         action={formAction}
         onSubmit={handleSubmit(onSubmit)}
-        className="space-y-6"
+        className="space-y-7"
       >
         <FormField
           label="Full Name"
@@ -92,7 +92,7 @@ export default function MemberSubmissionForm() {
             type="text"
             id="name"
             {...register("name")}
-            className="w-full h-12 px-4 text-base text-[16px] bg-black border border-gray-800 rounded text-white placeholder-gray-500 focus:border-white focus:outline-none focus:ring-1 focus:ring-white touch-manipulation"
+            className={fieldClass}
             placeholder="John Doe"
             aria-describedby={getFieldError("name") ? "name-error" : undefined}
           />
@@ -108,7 +108,7 @@ export default function MemberSubmissionForm() {
             type="text"
             id="jobTitle"
             {...register("jobTitle")}
-            className="w-full h-12 px-4 text-base text-[16px] bg-black border border-gray-800 rounded text-white placeholder-gray-500 focus:border-white focus:outline-none focus:ring-1 focus:ring-white touch-manipulation"
+            className={fieldClass}
             placeholder="Product Manager"
             aria-describedby={
               getFieldError("jobTitle") ? "jobTitle-error" : undefined
@@ -125,7 +125,7 @@ export default function MemberSubmissionForm() {
             type="text"
             id="company"
             {...register("company")}
-            className="w-full h-12 px-4 text-base text-[16px] bg-black border border-gray-800 rounded text-white placeholder-gray-500 focus:border-white focus:outline-none focus:ring-1 focus:ring-white touch-manipulation"
+            className={fieldClass}
             placeholder="Acme Corp"
             aria-describedby={
               getFieldError("company") ? "company-error" : undefined
@@ -142,7 +142,7 @@ export default function MemberSubmissionForm() {
             type="url"
             id="linkedIn"
             {...register("linkedIn")}
-            className="w-full h-12 px-4 text-base text-[16px] bg-black border border-gray-800 rounded text-white placeholder-gray-500 focus:border-white focus:outline-none focus:ring-1 focus:ring-white touch-manipulation"
+            className={fieldClass}
             placeholder="https://linkedin.com/in/johndoe"
             aria-describedby={
               getFieldError("linkedIn") ? "linkedIn-error" : undefined
@@ -174,12 +174,12 @@ export default function MemberSubmissionForm() {
         <button
           type="submit"
           disabled={isPending || isTransitioning}
-          className="w-full h-12 sm:h-14 px-6 bg-white text-black font-medium rounded hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-black disabled:opacity-50 disabled:cursor-not-allowed touch-manipulation transition-colors"
+          className="inline-flex h-12 w-full items-center justify-center rounded-pill bg-lime px-7 text-ui font-semibold text-canvas transition-colors hover:bg-lime/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lime disabled:cursor-not-allowed disabled:opacity-50 touch-manipulation sm:w-auto sm:min-w-[220px]"
         >
           {isPending || isTransitioning ? "Submitting..." : "Submit Application"}
         </button>
 
-        <p className="text-sm text-gray-400 text-center">
+        <p className="text-micro text-muted">
           By submitting, you agree to have your profile reviewed for inclusion
           in our member directory.
         </p>
