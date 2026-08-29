@@ -13,57 +13,40 @@ export const membersQuery = `*[_type == "member" && status == "approved"] | orde
   approvedAt
 }`;
 
-export const blogPostsQuery = `*[_type == "blogPost" && defined(publishedAt)] | order(publishedAt desc) {
+/**
+ * Homepage image collections.
+ *
+ * Every one of these stores a Cloudinary asset rather than a Sanity asset —
+ * see lib/sanity/schemas/*. The `image` projection returns the raw plugin
+ * payload; lib/cloudinary/url.ts turns it into a delivery URL.
+ */
+
+export const logosQuery = `*[_type == "logo"] | order(order asc, name asc) {
   _id,
-  title,
-  slug,
-  coverImage,
-  excerpt,
-  publishedAt,
-  author
+  name,
+  url,
+  image
 }`;
 
-export const blogPostBySlugQuery = `*[_type == "blogPost" && slug.current == $slug][0] {
+export const pastEventsQuery = `*[_type == "pastEvent"] | order(order asc, _createdAt desc) {
   _id,
-  title,
-  slug,
-  coverImage,
-  excerpt,
-  body,
-  publishedAt,
-  author
+  caption,
+  eventDate,
+  image
 }`;
 
-export const upcomingEventsQuery = `*[
-  _type == "event"
-  && status == "approved"
-  && (
-    eventType == "recurring"
-    || dateTime(eventDateTime) > dateTime(now())
-  )
-] | order(eventDateTime asc) {
+export const testimonialsQuery = `*[_type == "testimonial"] | order(order asc, _createdAt desc) {
   _id,
-  title,
-  slug,
-  image,
-  description,
-  eventType,
-  eventDateTime,
-  recurrencePattern,
-  author
+  quote,
+  authorName,
+  authorRole,
+  image
 }`;
 
-export const allEventsQuery = `*[
-  _type == "event"
-  && status == "approved"
-] | order(eventDateTime desc) {
+export const upcomingPostsQuery = `*[_type == "upcomingPost" && (!defined(eventDate) || dateTime(eventDate) > dateTime(now()))] | order(eventDate asc) {
   _id,
   title,
-  slug,
-  image,
-  description,
-  eventType,
-  eventDateTime,
-  recurrencePattern,
-  author
+  eventDate,
+  url,
+  image
 }`;

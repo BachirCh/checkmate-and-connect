@@ -1,0 +1,128 @@
+[
+  {
+    "public_id": "checkmate/logos/ocp",
+    "version": 1787950325,
+    "format": "png",
+    "width": 334,
+    "height": 104,
+    "resource_type": "image",
+    "secure_url": "https://res.cloudinary.com/dnamxu2im/image/upload/v1787950325/checkmate/logos/ocp.png"
+  },
+  {
+    "public_id": "checkmate/logos/um6p",
+    "version": 1787948196,
+    "format": "png",
+    "width": 348,
+    "height": 102,
+    "resource_type": "image",
+    "secure_url": "https://res.cloudinary.com/dnamxu2im/image/upload/v1787948196/checkmate/logos/um6p.png"
+  },
+  {
+    "public_id": "checkmate/logos/bewize",
+    "version": 1787950327,
+    "format": "png",
+    "width": 286,
+    "height": 120,
+    "resource_type": "image",
+    "secure_url": "https://res.cloudinary.com/dnamxu2im/image/upload/v1787950327/checkmate/logos/bewize.png"
+  },
+  {
+    "public_id": "checkmate/past-events/branded-bottles",
+    "version": 1787948200,
+    "format": "jpg",
+    "width": 1800,
+    "height": 1192,
+    "resource_type": "image",
+    "secure_url": "https://res.cloudinary.com/dnamxu2im/image/upload/v1787948200/checkmate/past-events/branded-bottles.jpg"
+  },
+  {
+    "public_id": "checkmate/past-events/commons-neon",
+    "version": 1787948204,
+    "format": "jpg",
+    "width": 1800,
+    "height": 1351,
+    "resource_type": "image",
+    "secure_url": "https://res.cloudinary.com/dnamxu2im/image/upload/v1787948204/checkmate/past-events/commons-neon.jpg"
+  },
+  {
+    "public_id": "checkmate/past-events/crowd-terrace",
+    "version": 1787948208,
+    "format": "jpg",
+    "width": 1800,
+    "height": 1351,
+    "resource_type": "image",
+    "secure_url": "https://res.cloudinary.com/dnamxu2im/image/upload/v1787948208/checkmate/past-events/crowd-terrace.jpg"
+  },
+  {
+    "public_id": "checkmate/past-events/group-celebration",
+    "version": 1787948212,
+    "format": "jpg",
+    "width": 1800,
+    "height": 1192,
+    "resource_type": "image",
+    "secure_url": "https://res.cloudinary.com/dnamxu2im/image/upload/v1787948212/checkmate/past-events/group-celebration.jpg"
+  },
+  {
+    "public_id": "checkmate/past-events/hackathon-stage",
+    "version": 1787948215,
+    "format": "jpg",
+    "width": 1800,
+    "height": 1192,
+    "resource_type": "image",
+    "secure_url": "https://res.cloudinary.com/dnamxu2im/image/upload/v1787948215/checkmate/past-events/hackathon-stage.jpg"
+  },
+  {
+    "public_id": "checkmate/past-events/jenga-tower",
+    "version": 1787948218,
+    "format": "jpg",
+    "width": 1192,
+    "height": 1800,
+    "resource_type": "image",
+    "secure_url": "https://res.cloudinary.com/dnamxu2im/image/upload/v1787948218/checkmate/past-events/jenga-tower.jpg"
+  },
+  {
+    "public_id": "checkmate/past-events/networking-room",
+    "version": 1787948221,
+    "format": "jpg",
+    "width": 1800,
+    "height": 1192,
+    "resource_type": "image",
+    "secure_url": "https://res.cloudinary.com/dnamxu2im/image/upload/v1787948221/checkmate/past-events/networking-room.jpg"
+  },
+  {
+    "public_id": "checkmate/past-events/standing-circle",
+    "version": 1787948226,
+    "format": "jpg",
+    "width": 1800,
+    "height": 1192,
+    "resource_type": "image",
+    "secure_url": "https://res.cloudinary.com/dnamxu2im/image/upload/v1787948226/checkmate/past-events/standing-circle.jpg"
+  },
+  {
+    "public_id": "checkmate/past-events/table-game",
+    "version": 1787948231,
+    "format": "jpg",
+    "width": 1800,
+    "height": 1192,
+    "resource_type": "image",
+    "secure_url": "https://res.cloudinary.com/dnamxu2im/image/upload/v1787948231/checkmate/past-events/table-game.jpg"
+  },
+  {
+    "public_id": "checkmate/past-events/talk-audience",
+    "version": 1787948235,
+    "format": "jpg",
+    "width": 1800,
+    "height": 1192,
+    "resource_type": "image",
+    "secure_url": "https://res.cloudinary.com/dnamxu2im/image/upload/v1787948235/checkmate/past-events/talk-audience.jpg"
+  },
+  {
+    "public_id": "checkmate/testimonials/bachir-cherrat",
+    "version": 1787948237,
+    "format": "png",
+    "width": 720,
+    "height": 720,
+    "resource_type": "image",
+    "secure_url": "https://res.cloudinary.com/dnamxu2im/image/upload/v1787948237/checkmate/testimonials/bachir-cherrat.png"
+  }
+]

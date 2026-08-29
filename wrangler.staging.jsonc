@@ -1,0 +1,20 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  // Staging variant of wrangler.jsonc: identical Worker, but with NO custom
+  // domain routes. Deploying this publishes to <name>.<subdomain>.workers.dev
+  // so the build can be verified on real Cloudflare infra before checkmate.ma
+  // is detached from the old static Worker. Same worker name, so the later
+  // production deploy updates this same script rather than creating a second.
+  "name": "checkmate-and-connect",
+  "account_id": "11a97cad91bc72800eac712c07af4ace",
+  "main": ".open-next/worker.js",
+  "compatibility_date": "2026-07-01",
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "workers_dev": true,
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS",
+    "html_handling": "auto-trailing-slash"
+  },
+  "observability": { "enabled": true }
+}

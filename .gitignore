@@ -33,3 +33,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# cloudflare / opennext build output
+/.open-next/
+/.wrangler/
+
+# sanity studio build output (npm run studio:deploy)
+/dist/

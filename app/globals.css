@@ -1,34 +1,125 @@
 @import "tailwindcss";
 
-@custom-variant dark (&:is(.dark *));
-
+/*
+ * Checkmate & Connect design tokens.
+ *
+ * Values are lifted directly from the Figma home page (56674:572) rather than
+ * approximated — see the brand guidelines deck for the reasoning behind each.
+ * Two rules that are easy to break by accident:
+ *   1. Lime is for action only. Buttons, links, the eyebrow. Never a surface.
+ *   2. Headlines are Outfit; everything else is Figtree. No exceptions.
+ */
 @theme {
-  /* Poppins for body text */
-  --font-sans: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+  /* Typefaces */
+  --font-sans: var(--font-figtree), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
 
-  /* Montserrat for headings */
-  --font-heading: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
+  /* Canvas and surfaces */
+  --color-canvas: #0a0a0a;
+  --color-surface: #121212;
+  --color-raised: #191919;
 
-  /* Dark mode colors - black and white branding */
-  --color-background: #000000;
-  --color-foreground: #ffffff;
-  --color-muted: #1a1a1a;
-  --color-accent: #333333;
-  --color-muted-foreground: #9ca3af;
-  --color-surface: #1a1a1a;
-  --color-border: #333333;
+  /* Lines — hairline is the full-bleed rule under the nav, line is for borders */
+  --color-hairline: #1f1f1f;
+  --color-line: #262626;
+
+  /* Type colours, brightest to dimmest */
+  --color-ink: #ffffff;
+  --color-secondary: #b8b8b8;
+  --color-muted: #8a8a8a;
+  --color-faint: #4a4a4a;
+
+  /* The one accent */
+  --color-lime: #dfff1e;
+
+  /* Radii */
+  --radius-badge: 8px;
+  --radius-input: 16px;
+  --radius-card: 24px;
+  --radius-media: 32px;
+  --radius-pill: 999px;
+
+  /* Type scale */
+  --text-display: 88px;
+  --text-display--line-height: 88px;
+  --text-display--letter-spacing: -0.02em;
+
+  --text-h2: 48px;
+  --text-h2--line-height: 54px;
+  --text-h2--letter-spacing: -0.02em;
+
+  --text-h2lg: 56px;
+  --text-h2lg--line-height: 60px;
+  --text-h2lg--letter-spacing: -0.02em;
+
+  --text-stat: 26px;
+  --text-stat--line-height: 33px;
+  --text-stat--letter-spacing: -0.01em;
+
+  --text-lead: 20px;
+  --text-lead--line-height: 32px;
+
+  --text-feature: 20px;
+  --text-feature--line-height: 30px;
+
+  --text-body: 19px;
+  --text-body--line-height: 30px;
+
+  --text-ui: 15px;
+  --text-ui--line-height: 18px;
+
+  --text-caption: 14px;
+  --text-caption--line-height: 17px;
+
+  --text-micro: 13px;
+  --text-micro--line-height: 16px;
+
+  --text-eyebrow: 11px;
+  --text-eyebrow--line-height: 13px;
+  --text-eyebrow--letter-spacing: 0.12em;
 }
 
 html {
   scroll-behavior: smooth;
+  background-color: var(--color-canvas);
 }
 
 body {
-  background-color: #000000;
-  color: #ffffff;
+  background-color: var(--color-canvas);
+  color: var(--color-ink);
 }
 
-/* Apply Montserrat to all headings globally */
+/* Headlines are Outfit everywhere, so authors can't forget the font class */
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--font-display);
+}
+
+/*
+ * Horizontal carousels.
+ *
+ * Scroll-snap rather than a carousel library: it is native, keyboard- and
+ * touch-accessible for free, and adds nothing to a Worker bundle that has a
+ * 3 MiB ceiling.
+ */
+.carousel {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  overscroll-behavior-x: contain;
+}
+
+.carousel::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel > * {
+  scroll-snap-align: start;
+  flex: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
