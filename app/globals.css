@@ -127,15 +127,17 @@ h1, h2, h3, h4, h5, h6 {
 /*
  * Hero carousel line timer.
  *
- * The active segment fills over the slide duration. Kept as a transform so it
- * animates on the compositor rather than triggering layout every frame; the
- * component restarts it by remounting the element on slide change.
+ * The active segment starts full and drains over the slide duration, so the
+ * bar reads as time running out rather than time accumulating. Kept as a
+ * transform so it animates on the compositor rather than triggering layout
+ * every frame; the component restarts it by remounting the element on slide
+ * change.
  */
 @keyframes hero-timer {
   from {
-    transform: scaleX(0);
+    transform: scaleX(1);
   }
   to {
-    transform: scaleX(1);
+    transform: scaleX(0);
   }
 }

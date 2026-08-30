@@ -128,9 +128,18 @@ export function HeroCarousel({ slides }: { slides: HeroSlide[] }) {
                 aria-current={i === index}
                 className="group h-5 w-10 px-0 py-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lime"
               >
-                <span className="block h-1 w-full overflow-hidden rounded-pill bg-ink/30 group-hover:bg-ink/50">
+                {/*
+                  The active track is brighter than the rest. Once the bar has
+                  drained it is empty like its neighbours, so without this the
+                  current slide is unreadable at the end of every cycle.
+                */}
+                <span
+                  className={`block h-1 w-full overflow-hidden rounded-pill ${
+                    i === index ? 'bg-ink/45' : 'bg-ink/20'
+                  } group-hover:bg-ink/60`}
+                >
                   <span
-                    // Remounting on slide change restarts the fill animation.
+                    // Remounting on slide change restarts the drain.
                     key={`${i === index}-${index}`}
                     className="block h-full w-full origin-left rounded-pill bg-ink"
                     style={
