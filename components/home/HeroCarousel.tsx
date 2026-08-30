@@ -23,7 +23,7 @@ import { useCallback, useEffect, useState } from 'react';
  */
 
 export type HeroSlide = {
-  /** 1x source, 1200x460. */
+  /** 1x source, 1200x800. */
   src: string;
   /** 2x source, 2400x920. */
   src2x: string;
@@ -92,16 +92,17 @@ export function HeroCarousel({ slides }: { slides: HeroSlide[] }) {
             srcSet={`${slide.src} 1200w, ${slide.src2x} 2400w`}
             sizes="(max-width: 1440px) calc(100vw - 48px), 1200px"
             width={1200}
-            height={460}
+            height={800}
             alt={slide.alt}
             // The first frame is the page's LCP element; the rest can wait.
             fetchPriority={i === 0 ? 'high' : 'low'}
             loading={i === 0 ? 'eager' : 'lazy'}
             decoding="async"
             aria-hidden={i !== index}
-            // Taller on phones: the 2.6:1 artboard crop is only ~144px tall at
-            // 375px wide, which reads as a strip rather than a photo.
-            className="aspect-[16/9] w-full shrink-0 object-cover sm:aspect-[1200/460]"
+            // One ratio at every width: the sources are 3:2 frames, so a
+            // breakpoint override here would crop the photo rather than
+            // reveal more of it.
+            className="aspect-[3/2] w-full shrink-0 object-cover"
           />
         ))}
       </div>

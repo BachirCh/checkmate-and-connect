@@ -15,7 +15,7 @@ const BASE =
 const VARIANTS = {
   primary: 'bg-lime text-canvas font-semibold hover:bg-lime/90',
   secondary:
-    'border border-line text-ink font-medium hover:border-ink/40 hover:bg-raised',
+    'border border-white/15 bg-raised text-ink font-medium hover:border-ink/40 hover:bg-hairline',
 } as const;
 
 type Variant = keyof typeof VARIANTS;

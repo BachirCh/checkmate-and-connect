@@ -23,7 +23,7 @@ export default function JoinBand() {
           </h2>
 
           <p className="mx-auto mt-5 max-w-[680px] text-body text-secondary">
-            No ticket, no pitch, no membership. Doors open at{' '}
+            No ticket, no registration, no membership. Doors open at{' '}
             {site.event.startHour}:00 at {site.event.venueName}. Come when you can.
           </p>
 

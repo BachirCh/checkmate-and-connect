@@ -20,8 +20,6 @@ export const memberSubmissionSchema = z.object({
       (file) => ['image/jpeg', 'image/png', 'image/webp'].includes(file.type),
       'Photo must be JPEG, PNG, or WebP'
     ),
-  // recaptchaToken is added programmatically in onSubmit, not a form field
-  recaptchaToken: z.string().optional(),
   _honey: z.string().optional(),
 });
 
@@ -40,6 +38,5 @@ export const serverMemberSubmissionSchema = z.object({
       (val) => !val || val === '' || (val.startsWith('http') && val.includes('linkedin.com')),
       'LinkedIn URL must be a valid URL from linkedin.com'
     ),
-  recaptchaToken: z.string().min(1, 'reCAPTCHA verification required'),
   _honey: z.string().optional(),
 });

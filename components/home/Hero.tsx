@@ -6,25 +6,46 @@ import { Icon } from '@/components/ui/Icon';
 import { site } from '@/lib/site';
 
 /**
- * Placeholder frames pending final picks. Each is a 2.6:1 centre crop of an
- * original camera file, pre-sized at 1200 and 2400 so the browser never asks
+ * Each is a 3:2 frame, pre-sized at 1200 and 2400 so the browser never asks
  * the Worker to resize anything.
+ *
+ * 3:2 is the camera's native ratio (4928x3264), so the slides now show close
+ * to the whole frame instead of the 2.6:1 letterbox crop they shipped with.
+ * Five of the six are exported straight from the crops in the C&C Figma file
+ * (section "Section 1", frames image1-image5, 4096x2713) — that is the source
+ * of truth for how each photo is framed, so re-cut from there, not from the
+ * camera original, if one ever needs regenerating.
  */
 const SLIDES: HeroSlide[] = [
-  {
-    src: '/img/hero-1-1200.webp',
-    src2x: '/img/hero-1-2400.webp',
-    alt: 'Members of Checkmate & Connect gathered under the pendant lights at Commons Zerktouni, holding certificates at the end of a hackathon.',
-  },
   {
     src: '/img/hero-2-1200.webp',
     src2x: '/img/hero-2-2400.webp',
     alt: 'A packed room of founders and builders standing and talking during a Checkmate & Connect event.',
   },
   {
-    src: '/img/hero-3-1200.webp',
-    src2x: '/img/hero-3-2400.webp',
-    alt: 'A seated audience listening to a talk at a Checkmate & Connect event in Casablanca.',
+    src: '/img/hero-image1-1200.webp',
+    src2x: '/img/hero-image1-2400.webp',
+    alt: 'Members playing a game theory exercise on a whiteboard while a talk plays on the screen behind them.',
+  },
+  {
+    src: '/img/hero-image2-1200.webp',
+    src2x: '/img/hero-image2-2400.webp',
+    alt: 'A member stacking a Jenga tower back together as a crowd watches and laughs.',
+  },
+  {
+    src: '/img/hero-image3-1200.webp',
+    src2x: '/img/hero-image3-2400.webp',
+    alt: 'The Commons Zerktouni neon sign reading "Commons work wonders" on a plant wall.',
+  },
+  {
+    src: '/img/hero-image4-1200.webp',
+    src2x: '/img/hero-image4-2400.webp',
+    alt: 'Checkmate & Connect branded water bottles lined up along the bar.',
+  },
+  {
+    src: '/img/hero-image5-1200.webp',
+    src2x: '/img/hero-image5-2400.webp',
+    alt: 'A member smiling behind stacked meal boxes under pendant lights at Commons Zerktouni.',
   },
 ];
 

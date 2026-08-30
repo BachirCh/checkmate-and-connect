@@ -37,9 +37,13 @@ export default function SpeakersBand({ logos }: { logos: Logo[] }) {
           rather than a fixed grid, so a short last row still centres itself
           instead of leaving a hole where the empty cells would be.
 
-          On phones the item basis drops to half the row so it is always two up.
-          A fixed 152px would need 328px of track, one pixel more than a 375px
-          screen leaves inside the px-6 gutter — which silently made it one up.
+          On phones the item basis drops to half the row so it is always two up,
+          and the logo itself steps down to 124px. A fixed 152px would need
+          328px of track, one pixel more than a 375px screen leaves inside the
+          px-6 gutter — which silently made it one up.
+
+          The width/height attributes stay at the desktop 152x47: they only
+          reserve the aspect ratio against layout shift, and CSS wins over them.
         */}
         <ul className="mx-auto mt-12 flex max-w-[680px] flex-wrap items-center justify-center gap-x-6 gap-y-8">
           {logos.map((logo) => {
@@ -55,7 +59,7 @@ export default function SpeakersBand({ logos }: { logos: Logo[] }) {
                 height={47}
                 loading="lazy"
                 decoding="async"
-                className="h-[47px] w-[152px] max-w-full object-contain opacity-80 transition-opacity hover:opacity-100"
+                className="h-[38px] w-[124px] max-w-full object-contain opacity-80 transition-opacity hover:opacity-100 sm:h-[47px] sm:w-[152px]"
               />
             );
 

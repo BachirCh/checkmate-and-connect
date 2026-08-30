@@ -101,8 +101,6 @@ Test on a representative sample of iOS and Android devices to ensure broad compa
 - [ ] Loading state visible during submission
 
 ### Spam Protection
-- [ ] reCAPTCHA badge appears in bottom-right corner
-- [ ] reCAPTCHA doesn't interfere with form interaction
 - [ ] Honeypot field not visible to users
 - [ ] Rate limiting triggers after 5 rapid submissions
 

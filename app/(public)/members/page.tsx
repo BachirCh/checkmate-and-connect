@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { MemberGrid, type DirectoryMember } from '@/components/members/MemberGrid';
 import { ButtonLink } from '@/components/ui/Button';
 import { Container } from '@/components/ui/Container';
+import { DepthText } from '@/components/ui/DepthText';
 import { PageHeader } from '@/components/ui/PageHeader';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { client } from '@/lib/sanity/client';
@@ -71,12 +72,12 @@ export default async function MembersPage() {
       <main>
         <PageHeader
           eyebrow="The community"
-          title="The people in the room."
-          lead={
-            count > 0
-              ? `${count} member${count === 1 ? '' : 's'} have added themselves to the directory. It is opt-in, so this is a slice of the community rather than all ${site.stats.members} of it.`
-              : 'The directory is opt-in and nobody has been listed yet. Add yourself and be the first.'
+          title={
+            <>
+              The people who took the <DepthText text="move" />
+            </>
           }
+          lead="Join our next event to be findable by founders, entrepreneurs, next-gen startups and established companies."
         >
           <div className="mt-10">
             <ButtonLink href="/join">Add yourself</ButtonLink>

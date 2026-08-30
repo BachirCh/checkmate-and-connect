@@ -3,7 +3,6 @@
 import { useActionState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 import {
   memberSubmissionSchema,
   type MemberSubmissionData,
@@ -13,7 +12,6 @@ import FormField, { fieldClass } from "./FormField";
 import ImageUpload from "./ImageUpload";
 
 export default function MemberSubmissionForm() {
-  const { executeRecaptcha } = useGoogleReCaptcha();
   const [state, formAction, isPending] = useActionState(
     submitMemberAction,
     null,
@@ -34,14 +32,6 @@ export default function MemberSubmissionForm() {
   const photoValue = watch("photo");
 
   const onSubmit = async (data: MemberSubmissionData) => {
-    // Get reCAPTCHA token before submission (TEMPORARILY DISABLED)
-    // TODO: Re-enable after configuring reCAPTCHA properly
-    // if (!executeRecaptcha) {
-    //   console.error('reCAPTCHA not available');
-    //   return;
-    // }
-    // const recaptchaToken = await executeRecaptcha('member_submission');
-
     // Create FormData and append all fields
     const formData = new FormData();
     formData.append("name", data.name);
@@ -49,7 +39,6 @@ export default function MemberSubmissionForm() {
     formData.append("company", data.company || "");
     formData.append("linkedIn", data.linkedIn || "");
     formData.append("photo", data.photo);
-    formData.append("recaptchaToken", "disabled-for-testing"); // Placeholder
     formData.append("_honey", data._honey || "");
 
     // Call the server action inside a transition
@@ -93,7 +82,6 @@ export default function MemberSubmissionForm() {
             id="name"
             {...register("name")}
             className={fieldClass}
-            placeholder="John Doe"
             aria-describedby={getFieldError("name") ? "name-error" : undefined}
           />
         </FormField>
@@ -109,7 +97,6 @@ export default function MemberSubmissionForm() {
             id="jobTitle"
             {...register("jobTitle")}
             className={fieldClass}
-            placeholder="Product Manager"
             aria-describedby={
               getFieldError("jobTitle") ? "jobTitle-error" : undefined
             }
@@ -126,7 +113,6 @@ export default function MemberSubmissionForm() {
             id="company"
             {...register("company")}
             className={fieldClass}
-            placeholder="Acme Corp"
             aria-describedby={
               getFieldError("company") ? "company-error" : undefined
             }
@@ -178,11 +164,6 @@ export default function MemberSubmissionForm() {
         >
           {isPending || isTransitioning ? "Submitting..." : "Submit Application"}
         </button>
-
-        <p className="text-micro text-muted">
-          By submitting, you agree to have your profile reviewed for inclusion
-          in our member directory.
-        </p>
       </form>
     </div>
   );

@@ -3,7 +3,7 @@
 import { redirect } from 'next/navigation';
 import { writeClient } from '@/lib/sanity/write-client';
 import { serverMemberSubmissionSchema } from '@/lib/validations/member-submission';
-import { checkHoneypot, rateLimit, verifyRecaptcha } from '@/lib/spam-protection';
+import { checkHoneypot, rateLimit } from '@/lib/spam-protection';
 
 export async function submitMemberAction(prevState: any, formData: FormData) {
   try {
@@ -13,7 +13,6 @@ export async function submitMemberAction(prevState: any, formData: FormData) {
     const company = formData.get('company') as string;
     const linkedIn = formData.get('linkedIn') as string;
     const photo = formData.get('photo') as File;
-    const recaptchaToken = formData.get('recaptchaToken') as string;
     const _honey = formData.get('_honey') as string;
 
     // SPAM PROTECTION LAYER 1: Honeypot check
@@ -31,23 +30,12 @@ export async function submitMemberAction(prevState: any, formData: FormData) {
       };
     }
 
-    // SPAM PROTECTION LAYER 3: reCAPTCHA verification (TEMPORARILY DISABLED)
-    // TODO: Re-enable after configuring reCAPTCHA properly
-    // const recaptchaResult = await verifyRecaptcha(recaptchaToken, 'member_submission');
-    // if (!recaptchaResult.success || recaptchaResult.score < 0.5) {
-    //   return {
-    //     success: false,
-    //     error: 'reCAPTCHA verification failed. Please try again.',
-    //   };
-    // }
-
     // Validate text fields with Zod
     const validationResult = serverMemberSubmissionSchema.safeParse({
       name,
       jobTitle,
       company,
       linkedIn,
-      recaptchaToken,
       _honey,
     });
 

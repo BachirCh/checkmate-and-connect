@@ -32,6 +32,14 @@
   /* The one accent */
   --color-lime: #dfff1e;
 
+  /*
+   * Feedback signals. Not part of the brand palette and never a surface — they
+   * exist so a kept/improve pair reads at a glance, and appear as icons only.
+   * Negative doubles as the form-error red, which was already this value.
+   */
+  --color-positive: #4ade80;
+  --color-negative: #ff6b6b;
+
   /* Radii */
   --radius-badge: 8px;
   --radius-input: 16px;

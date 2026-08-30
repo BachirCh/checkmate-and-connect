@@ -66,7 +66,7 @@ const LOGOS = [
   { slug: 'cgem', name: 'CGEM' },
   { slug: 'oracle', name: 'Oracle' },
   { slug: 'sobrus', name: 'Sobrus' },
-  { slug: 'bewize', name: 'Bewize' },
+  { slug: 'yassir', name: 'Yassir' },
   { slug: 'datao', name: 'Datao' },
   { slug: 'aress', name: 'Aress' },
 ];

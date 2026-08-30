@@ -25,7 +25,8 @@ export const textareaClass = `${FIELD_BASE} min-h-[150px] resize-y py-3.5 leadin
 export const selectClass = `${FIELD_BASE} h-12 cursor-pointer appearance-none pr-11`;
 
 interface FormFieldProps {
-  label: string;
+  /** ReactNode, not string: the feedback fields put an icon beside the text. */
+  label: React.ReactNode;
   name: string;
   required?: boolean;
   error?: string;

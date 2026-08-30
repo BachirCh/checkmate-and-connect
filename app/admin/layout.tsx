@@ -14,6 +14,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const navLinks: { href: string; label: string; external?: boolean }[] = [
     { href: '/admin', label: 'Dashboard' },
     { href: '/admin/members', label: 'Members' },
+    { href: '/admin/feedback', label: 'Feedback' },
     // Studio is hosted by Sanity rather than embedded — see sanity.cli.ts
     {
       href: process.env.NEXT_PUBLIC_SANITY_STUDIO_URL || 'https://c-c.sanity.studio',

@@ -1,7 +1,7 @@
 /**
  * k6 Load Test for Rate Limiting and Spam Protection
  *
- * Tests rate limiting, honeypot, and reCAPTCHA spam protection under load.
+ * Tests rate limiting and honeypot spam protection under load.
  * Simulates bot attacks with rapid-fire submissions to verify protection holds.
  *
  * Usage:
@@ -49,10 +49,6 @@ export default function () {
     // Honeypot field - legitimate users leave this empty
     // Bots often fill all fields
     _honey: '', // Empty = legitimate user behavior
-
-    // NOTE: reCAPTCHA token not included in load test
-    // Production forms require valid token from Google reCAPTCHA API
-    // Rate limiting and honeypot still work without reCAPTCHA
   });
 
   const params = {
@@ -95,6 +91,6 @@ export default function () {
  * - Window: 60000ms (1 minute)
  *
  * NOTE: Once Phase 3 member submission endpoint is available, update ENDPOINT
- * constant to test actual form submission with full spam protection stack
- * (reCAPTCHA + honeypot + rate limiting).
+ * constant to test actual form submission with the full spam protection stack
+ * (honeypot + rate limiting).
  */
