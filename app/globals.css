@@ -123,3 +123,19 @@ h1, h2, h3, h4, h5, h6 {
     scroll-behavior: auto;
   }
 }
+
+/*
+ * Hero carousel line timer.
+ *
+ * The active segment fills over the slide duration. Kept as a transform so it
+ * animates on the compositor rather than triggering layout every frame; the
+ * component restarts it by remounting the element on slide change.
+ */
+@keyframes hero-timer {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
