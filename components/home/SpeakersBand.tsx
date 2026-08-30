@@ -33,9 +33,13 @@ export default function SpeakersBand({ logos }: { logos: Logo[] }) {
         </h2>
 
         {/*
-          Capped at four logos per row: 4 × 152px + 3 × 24px of gap. Wrapping
+          Four per row on desktop: 4 × 152px + 3 × 24px of gap = 680. Wrapping
           rather than a fixed grid, so a short last row still centres itself
           instead of leaving a hole where the empty cells would be.
+
+          On phones the item basis drops to half the row so it is always two up.
+          A fixed 152px would need 328px of track, one pixel more than a 375px
+          screen leaves inside the px-6 gutter — which silently made it one up.
         */}
         <ul className="mx-auto mt-12 flex max-w-[680px] flex-wrap items-center justify-center gap-x-6 gap-y-8">
           {logos.map((logo) => {
@@ -51,12 +55,15 @@ export default function SpeakersBand({ logos }: { logos: Logo[] }) {
                 height={47}
                 loading="lazy"
                 decoding="async"
-                className="h-[47px] w-[152px] object-contain opacity-80 transition-opacity hover:opacity-100"
+                className="h-[47px] w-[152px] max-w-full object-contain opacity-80 transition-opacity hover:opacity-100"
               />
             );
 
             return (
-              <li key={logo._id}>
+              <li
+                key={logo._id}
+                className="flex basis-[calc(50%-12px)] justify-center sm:basis-auto"
+              >
                 {logo.url ? (
                   <a
                     href={logo.url}

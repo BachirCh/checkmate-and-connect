@@ -100,9 +100,42 @@ const PAST_EVENTS = [
 const TESTIMONIALS = [
   {
     slug: 'bachir-cherrat',
-    quote: 'I came for the networking and left with two people who are now building it with me.',
+    quote: 'Life is a game. Make your move with other players in mind.',
     authorName: 'Bachir Cherrat',
-    authorRole: 'UX Designer · OCP · member since 2025',
+    authorRole: 'UX Designer · OCP · Board member',
+  },
+  {
+    slug: 'abdelkbir-nainiaa',
+    quote:
+      "Managing isn't about keeping control of every decision. It's about creating the conditions for a team to find, together, a better answer than the one you walked in with.",
+    authorName: 'Abdelkbir Nainiaa',
+    authorRole: 'QA Engineer',
+  },
+  {
+    slug: 'ismail-dachraoui',
+    quote:
+      'Sometimes, one idea, one connection, or one conversation can completely change the direction of a project.',
+    authorName: 'Ismail Dachraoui',
+    authorRole: 'Engineering Student, ENSA Khouribga · Digital manager',
+  },
+  {
+    slug: 'calina-hasegawa',
+    quote: "We're such a bunch of different people with a common vision.",
+    authorName: 'Calina Hasegawa',
+    authorRole: 'Digital and People Operations',
+  },
+  {
+    slug: 'kawtar-ait-el-haj',
+    quote: 'Growth begins where our expertise ends.',
+    authorName: 'Kawtar AIT EL HAJ',
+    authorRole: 'Founder & Managing Director · Strategy & Market Expansion',
+  },
+  {
+    slug: 'amina-fatima-duo',
+    quote:
+      "You only find your real limits by stepping into rooms where you're not already comfortable. Technology doesn't live in one field, and neither should we.",
+    authorName: 'Amina AMJOUNE & Fatima Ezzahra EL HASNAOUI',
+    authorRole: 'Cybersecurity Engineers',
   },
 ];
 

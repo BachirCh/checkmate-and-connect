@@ -1,8 +1,9 @@
 import { MessageUsButton } from '@/components/MessageUs';
-import { GlitchText } from '@/components/ui/GlitchText';
+import { DepthText } from '@/components/ui/DepthText';
 import { HeroCarousel, type HeroSlide } from './HeroCarousel';
 import { ButtonLink } from '@/components/ui/Button';
 import { Container } from '@/components/ui/Container';
+import { Icon } from '@/components/ui/Icon';
 import { site } from '@/lib/site';
 
 /**
@@ -28,11 +29,26 @@ const SLIDES: HeroSlide[] = [
   },
 ];
 
-const STATS = [
+/**
+ * `href` turns the caption into a link. The venue uses it to hand off to Maps —
+ * on a phone the maps.app.goo.gl short link opens the Google Maps app directly.
+ */
+const STATS: {
+  value: string;
+  label: string;
+  href?: string;
+  /** Screen-reader term, where the visible caption does not describe the value. */
+  term?: string;
+}[] = [
   { value: site.stats.members, label: 'members' },
   { value: site.stats.cadence, label: 'every Wednesday, 18:00' },
   { value: site.stats.price, label: 'no ticket, no pitch' },
-  { value: site.stats.venue, label: 'Casablanca' },
+  {
+    value: site.stats.venue,
+    label: 'Open in Maps',
+    href: site.event.mapsUrl,
+    term: 'venue',
+  },
 ];
 
 export default function Hero() {
@@ -46,7 +62,7 @@ export default function Hero() {
         {/* No max-width: at 88px this sits on one line across the 1200px
             measure, exactly as in the artboard. It wraps naturally below ~1180px. */}
         <h1 className="mt-6 font-display text-[clamp(40px,6.4vw,88px)] font-bold leading-none tracking-[-0.02em]">
-          Your next <GlitchText>move</GlitchText> starts here
+          Your next <DepthText text="move" /> starts here
         </h1>
 
         <p className="mt-7 max-w-[720px] text-lead text-secondary">
@@ -63,14 +79,28 @@ export default function Hero() {
         <dl className="mt-7 grid grid-cols-2 gap-x-6 gap-y-8 lg:grid-cols-4">
           {STATS.map((stat) => (
             <div key={stat.label}>
-              <dt className="sr-only">{stat.label}</dt>
+              <dt className="sr-only">{stat.term ?? stat.label}</dt>
               <dd>
                 <span className="block font-display text-stat font-semibold tracking-[-0.01em] text-ink">
                   {stat.value}
                 </span>
-                <span className="mt-1.5 block text-caption text-muted">
-                  {stat.label}
-                </span>
+                {stat.href ? (
+                  <a
+                    href={stat.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-1.5 inline-flex items-center gap-1 text-caption text-muted transition-colors hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-lime"
+                  >
+                    <span className="underline decoration-dashed underline-offset-4">
+                      {stat.label}
+                    </span>
+                    <Icon name="arrow-up-right" size={14} className="shrink-0" />
+                  </a>
+                ) : (
+                  <span className="mt-1.5 block text-caption text-muted">
+                    {stat.label}
+                  </span>
+                )}
               </dd>
             </div>
           ))}

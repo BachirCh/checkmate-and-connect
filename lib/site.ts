@@ -23,14 +23,14 @@ export const site = {
     venueName: 'Commons Zerktouni',
     addressLocality: 'Casablanca',
     addressCountry: 'MA',
-    mapsUrl: 'https://maps.app.goo.gl/K9id6TktfPycE6Bt8',
+    mapsUrl: 'https://maps.app.goo.gl/SY56R4Lpy5LTWxTZ7',
   },
 
   stats: {
     members: '400+',
     cadence: 'Weekly',
     price: 'Free',
-    venue: 'Commons Zerktouni',
+    venue: 'Commons Zerktouni, Casa',
   },
 
   social: {

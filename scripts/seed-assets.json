@@ -10,12 +10,12 @@
   },
   {
     "public_id": "checkmate/logos/um6p",
-    "version": 1787948196,
+    "version": 1788086632,
     "format": "png",
-    "width": 348,
-    "height": 102,
+    "width": 1309,
+    "height": 314,
     "resource_type": "image",
-    "secure_url": "https://res.cloudinary.com/dnamxu2im/image/upload/v1787948196/checkmate/logos/um6p.png"
+    "secure_url": "https://res.cloudinary.com/dnamxu2im/image/upload/v1788086632/checkmate/logos/um6p.png"
   },
   {
     "public_id": "checkmate/logos/bewize",
@@ -118,12 +118,57 @@
   },
   {
     "public_id": "checkmate/testimonials/bachir-cherrat",
-    "version": 1787948237,
+    "version": 1788092702,
     "format": "png",
-    "width": 720,
-    "height": 720,
+    "width": 1080,
+    "height": 1080,
     "resource_type": "image",
-    "secure_url": "https://res.cloudinary.com/dnamxu2im/image/upload/v1787948237/checkmate/testimonials/bachir-cherrat.png"
+    "secure_url": "https://res.cloudinary.com/dnamxu2im/image/upload/v1788092702/checkmate/testimonials/bachir-cherrat.png"
+  },
+  {
+    "public_id": "checkmate/testimonials/abdelkbir-nainiaa",
+    "version": 1788092692,
+    "format": "png",
+    "width": 1080,
+    "height": 1080,
+    "resource_type": "image",
+    "secure_url": "https://res.cloudinary.com/dnamxu2im/image/upload/v1788092692/checkmate/testimonials/abdelkbir-nainiaa.png"
+  },
+  {
+    "public_id": "checkmate/testimonials/ismail-dachraoui",
+    "version": 1788092694,
+    "format": "png",
+    "width": 1080,
+    "height": 1080,
+    "resource_type": "image",
+    "secure_url": "https://res.cloudinary.com/dnamxu2im/image/upload/v1788092694/checkmate/testimonials/ismail-dachraoui.png"
+  },
+  {
+    "public_id": "checkmate/testimonials/calina-hasegawa",
+    "version": 1788092696,
+    "format": "png",
+    "width": 1080,
+    "height": 1080,
+    "resource_type": "image",
+    "secure_url": "https://res.cloudinary.com/dnamxu2im/image/upload/v1788092696/checkmate/testimonials/calina-hasegawa.png"
+  },
+  {
+    "public_id": "checkmate/testimonials/kawtar-ait-el-haj",
+    "version": 1788092698,
+    "format": "png",
+    "width": 1080,
+    "height": 1080,
+    "resource_type": "image",
+    "secure_url": "https://res.cloudinary.com/dnamxu2im/image/upload/v1788092698/checkmate/testimonials/kawtar-ait-el-haj.png"
+  },
+  {
+    "public_id": "checkmate/testimonials/amina-fatima-duo",
+    "version": 1788092700,
+    "format": "png",
+    "width": 1080,
+    "height": 1080,
+    "resource_type": "image",
+    "secure_url": "https://res.cloudinary.com/dnamxu2im/image/upload/v1788092700/checkmate/testimonials/amina-fatima-duo.png"
   },
   {
     "public_id": "checkmate/logos/aress",

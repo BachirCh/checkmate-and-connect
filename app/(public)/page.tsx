@@ -95,13 +95,15 @@ export default async function HomePage() {
         <Features />
         <CarouselSection
           id="testimonials"
-          heading="What we learned."
+          heading="We heard that"
           label="testimonials"
           items={testimonialItems}
+          cardSize={640}
+          cardClassName="border border-line"
         />
         <CarouselSection
           id="past-events"
-          heading="What you missed."
+          heading="Something, Somewhere"
           label="past events"
           items={pastEventItems}
         />

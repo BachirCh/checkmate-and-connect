@@ -1,0 +1,77 @@
+/*
+ * DepthText, adapted for inline use inside a headline. See DepthText.tsx for
+ * the full list of departures from the upstream component.
+ *
+ * The one that matters here: the layers and the face inherit their type from
+ * the heading instead of declaring their own font-size, weight, line-height
+ * and tracking. Upstream sets all four, which inside our <h1> would drop the
+ * word off the baseline and give it different tracking from the words either
+ * side of it.
+ */
+
+.depth-text {
+  display: inline-block;
+  perspective: var(--depth-text-perspective);
+  perspective-origin: 50% 48%;
+  isolation: isolate;
+}
+
+.depth-text__stage {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  transform-style: preserve-3d;
+  transform-origin: 50% 50%;
+  will-change: transform;
+}
+
+.depth-text__layer,
+.depth-text__layer::before,
+.depth-text__face {
+  grid-area: 1 / 1;
+  display: inline-block;
+  font: inherit;
+  letter-spacing: inherit;
+  white-space: nowrap;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  font-kerning: normal;
+  text-rendering: geometricPrecision;
+}
+
+.depth-text__layer {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  filter: saturate(0.95) brightness(0.92);
+  pointer-events: none;
+  user-select: none;
+}
+
+/* The depth copies are drawn as generated content, never as DOM text. The
+   face alone carries the real string, so the <h1> still reads (and indexes)
+   as "Your next move starts here" rather than repeating the word once per
+   layer. */
+.depth-text__layer::before {
+  content: attr(data-text);
+}
+
+.depth-text__face {
+  position: relative;
+  z-index: 1;
+  color: var(--depth-text-face-color);
+  text-shadow: var(--depth-text-shadow);
+  transform: translateZ(0.6px);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .depth-text {
+    cursor: default;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .depth-text__stage {
+    will-change: auto;
+  }
+}
