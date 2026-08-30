@@ -16,7 +16,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     { href: '/admin/members', label: 'Members' },
     // Studio is hosted by Sanity rather than embedded — see sanity.cli.ts
     {
-      href: process.env.NEXT_PUBLIC_SANITY_STUDIO_URL || 'https://checkmate-connect.sanity.studio',
+      href: process.env.NEXT_PUBLIC_SANITY_STUDIO_URL || 'https://c-c.sanity.studio',
       label: 'Studio ↗',
       external: true,
     },

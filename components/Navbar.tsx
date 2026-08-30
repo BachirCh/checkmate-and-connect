@@ -8,14 +8,15 @@ import { MessageUsButton } from '@/components/MessageUs';
 import { lockBodyScroll } from '@/lib/bodyScrollLock';
 import { ButtonLink } from '@/components/ui/Button';
 import { Container } from '@/components/ui/Container';
-import { site } from '@/lib/site';
 
 /**
  * Only routes that actually exist appear here.
  *
  * The Figma nav shows "Events"; /events was deleted, and there is no RSVP to
  * point at either: nobody has to register to turn up on a Wednesday. The nav
- * actions are the same pair used site-wide, LinkedIn then "Message us".
+ * actions are the same pair used site-wide (see CtaPair) — "Suggest a talk",
+ * then "Message us" — composed by hand here because the nav sizes them to the
+ * bar on desktop and to the full drawer width on mobile.
  */
 const LINKS = [
   { href: '/about', label: 'About' },
@@ -67,8 +68,8 @@ export default function Navbar() {
                 {link.label}
               </Link>
             ))}
-            <ButtonLink href={site.social.linkedin} className="ml-2">
-              Follow on LinkedIn
+            <ButtonLink href="/speak" className="ml-2">
+              Suggest a talk
             </ButtonLink>
             <MessageUsButton />
           </div>
@@ -109,8 +110,8 @@ export default function Navbar() {
                 {link.label}
               </Link>
             ))}
-            <ButtonLink href={site.social.linkedin} className="mt-2 w-full">
-              Follow on LinkedIn
+            <ButtonLink href="/speak" className="mt-2 w-full">
+              Suggest a talk
             </ButtonLink>
             <MessageUsButton className="w-full" />
           </Container>

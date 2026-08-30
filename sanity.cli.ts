@@ -12,8 +12,11 @@ import { defineCliConfig } from 'sanity/cli';
  */
 export default defineCliConfig({
   api: {
-    projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
-    dataset: process.env.NEXT_PUBLIC_SANITY_DATASET,
+    projectId: process.env.SANITY_STUDIO_PROJECT_ID,
+    dataset: process.env.SANITY_STUDIO_DATASET,
   },
-  studioHost: 'checkmate-connect',
+  studioHost: 'c-c',
+  deployment: {
+    appId: 'vk0rd9cv7t59k743u7nqxynh',
+  },
 });

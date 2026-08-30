@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { ButtonLink } from '@/components/ui/Button';
+import { CtaPair } from '@/components/ui/CtaPair';
 import { Container } from '@/components/ui/Container';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { organizationJsonLd } from '@/lib/seo/jsonLd';
@@ -25,11 +25,22 @@ export const metadata: Metadata = {
 
 /**
  * Every claim on this page is traceable to something public: the LinkedIn
- * page, the venue, the event artwork, the partner logos in the CMS. Deliberately
- * absent: a founding date, founder names, and an organisers section — none of
- * those have been confirmed, and inventing them would put false facts on a
+ * page, the venue, the event artwork, the partner logos in the CMS. Still
+ * deliberately absent: a founding date, and any bio copy for the people below
+ * — neither has been confirmed, and inventing them would put false facts on a
  * page whose whole job is to be the trustworthy answer to "what is C&C?".
  */
+
+/**
+ * Names, roles, portraits and running order are taken from the C&C Figma file
+ * (56784:2453). Photos are the crops set there, exported square.
+ */
+const PEOPLE = [
+  { name: 'Ali El Kandoussi', role: 'President & Co-founder', slug: 'ali-el-kandoussi' },
+  { name: 'Hicham Houmane', role: 'Co-founder', slug: 'hicham-houmane' },
+  { name: 'Chakib Dekik', role: 'Board Member', slug: 'chakib-dekik' },
+  { name: 'Bachir Cherrat', role: 'Board Member', slug: 'bachir-cherrat' },
+];
 const SECTIONS = [
   {
     heading: 'What it is',
@@ -100,13 +111,47 @@ export default function AboutPage() {
                   ))}
                 </div>
               ))}
+
+              {/*
+                Sits inside the same bordered column as the prose blocks so it
+                keeps the page rhythm. Square corners match the artboard and the
+                homepage carousel cards; the hero is the only rounded media.
+              */}
+              <div className="border-b border-line py-12">
+                <h2 className="font-display text-[clamp(28px,4vw,40px)] font-bold leading-tight tracking-[-0.02em]">
+                  Who runs it
+                </h2>
+
+                <ul className="mt-10 grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-4">
+                  {PEOPLE.map((person) => (
+                    <li key={person.slug} className="flex h-full flex-col">
+                      <img
+                        src={`/img/team-${person.slug}-400.webp`}
+                        srcSet={`/img/team-${person.slug}-400.webp 1x, /img/team-${person.slug}-800.webp 2x`}
+                        alt={`${person.name}, ${person.role} of ${site.name}.`}
+                        width={400}
+                        height={400}
+                        loading="lazy"
+                        decoding="async"
+                        className="aspect-square w-full bg-raised object-cover"
+                      />
+                      <p className="mt-4 font-display text-body font-semibold leading-snug tracking-[-0.01em] text-ink">
+                        {person.name}
+                      </p>
+                      {/* mt-auto so the roles share a baseline when a longer
+                          name above them wraps to a second line. */}
+                      <p className="mt-auto pt-1 text-caption text-muted">{person.role}</p>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
 
             <dl className="mt-16 grid max-w-[760px] grid-cols-2 gap-x-6 gap-y-10 lg:grid-cols-4">
               {[
                 { v: site.stats.members, l: 'people in the community' },
                 { v: site.stats.cadence, l: 'every Wednesday, 18:00' },
-                { v: site.stats.price, l: 'no ticket, no pitch' },
+                { v: site.stats.price, l: 'no ticket, no registration' },
                 { v: site.stats.venue, l: 'Casablanca' },
               ].map((s) => (
                 <div key={s.l}>
@@ -121,12 +166,7 @@ export default function AboutPage() {
               ))}
             </dl>
 
-            <div className="mt-16 flex flex-col gap-3.5 sm:flex-row">
-              <ButtonLink href={site.social.linkedin}>Follow on LinkedIn</ButtonLink>
-              <ButtonLink href="/members" variant="secondary">
-                See the members
-              </ButtonLink>
-            </div>
+            <CtaPair className="mt-16" />
           </Container>
         </section>
       </main>

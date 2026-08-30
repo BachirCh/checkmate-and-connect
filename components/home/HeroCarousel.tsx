@@ -1,23 +1,25 @@
 'use client';
 
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 /**
  * Auto-advancing hero carousel.
  *
- * No arrows by request — position and progress are carried entirely by the
- * segmented line timer at the bottom, one segment per slide, the active one
- * filling over the slide duration.
- *
- * Those segments are real buttons rather than decorative bars. Content that
- * animates on its own needs some way for a person to take control of it
- * (WCAG 2.2.2), and with the arrows gone these are the only affordance left.
- * Auto-advance also pauses on hover, on keyboard focus, and while the tab is
- * hidden — the last one stops a pile of queued transitions firing the moment
+ * No arrows and no per-slide segments by request: advancing is automatic only,
+ * and the single bar at the bottom is a decorative timer for the current slide
+ * rather than a control. Auto-advance still pauses on hover and while the tab
+ * is hidden — the latter stops a pile of queued transitions firing the moment
  * someone comes back.
  *
- * Under `prefers-reduced-motion` nothing moves by itself and the slide
- * transition is dropped; the buttons still work.
+ * Under `prefers-reduced-motion` nothing moves by itself: the slide transition
+ * is dropped and the carousel holds on the first frame.
+ *
+ * ACCESSIBILITY: with the segments gone there is no longer a control to pause
+ * or step the carousel, which WCAG 2.2.2 (Pause, Stop, Hide) asks for on
+ * content that animates for more than five seconds. The reduced-motion path
+ * covers the people most affected and hover covers pointer users, but touch
+ * and keyboard users have no way to hold a frame. Restoring that needs a
+ * visible control of some kind.
  */
 
 export type HeroSlide = {
@@ -32,13 +34,12 @@ const DURATION_MS = 6000;
 
 export function HeroCarousel({ slides }: { slides: HeroSlide[] }) {
   const [index, setIndex] = useState(0);
-  // Two independent reasons to hold: the pointer/focus is inside, or the tab
-  // is in the background. They were one boolean at first, which meant a
+  // Two independent reasons to hold: the pointer is inside, or the tab is in
+  // the background. They were one boolean at first, which meant a
   // visibilitychange could clear a hover pause out from under the user.
   const [engaged, setEngaged] = useState(false);
   const [backgrounded, setBackgrounded] = useState(false);
   const [reduced, setReduced] = useState(false);
-  const rootRef = useRef<HTMLDivElement>(null);
   const paused = engaged || backgrounded;
 
   useEffect(() => {
@@ -66,24 +67,16 @@ export function HeroCarousel({ slides }: { slides: HeroSlide[] }) {
   }, [index, paused, reduced, slides.length]);
 
   const hold = useCallback(() => setEngaged(true), []);
-  const release = useCallback(() => {
-    // Keep paused while focus is still somewhere inside the carousel.
-    const active = document.activeElement;
-    if (rootRef.current && active && rootRef.current.contains(active)) return;
-    setEngaged(false);
-  }, []);
+  const release = useCallback(() => setEngaged(false), []);
 
   return (
     <div
-      ref={rootRef}
       role="group"
       aria-roledescription="carousel"
       aria-label="Photos from recent Checkmate & Connect events"
       className="relative mt-16 overflow-hidden rounded-media"
       onMouseEnter={hold}
       onMouseLeave={release}
-      onFocus={hold}
-      onBlur={release}
     >
       <div
         className="flex"
@@ -106,58 +99,42 @@ export function HeroCarousel({ slides }: { slides: HeroSlide[] }) {
             loading={i === 0 ? 'eager' : 'lazy'}
             decoding="async"
             aria-hidden={i !== index}
-            className="aspect-[1200/460] w-full shrink-0 object-cover"
+            // Taller on phones: the 2.6:1 artboard crop is only ~144px tall at
+            // 375px wide, which reads as a strip rather than a photo.
+            className="aspect-[16/9] w-full shrink-0 object-cover sm:aspect-[1200/460]"
           />
         ))}
       </div>
 
       {slides.length > 1 ? (
         /*
-          The segments sit on a dark blurred pill. Without it the timer reads
-          fine on dark frames and is nearly invisible on bright ones, and it
-          is the only progress affordance the carousel has.
+          One bar, no pill behind it. It carries progress through the current
+          slide only — not position in the set — and is inert, so it is hidden
+          from assistive tech rather than announced as a control.
+
+          The pill used to supply the contrast that keeps the bar readable on a
+          bright frame. A drop-shadow does that job instead: it follows the
+          rounded shape rather than boxing it, and it costs nothing on the dark
+          frames where the bar already reads.
         */
-        <div className="absolute inset-x-0 bottom-5 flex justify-center">
-          <div className="flex items-center gap-2 rounded-pill bg-canvas/55 px-3 py-1.5 backdrop-blur-sm">
-            {slides.map((slide, i) => (
-              <button
-                key={slide.src}
-                type="button"
-                onClick={() => setIndex(i)}
-                aria-label={`Show photo ${i + 1} of ${slides.length}`}
-                aria-current={i === index}
-                className="group h-5 w-10 px-0 py-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lime"
-              >
-                {/*
-                  The active track is brighter than the rest. Once the bar has
-                  drained it is empty like its neighbours, so without this the
-                  current slide is unreadable at the end of every cycle.
-                */}
-                <span
-                  className={`block h-1 w-full overflow-hidden rounded-pill ${
-                    i === index ? 'bg-ink/45' : 'bg-ink/20'
-                  } group-hover:bg-ink/60`}
-                >
-                  <span
-                    // Remounting on slide change restarts the drain.
-                    key={`${i === index}-${index}`}
-                    className="block h-full w-full origin-left rounded-pill bg-ink"
-                    style={
-                      i === index
-                        ? {
-                            animation: reduced
-                              ? 'none'
-                              : `hero-timer ${DURATION_MS}ms linear forwards`,
-                            animationPlayState: paused ? 'paused' : 'running',
-                            transform: reduced ? 'scaleX(1)' : undefined,
-                          }
-                        : { transform: 'scaleX(0)' }
-                    }
-                  />
-                </span>
-              </button>
-            ))}
-          </div>
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-x-0 bottom-5 flex justify-center drop-shadow-[0_1px_3px_rgba(0,0,0,0.75)]"
+        >
+          <span className="block h-1 w-24 overflow-hidden rounded-pill bg-ink/25">
+            <span
+              // Remounting on slide change restarts the drain.
+              key={index}
+              className="block h-full w-full origin-left rounded-pill bg-ink"
+              style={{
+                animation: reduced
+                  ? 'none'
+                  : `hero-timer ${DURATION_MS}ms linear forwards`,
+                animationPlayState: paused ? 'paused' : 'running',
+                transform: reduced ? 'scaleX(1)' : undefined,
+              }}
+            />
+          </span>
         </div>
       ) : null}
     </div>

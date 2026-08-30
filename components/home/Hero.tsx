@@ -1,7 +1,6 @@
-import { MessageUsButton } from '@/components/MessageUs';
 import { DepthText } from '@/components/ui/DepthText';
 import { HeroCarousel, type HeroSlide } from './HeroCarousel';
-import { ButtonLink } from '@/components/ui/Button';
+import { CtaPair } from '@/components/ui/CtaPair';
 import { Container } from '@/components/ui/Container';
 import { Icon } from '@/components/ui/Icon';
 import { site } from '@/lib/site';
@@ -42,7 +41,7 @@ const STATS: {
 }[] = [
   { value: site.stats.members, label: 'members' },
   { value: site.stats.cadence, label: 'every Wednesday, 18:00' },
-  { value: site.stats.price, label: 'no ticket, no pitch' },
+  { value: site.stats.price, label: 'no ticket, no registration' },
   {
     value: site.stats.venue,
     label: 'Open in Maps',
@@ -69,10 +68,7 @@ export default function Hero() {
           {site.description}
         </p>
 
-        <div className="mt-10 flex flex-col gap-3.5 sm:flex-row">
-          <ButtonLink href={site.social.linkedin}>Follow on LinkedIn</ButtonLink>
-          <MessageUsButton />
-        </div>
+        <CtaPair className="mt-10" />
 
         <HeroCarousel slides={SLIDES} />
 

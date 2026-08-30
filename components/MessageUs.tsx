@@ -7,9 +7,11 @@ import { lockBodyScroll } from '@/lib/bodyScrollLock';
 import { site } from '@/lib/site';
 
 /**
- * "Message us" is the secondary CTA everywhere the primary is "Follow on
- * LinkedIn". There is no contact form and no inbox to run, so the dialog just
- * hands over the two channels an organiser actually watches.
+ * "Message us" is the site-wide secondary CTA, paired with "Suggest a talk"
+ * (see CtaPair). There is no contact form and no inbox to run, so the dialog
+ * just hands over the two channels an organiser actually watches — LinkedIn
+ * included, which is why dropping the old "Follow on LinkedIn" primary does
+ * not strand that channel.
  *
  * Deliberately not a <dialog>: the native element's backdrop cannot be styled
  * from a token and its top-layer stacking fights the sticky nav on iOS.

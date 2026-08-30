@@ -69,3 +69,46 @@ export function nextMeetupISO(from: Date = new Date()): string {
   next.setUTCHours(site.event.startHour - CASABLANCA_OFFSET_HOURS, 0, 0, 0);
   return next.toISOString();
 }
+
+export type MeetupDateOption = {
+  /** ISO calendar date, e.g. '2026-09-02'. What gets stored. */
+  value: string;
+  /** e.g. 'Wednesday 2 September'. What the visitor reads. */
+  label: string;
+};
+
+/** 'Wednesday 2 September' — no leading zero, no year, no comma. */
+export function formatMeetupDate(date: Date): string {
+  return new Intl.DateTimeFormat('en-GB', {
+    weekday: 'long',
+    day: 'numeric',
+    month: 'long',
+    timeZone: 'UTC',
+  }).format(date);
+}
+
+/**
+ * The next `count` Wednesdays, starting from the one people could still turn
+ * up to — nextMeetupISO() rolls over once a Wednesday's 18:00 has passed, so
+ * nobody is offered a date that has already happened.
+ *
+ * Recomputed on the server for every submission as well as for the form, so a
+ * stale page cannot smuggle in an expired date.
+ */
+export function upcomingMeetupDates(
+  count = 4,
+  from: Date = new Date()
+): MeetupDateOption[] {
+  const first = new Date(nextMeetupISO(from));
+
+  return Array.from({ length: count }, (_, i) => {
+    const date = new Date(first);
+    date.setUTCDate(first.getUTCDate() + i * 7);
+    return {
+      // nextMeetupISO() lands at 17:00 UTC, so the UTC day is still the
+      // Wednesday itself and slicing the ISO string is safe.
+      value: date.toISOString().slice(0, 10),
+      label: formatMeetupDate(date),
+    };
+  });
+}

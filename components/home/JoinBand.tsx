@@ -1,6 +1,5 @@
 import { MarkShape } from '@/components/brand/MarkShape';
-import { MessageUsButton } from '@/components/MessageUs';
-import { ButtonLink } from '@/components/ui/Button';
+import { CtaPair } from '@/components/ui/CtaPair';
 import { Container } from '@/components/ui/Container';
 import { site } from '@/lib/site';
 
@@ -28,10 +27,7 @@ export default function JoinBand() {
             {site.event.startHour}:00 at {site.event.venueName}. Come when you can.
           </p>
 
-          <div className="mt-9 flex flex-col items-center justify-center gap-3.5 sm:flex-row">
-            <ButtonLink href={site.social.linkedin}>Follow on LinkedIn</ButtonLink>
-            <MessageUsButton />
-          </div>
+          <CtaPair className="mt-9" align="center" />
         </div>
       </Container>
     </section>
