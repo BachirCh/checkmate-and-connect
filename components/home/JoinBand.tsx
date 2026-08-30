@@ -1,4 +1,5 @@
 import { MarkShape } from '@/components/brand/MarkShape';
+import { MessageUsButton } from '@/components/MessageUs';
 import { ButtonLink } from '@/components/ui/Button';
 import { Container } from '@/components/ui/Container';
 import { site } from '@/lib/site';
@@ -28,10 +29,8 @@ export default function JoinBand() {
           </p>
 
           <div className="mt-9 flex flex-col items-center justify-center gap-3.5 sm:flex-row">
-            <ButtonLink href={site.social.meetup}>Join on Meetup</ButtonLink>
-            <ButtonLink href={site.social.linkedin} variant="secondary">
-              Follow on LinkedIn
-            </ButtonLink>
+            <ButtonLink href={site.social.linkedin}>Follow on LinkedIn</ButtonLink>
+            <MessageUsButton />
           </div>
         </div>
       </Container>

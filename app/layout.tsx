@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || site.url),
   title: {
     template: `%s | ${site.name}`,
-    default: `${site.name} — Casablanca's weekly startup community`,
+    default: `${site.name} | Casablanca's weekly startup community`,
   },
   description: site.description,
   keywords: [
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     canonical: '/',
   },
   openGraph: {
-    title: `${site.name} — Casablanca's weekly startup community`,
+    title: `${site.name} | Casablanca's weekly startup community`,
     description: site.description,
     type: 'website',
     locale: site.locale,
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: `${site.name} — Casablanca's weekly startup community`,
+    title: `${site.name} | Casablanca's weekly startup community`,
     description: site.description,
     images: ['/og-image.png'],
   },

@@ -71,7 +71,7 @@ export function LogoLink({ size, className }: LogoProps) {
   return (
     <Link
       href="/"
-      aria-label={`${site.name} — home`}
+      aria-label={`${site.name} home`}
       className="inline-flex focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-lime rounded-badge"
     >
       <Logo size={size} className={className} />

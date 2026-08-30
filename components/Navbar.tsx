@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { LogoLink } from '@/components/brand/Logo';
+import { MessageUsButton } from '@/components/MessageUs';
+import { lockBodyScroll } from '@/lib/bodyScrollLock';
 import { ButtonLink } from '@/components/ui/Button';
 import { Container } from '@/components/ui/Container';
 import { site } from '@/lib/site';
@@ -11,9 +13,9 @@ import { site } from '@/lib/site';
 /**
  * Only routes that actually exist appear here.
  *
- * The Figma nav shows "Events" and "About"; /events was deleted and its
- * listings live on Meetup, so RSVP points there instead of to a page that
- * would duplicate — and go stale against — the real source.
+ * The Figma nav shows "Events"; /events was deleted, and there is no RSVP to
+ * point at either: nobody has to register to turn up on a Wednesday. The nav
+ * actions are the same pair used site-wide, LinkedIn then "Message us".
  */
 const LINKS = [
   { href: '/about', label: 'About' },
@@ -31,10 +33,8 @@ export default function Navbar() {
 
   // Don't let the page scroll behind an open drawer
   useEffect(() => {
-    document.body.style.overflow = open ? 'hidden' : '';
-    return () => {
-      document.body.style.overflow = '';
-    };
+    if (!open) return;
+    return lockBodyScroll();
   }, [open]);
 
   useEffect(() => {
@@ -67,9 +67,10 @@ export default function Navbar() {
                 {link.label}
               </Link>
             ))}
-            <ButtonLink href={site.social.meetup} className="ml-2">
-              RSVP
+            <ButtonLink href={site.social.linkedin} className="ml-2">
+              Follow on LinkedIn
             </ButtonLink>
+            <MessageUsButton />
           </div>
 
           {/* Mobile */}
@@ -108,9 +109,10 @@ export default function Navbar() {
                 {link.label}
               </Link>
             ))}
-            <ButtonLink href={site.social.meetup} className="mt-2 w-full">
-              RSVP on Meetup
+            <ButtonLink href={site.social.linkedin} className="mt-2 w-full">
+              Follow on LinkedIn
             </ButtonLink>
+            <MessageUsButton className="w-full" />
           </Container>
         </div>
       ) : null}

@@ -34,7 +34,7 @@ export function organizationJsonLd() {
         addressCountry: site.event.addressCountry,
       },
     },
-    sameAs: [site.social.meetup, site.social.linkedin, site.social.instagram],
+    sameAs: [site.social.linkedin, site.social.instagram],
   };
 }
 
@@ -70,7 +70,7 @@ export function eventJsonLd() {
       price: '0',
       priceCurrency: 'MAD',
       availability: 'https://schema.org/InStock',
-      url: site.social.meetup,
+      url: site.url,
     },
     organizer: { '@id': ORG_ID },
   };

@@ -9,14 +9,14 @@ import { site } from '@/lib/site';
  * the FAQPage structured data — Google requires the answer to be visible on
  * the page, so they must never diverge.
  *
- * Every answer is grounded in something verifiable (the Meetup listing, the
+ * Every answer is grounded in something verifiable (the LinkedIn page, the
  * venue, the format). Nothing here is aspirational marketing.
  */
 export const faq = [
   {
     question: 'Who can come to Checkmate & Connect?',
     answer:
-      'Anyone. Founders, investors, engineers, designers, students and people who are simply curious about the Casablanca startup scene. There is no application, no membership and no vetting — if you want to be in the room, you are welcome in the room.',
+      'Anyone. Founders, investors, engineers, designers, students and people who are simply curious about the Casablanca startup scene. There is no application, no membership and no vetting. If you want to be in the room, you are welcome in the room.',
   },
   {
     question: 'Do I need to know how to play chess?',
@@ -26,11 +26,11 @@ export const faq = [
   {
     question: 'Is it free?',
     answer:
-      'Yes. There is no ticket, no membership fee and no obligation to pitch anything. Just turn up.',
+      'Yes. There is no ticket, no membership fee, no registration and no obligation to pitch anything. Just turn up.',
   },
   {
     question: 'When and where does it happen?',
-    answer: `Every Wednesday at ${site.event.startHour}:00 at ${site.event.venueName} in ${site.event.addressLocality}. Doors are open from then on — come when you can, even if you are late.`,
+    answer: `Every Wednesday at ${site.event.startHour}:00 at ${site.event.venueName} in ${site.event.addressLocality}. Doors are open from then on, so come when you can, even if you are late.`,
   },
   {
     question: 'What actually happens at a meetup?',
@@ -39,11 +39,11 @@ export const faq = [
   },
   {
     question: 'How big is the community?',
-    answer: `Checkmate & Connect has ${site.stats.members} members on Meetup, with a few dozen people at a typical weekly meetup and several hundred at larger events like our hackathons.`,
+    answer: `Checkmate & Connect is ${site.stats.members} people, with a few dozen at a typical Wednesday and several hundred at larger events like our hackathons.`,
   },
   {
-    question: 'How do I stay in the loop?',
+    question: 'Do I need to register, and how do I stay in the loop?',
     answer:
-      'Join the group on Meetup for event announcements and RSVPs, and follow us on LinkedIn and Instagram for recaps and speaker news.',
+      'You do not need to register. There is no sign-up list and no RSVP: turn up on a Wednesday and you are in. Follow us on LinkedIn and Instagram if you want the announcements, recaps and speaker news, or send us a message and we will answer.',
   },
 ] as const;

@@ -24,8 +24,8 @@ export const metadata: Metadata = {
 };
 
 /**
- * Every claim on this page is traceable to something public: the Meetup group,
- * the venue, the event artwork, the partner logos in the CMS. Deliberately
+ * Every claim on this page is traceable to something public: the LinkedIn
+ * page, the venue, the event artwork, the partner logos in the CMS. Deliberately
  * absent: a founding date, founder names, and an organisers section — none of
  * those have been confirmed, and inventing them would put false facts on a
  * page whose whole job is to be the trustworthy answer to "what is C&C?".
@@ -34,21 +34,21 @@ const SECTIONS = [
   {
     heading: 'What it is',
     body: [
-      "Checkmate & Connect is a community of people building things in Casablanca — founders, investors, engineers, designers, students, and a fair number of people who just wanted to see what was going on. It runs as a weekly meetup, and several times a year it scales up into workshops, bootcamps and hackathons.",
+      "Checkmate & Connect is a community of people building things in Casablanca: founders, investors, engineers, designers, students, and a fair number of people who just wanted to see what was going on. It runs as a weekly meetup, and several times a year it scales up into workshops, bootcamps and hackathons.",
       "The format is deliberately low-friction. There is no ticket, no membership, no application and no obligation to pitch anything. You turn up, you talk to people, you leave with something you did not have before. That is the whole model.",
     ],
   },
   {
     heading: 'How a Wednesday runs',
     body: [
-      `Doors open at ${site.event.startHour}:00 at ${site.event.venueName}. The first stretch is open networking — the part most people actually come for. Somewhere in the middle there is usually a talk or a workshop from someone who has built the thing they are talking about, which tends to be more useful than a panel about building things.`,
+      `Doors open at ${site.event.startHour}:00 at ${site.event.venueName}. The first stretch is open networking, which is the part most people actually come for. Somewhere in the middle there is usually a talk or a workshop from someone who has built the thing they are talking about, which tends to be more useful than a panel about building things.`,
       "Then the room goes back to talking. There are chess boards and games on the tables, which exist to give people who do not know anyone an easy way in. Nobody has to play.",
     ],
   },
   {
     heading: 'Who comes',
     body: [
-      `The Meetup group has ${site.stats.members} members. A typical Wednesday is a few dozen people; the larger events run into the hundreds. It skews early-stage — people at the idea, first-hire or first-customer stage — but there is no filter on who is welcome.`,
+      `The community is ${site.stats.members} people. A typical Wednesday is a few dozen people; the larger events run into the hundreds. It skews early-stage, mostly people at the idea, first-hire or first-customer stage, but there is no filter on who is welcome.`,
       "Past events have brought in speakers and partners from across Moroccan industry and academia, including OCP, UM6P and Bewize.",
     ],
   },
@@ -63,7 +63,7 @@ export default function AboutPage() {
           {
             '@context': 'https://schema.org',
             '@type': 'AboutPage',
-            name: `${title} — ${site.name}`,
+            name: `${title} | ${site.name}`,
             description,
             url: `${site.url}/about`,
             mainEntity: { '@id': `${site.url}/#organization` },
@@ -104,7 +104,7 @@ export default function AboutPage() {
 
             <dl className="mt-16 grid max-w-[760px] grid-cols-2 gap-x-6 gap-y-10 lg:grid-cols-4">
               {[
-                { v: site.stats.members, l: 'members on Meetup' },
+                { v: site.stats.members, l: 'people in the community' },
                 { v: site.stats.cadence, l: 'every Wednesday, 18:00' },
                 { v: site.stats.price, l: 'no ticket, no pitch' },
                 { v: site.stats.venue, l: 'Casablanca' },
@@ -122,7 +122,7 @@ export default function AboutPage() {
             </dl>
 
             <div className="mt-16 flex flex-col gap-3.5 sm:flex-row">
-              <ButtonLink href={site.social.meetup}>Join on Meetup</ButtonLink>
+              <ButtonLink href={site.social.linkedin}>Follow on LinkedIn</ButtonLink>
               <ButtonLink href="/members" variant="secondary">
                 See the members
               </ButtonLink>

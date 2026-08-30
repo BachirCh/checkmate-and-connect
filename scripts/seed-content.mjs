@@ -58,10 +58,17 @@ function asset(publicId) {
   };
 }
 
+// Array order becomes the `order` field, which is what the band sorts on. The
+// band fits four per row on desktop, so this reads as two deliberate lines.
 const LOGOS = [
   { slug: 'ocp', name: 'OCP' },
   { slug: 'um6p', name: 'UM6P' },
+  { slug: 'cgem', name: 'CGEM' },
+  { slug: 'oracle', name: 'Oracle' },
+  { slug: 'sobrus', name: 'Sobrus' },
   { slug: 'bewize', name: 'Bewize' },
+  { slug: 'datao', name: 'Datao' },
+  { slug: 'aress', name: 'Aress' },
 ];
 
 // eventDate is set only for the hackathon set, which is dated from the event

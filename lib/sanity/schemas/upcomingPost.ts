@@ -23,7 +23,7 @@ export default defineType({
       name: 'url',
       title: 'RSVP link',
       type: 'url',
-      description: 'Usually the Meetup event page.',
+      description: 'Usually the LinkedIn post for the event.',
     }),
     cloudinaryImageField('upcomingPosts'),
   ],

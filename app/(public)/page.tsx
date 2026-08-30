@@ -51,7 +51,7 @@ export default async function HomePage() {
   const testimonialItems: CarouselItem[] = testimonials.map((t) => ({
     _id: t._id,
     image: t.image,
-    alt: `“${t.quote}” — ${t.authorName}${t.authorRole ? `, ${t.authorRole}` : ''}`,
+    alt: `“${t.quote}”, ${t.authorName}${t.authorRole ? `, ${t.authorRole}` : ''}`,
   }));
 
   const pastEventItems: CarouselItem[] = pastEvents.map((e) => ({
@@ -95,7 +95,7 @@ export default async function HomePage() {
         <Features />
         <CarouselSection
           id="testimonials"
-          heading="What people say."
+          heading="What we learned."
           label="testimonials"
           items={testimonialItems}
         />

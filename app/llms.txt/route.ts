@@ -24,9 +24,10 @@ workshops, bootcamps and hackathons through the year.
 
 - Location: ${site.event.venueName}, ${site.event.addressLocality}, Morocco
 - Schedule: every Wednesday, ${site.event.startHour}:00 (Africa/Casablanca)
-- Next meetup: ${nextMeetupISO()}
-- Cost: free — no ticket, no membership, no application
-- Community size: ${site.stats.members} members on Meetup
+- Next gathering: ${nextMeetupISO()}
+- Cost: free. No ticket, no membership, no application
+- Registration: none. No RSVP and no sign-up list, just turn up
+- Community size: ${site.stats.members} people
 - Open to: anyone (founders, investors, engineers, designers, students)
 - Chess knowledge is not required to attend
 
@@ -39,9 +40,9 @@ workshops, bootcamps and hackathons through the year.
 
 ## Links
 
-- Meetup (event listings and RSVPs): ${site.social.meetup}
-- LinkedIn: ${site.social.linkedin}
+- LinkedIn (announcements, and the best way to reach an organiser): ${site.social.linkedin}
 - Instagram: ${site.social.instagram}
+- WhatsApp: ${site.contact.whatsappNumber}
 
 ## Frequently asked questions
 

@@ -20,6 +20,11 @@ const VARIANTS = {
 
 type Variant = keyof typeof VARIANTS;
 
+/** Same pill as ButtonLink, for anything that has to be a real <button>. */
+export function buttonClass(variant: Variant = 'primary', className?: string) {
+  return `${BASE} ${VARIANTS[variant]} ${className ?? ''}`;
+}
+
 type ButtonLinkProps = {
   variant?: Variant;
   children: ReactNode;
@@ -44,5 +49,24 @@ export function ButtonLink({
     >
       {children}
     </Link>
+  );
+}
+
+type ButtonProps = {
+  variant?: Variant;
+  children: ReactNode;
+} & ComponentProps<'button'>;
+
+export function Button({
+  variant = 'primary',
+  children,
+  className,
+  type = 'button',
+  ...rest
+}: ButtonProps) {
+  return (
+    <button type={type} className={buttonClass(variant, className)} {...rest}>
+      {children}
+    </button>
   );
 }

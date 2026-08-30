@@ -56,7 +56,7 @@ export default function MemberRow({ member }: MemberRowProps) {
       </td>
 
       {/* Company */}
-      <td className="p-4 text-gray-300">{member.company || '—'}</td>
+      <td className="p-4 text-gray-300">{member.company || '-'}</td>
 
       {/* Submitted */}
       <td className="p-4 text-gray-400 text-sm">

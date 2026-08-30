@@ -11,11 +11,12 @@ export type Logo = {
 /**
  * Speakers / partners band.
  *
- * Renders exactly what is in the CMS. The Figma artboard shows twelve slots,
- * but nine of those were template placeholders for companies with no relation
- * to C&C — publishing them would be a false claim of association. The grid
- * centres itself so three logos look deliberate rather than unfinished, and
- * grows to six-up as real ones are added.
+ * Renders exactly what is in the CMS — never a template placeholder, since a
+ * logo here reads as a claim of association. The grid centres itself and wraps,
+ * so any count from three upwards looks deliberate rather than unfinished.
+ *
+ * Masters live in assets/logos/ as white-on-transparent PNGs: the canvas is
+ * #0a0a0a, so a logo supplied in its brand colours disappears into it.
  */
 export default function SpeakersBand({ logos }: { logos: Logo[] }) {
   if (logos.length === 0) return null;
@@ -27,11 +28,16 @@ export default function SpeakersBand({ logos }: { logos: Logo[] }) {
           id="speakers-heading"
           className="mx-auto max-w-[520px] text-center font-sans text-lead font-normal text-ink"
         >
-          Bringing Morocco&rsquo;s best speakers. From next-gen startups to
-          established enterprises.
+          Bringing Morocco&rsquo;s best speakers. From established enterprises
+          to next-gen startups.
         </h2>
 
-        <ul className="mt-12 flex flex-wrap items-center justify-center gap-x-6 gap-y-8">
+        {/*
+          Capped at four logos per row: 4 × 152px + 3 × 24px of gap. Wrapping
+          rather than a fixed grid, so a short last row still centres itself
+          instead of leaving a hole where the empty cells would be.
+        */}
+        <ul className="mx-auto mt-12 flex max-w-[680px] flex-wrap items-center justify-center gap-x-6 gap-y-8">
           {logos.map((logo) => {
             const src = cloudinaryUrl(logo.image, { width: 152 });
             if (!src) return null;

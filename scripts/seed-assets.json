@@ -124,5 +124,50 @@
     "height": 720,
     "resource_type": "image",
     "secure_url": "https://res.cloudinary.com/dnamxu2im/image/upload/v1787948237/checkmate/testimonials/bachir-cherrat.png"
+  },
+  {
+    "public_id": "checkmate/logos/aress",
+    "version": 1788048746,
+    "format": "png",
+    "width": 363,
+    "height": 60,
+    "resource_type": "image",
+    "secure_url": "https://res.cloudinary.com/dnamxu2im/image/upload/v1788048746/checkmate/logos/aress.png"
+  },
+  {
+    "public_id": "checkmate/logos/sobrus",
+    "version": 1788048756,
+    "format": "png",
+    "width": 1436,
+    "height": 495,
+    "resource_type": "image",
+    "secure_url": "https://res.cloudinary.com/dnamxu2im/image/upload/v1788048756/checkmate/logos/sobrus.png"
+  },
+  {
+    "public_id": "checkmate/logos/cgem",
+    "version": 1788048071,
+    "format": "png",
+    "width": 890,
+    "height": 708,
+    "resource_type": "image",
+    "secure_url": "https://res.cloudinary.com/dnamxu2im/image/upload/v1788048071/checkmate/logos/cgem.png"
+  },
+  {
+    "public_id": "checkmate/logos/datao",
+    "version": 1788048757,
+    "format": "png",
+    "width": 617,
+    "height": 147,
+    "resource_type": "image",
+    "secure_url": "https://res.cloudinary.com/dnamxu2im/image/upload/v1788048757/checkmate/logos/datao.png"
+  },
+  {
+    "public_id": "checkmate/logos/oracle",
+    "version": 1788048758,
+    "format": "png",
+    "width": 923,
+    "height": 120,
+    "resource_type": "image",
+    "secure_url": "https://res.cloudinary.com/dnamxu2im/image/upload/v1788048758/checkmate/logos/oracle.png"
   }
 ]

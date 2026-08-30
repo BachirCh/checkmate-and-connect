@@ -16,7 +16,6 @@ const COLUMNS = [
   {
     heading: 'Follow',
     links: [
-      { label: 'Meetup', href: site.social.meetup },
       { label: 'LinkedIn', href: site.social.linkedin },
       { label: 'Instagram', href: site.social.instagram },
     ],
