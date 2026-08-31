@@ -1,4 +1,5 @@
 import { Container } from '@/components/ui/Container';
+import { SpeakersHeadline } from './SpeakersHeadline';
 import { cloudinarySrcSet, cloudinaryUrl, type CloudinaryAsset } from '@/lib/cloudinary/url';
 
 export type Logo = {
@@ -24,13 +25,7 @@ export default function SpeakersBand({ logos }: { logos: Logo[] }) {
   return (
     <section className="py-10" aria-labelledby="speakers-heading">
       <Container>
-        <h2
-          id="speakers-heading"
-          className="mx-auto max-w-[520px] text-center font-sans text-lead font-normal text-ink"
-        >
-          Bringing Morocco&rsquo;s best speakers. From established enterprises
-          to next-gen startups.
-        </h2>
+        <SpeakersHeadline id="speakers-heading" />
 
         {/*
           Four per row on desktop: 4 × 152px + 3 × 24px of gap = 680. Wrapping
