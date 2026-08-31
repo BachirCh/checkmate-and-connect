@@ -82,7 +82,7 @@ export default function Hero() {
         {/* No max-width: at 88px this sits on one line across the 1200px
             measure, exactly as in the artboard. It wraps naturally below ~1180px. */}
         <h1 className="mt-6 font-display text-[clamp(40px,6.4vw,88px)] font-bold leading-none tracking-[-0.02em]">
-          Your next <DepthText text="move" /> starts here
+          Your next <DepthText text="move" className="italic" /> starts here
         </h1>
 
         <p className="mt-7 max-w-[720px] text-lead text-secondary">

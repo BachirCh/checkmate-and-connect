@@ -74,7 +74,7 @@ export default async function MembersPage() {
           eyebrow="The community"
           title={
             <>
-              The people who took the <DepthText text="move" />
+              The people who took the <DepthText text="move" className="italic" />
             </>
           }
           lead="Join our next event to be findable by founders, entrepreneurs, next-gen startups and established companies."
