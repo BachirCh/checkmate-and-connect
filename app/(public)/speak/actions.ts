@@ -3,6 +3,7 @@
 import { redirect } from 'next/navigation';
 import { writeClient } from '@/lib/sanity/write-client';
 import { talkProposalSchema } from '@/lib/validations/talk-proposal';
+import { normaliseLinkedIn } from '@/lib/linkedin';
 import { checkHoneypot, rateLimit } from '@/lib/spam-protection';
 import { upcomingMeetupDates } from '@/lib/site';
 
@@ -78,7 +79,7 @@ export async function submitTalkProposalAction(
     await writeClient.create({
       _type: 'talkProposal',
       fullName,
-      linkedIn: linkedIn || undefined,
+      linkedIn: normaliseLinkedIn(linkedIn) || undefined,
       subjectTitle,
       subjectDescription,
       preferredDate,

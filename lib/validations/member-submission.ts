@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { ROLE_VALUES } from '@/lib/content/roles';
+import { LINKEDIN_ERROR, isLinkedInUrl } from '@/lib/linkedin';
 
 // Client-side validation schema (with File instanceof check)
 export const memberSubmissionSchema = z.object({
@@ -11,10 +12,7 @@ export const memberSubmissionSchema = z.object({
     .string()
     .optional()
     .or(z.literal(''))
-    .refine(
-      (val) => !val || val === '' || (val.startsWith('http') && val.includes('linkedin.com')),
-      'LinkedIn URL must be a valid URL from linkedin.com'
-    ),
+    .refine((val) => !val || isLinkedInUrl(val), LINKEDIN_ERROR),
   _honey: z.string().optional(),
 });
 
@@ -30,9 +28,6 @@ export const serverMemberSubmissionSchema = z.object({
     .string()
     .optional()
     .or(z.literal(''))
-    .refine(
-      (val) => !val || val === '' || (val.startsWith('http') && val.includes('linkedin.com')),
-      'LinkedIn URL must be a valid URL from linkedin.com'
-    ),
+    .refine((val) => !val || isLinkedInUrl(val), LINKEDIN_ERROR),
   _honey: z.string().optional(),
 });

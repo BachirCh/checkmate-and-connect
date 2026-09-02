@@ -4,6 +4,7 @@ import { redirect } from 'next/navigation';
 import { writeClient } from '@/lib/sanity/write-client';
 import { serverMemberSubmissionSchema } from '@/lib/validations/member-submission';
 import { checkHoneypot, rateLimit } from '@/lib/spam-protection';
+import { normaliseLinkedIn } from '@/lib/linkedin';
 
 export async function submitMemberAction(prevState: any, formData: FormData) {
   try {
@@ -71,7 +72,7 @@ export async function submitMemberAction(prevState: any, formData: FormData) {
       jobTitle,
       role: validationResult.data.role,
       company: company || undefined,
-      linkedIn: linkedIn || undefined,
+      linkedIn: normaliseLinkedIn(linkedIn || '') || undefined,
       status: 'pending',
       submittedAt: new Date().toISOString(),
     });

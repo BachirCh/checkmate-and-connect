@@ -81,7 +81,6 @@ export default function TalkProposalForm({
             id="fullName"
             {...register('fullName')}
             className={fieldClass}
-            placeholder="Sara Bennani"
             autoComplete="name"
             aria-describedby={
               getFieldError('fullName') ? 'fullName-error' : undefined
@@ -99,7 +98,6 @@ export default function TalkProposalForm({
             id="linkedIn"
             {...register('linkedIn')}
             className={fieldClass}
-            placeholder="https://linkedin.com/in/sarabennani"
             aria-describedby={
               getFieldError('linkedIn') ? 'linkedIn-error' : undefined
             }
@@ -117,7 +115,6 @@ export default function TalkProposalForm({
             id="subjectTitle"
             {...register('subjectTitle')}
             className={fieldClass}
-            placeholder="How we raised our first round in Morocco"
             aria-describedby={
               getFieldError('subjectTitle') ? 'subjectTitle-error' : undefined
             }
@@ -128,7 +125,6 @@ export default function TalkProposalForm({
           label="Subject description"
           name="subjectDescription"
           required
-          hint="A few lines on what you will cover."
           error={getFieldError('subjectDescription')}
         >
           <textarea
@@ -136,7 +132,6 @@ export default function TalkProposalForm({
             rows={6}
             {...register('subjectDescription')}
             className={textareaClass}
-            placeholder="What you will talk about, and who it is for."
             aria-describedby={
               getFieldError('subjectDescription')
                 ? 'subjectDescription-error'
@@ -149,7 +144,6 @@ export default function TalkProposalForm({
           label="Preferred date"
           name="preferredDate"
           required
-          hint="We meet every Wednesday."
           error={getFieldError('preferredDate')}
         >
           <div className="relative">
@@ -197,9 +191,6 @@ export default function TalkProposalForm({
           {busy ? 'Sending...' : 'Send suggestion'}
         </button>
 
-        <p className="text-micro text-muted">
-          No slot is booked yet. We will confirm before the date.
-        </p>
       </form>
     </div>
   );

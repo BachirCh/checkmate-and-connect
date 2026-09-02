@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { LINKEDIN_ERROR, isLinkedInUrl } from '@/lib/linkedin';
 
 /**
  * Shared by the client form and the server action, so a visitor never sees a
@@ -16,10 +17,7 @@ export const talkProposalSchema = z.object({
     .string()
     .optional()
     .or(z.literal(''))
-    .refine(
-      (val) => !val || (val.startsWith('http') && val.includes('linkedin.com')),
-      'Please paste a linkedin.com link, starting with https://'
-    ),
+    .refine((val) => !val || isLinkedInUrl(val), LINKEDIN_ERROR),
   subjectTitle: z
     .string()
     .min(4, 'Please give your talk a title.')

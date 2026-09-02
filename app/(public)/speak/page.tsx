@@ -38,7 +38,7 @@ export default function SpeakPage() {
       <PageHeader
         eyebrow="Speak"
         title="Suggest a talk."
-        lead="Got something worth sharing? Tell us what it is and pick a Wednesday. Anyone can suggest one — you do not have to be a member."
+        lead="Got something worth sharing? Tell us what it is and pick a Wednesday. Anyone can suggest one. You do not have to be a member."
       />
 
       <section className="pb-24">
