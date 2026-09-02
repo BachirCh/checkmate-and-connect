@@ -11,7 +11,7 @@ type Props = { params: Promise<{ date: string }> };
 
 type Response = {
   _id: string;
-  fullName: string;
+  fullName?: string;
   liked: string;
   improve: string;
   submittedAt?: string;
@@ -68,7 +68,7 @@ export default async function FeedbackSessionPage({ params }: Props) {
               className="rounded-lg border border-[#333333] bg-[#1a1a1a] p-6"
             >
               <div className="flex flex-wrap items-baseline justify-between gap-2">
-                <h3 className="font-semibold">{response.fullName}</h3>
+                <h3 className="font-semibold">{response.fullName || 'Anonymous'}</h3>
                 {response.submittedAt ? (
                   <time
                     dateTime={response.submittedAt}

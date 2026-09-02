@@ -6,10 +6,12 @@ import { z } from 'zod';
  * should not argue with it.
  */
 export const eventFeedbackSchema = z.object({
+  // Optional: plenty of people would rather say the honest thing unsigned,
+  // and a name is not what makes the answer useful.
   fullName: z
     .string()
-    .min(2, 'Please enter your name.')
-    .max(100, 'Please keep this under 100 characters.'),
+    .max(100, 'Please keep this under 100 characters.')
+    .optional(),
   liked: z
     .string()
     .min(3, 'Tell us one thing.')

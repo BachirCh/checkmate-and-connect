@@ -15,7 +15,7 @@ export default defineType({
       name: 'fullName',
       title: 'Full name',
       type: 'string',
-      validation: (Rule) => Rule.required(),
+      description: 'Optional — feedback can be left anonymously.',
     }),
     defineField({
       name: 'liked',

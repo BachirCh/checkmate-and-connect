@@ -61,7 +61,7 @@ export default function EventFeedbackForm({
 
   const onSubmit = (data: EventFeedbackData) => {
     const formData = new FormData();
-    formData.append('fullName', data.fullName);
+    formData.append('fullName', data.fullName ?? '');
     formData.append('liked', data.liked);
     formData.append('improve', data.improve);
     formData.append('eventDate', eventDate);
@@ -114,7 +114,6 @@ export default function EventFeedbackForm({
         <FormField
           label="Full name"
           name="fullName"
-          required
           error={getFieldError('fullName')}
         >
           <input

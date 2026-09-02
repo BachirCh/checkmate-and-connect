@@ -64,7 +64,9 @@ export async function submitFeedbackAction(
 
     await writeClient.create({
       _type: 'eventFeedback',
-      fullName,
+      // Omit rather than store '' — the Studio preview and the admin list both
+      // fall back to "Anonymous" on a missing name, not on an empty one.
+      fullName: fullName || undefined,
       liked,
       improve,
       eventDate,
