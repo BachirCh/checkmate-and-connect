@@ -110,7 +110,6 @@ export default function MemberSubmissionForm() {
           label="Role"
           name="role"
           required
-          hint="Sets the chess piece on your directory card."
           error={getFieldError("role")}
         >
           <div className="relative">
