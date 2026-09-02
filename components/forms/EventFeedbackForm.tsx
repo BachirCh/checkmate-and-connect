@@ -122,7 +122,6 @@ export default function EventFeedbackForm({
             id="fullName"
             {...register('fullName')}
             className={fieldClass}
-            placeholder="Sara Bennani"
             autoComplete="name"
             aria-describedby={
               getFieldError('fullName') ? 'fullName-error' : undefined
@@ -133,12 +132,11 @@ export default function EventFeedbackForm({
         <FormField
           label={
             <SignalLabel icon="check-circle" tone="positive">
-              What worked
+              One thing you liked most tonight
             </SignalLabel>
           }
           name="liked"
           required
-          hint="One thing to keep."
           error={getFieldError('liked')}
         >
           <textarea
@@ -146,7 +144,6 @@ export default function EventFeedbackForm({
             rows={4}
             {...register('liked')}
             className={textareaClass}
-            placeholder="The thing you liked most tonight."
             aria-describedby={getFieldError('liked') ? 'liked-error' : undefined}
           />
         </FormField>
@@ -154,12 +151,11 @@ export default function EventFeedbackForm({
         <FormField
           label={
             <SignalLabel icon="x-circle" tone="negative">
-              What to improve
+              One thing to change or improve next time
             </SignalLabel>
           }
           name="improve"
           required
-          hint="One thing to change next time."
           error={getFieldError('improve')}
         >
           <textarea
@@ -167,7 +163,6 @@ export default function EventFeedbackForm({
             rows={4}
             {...register('improve')}
             className={textareaClass}
-            placeholder="The thing you would change."
             aria-describedby={
               getFieldError('improve') ? 'improve-error' : undefined
             }
