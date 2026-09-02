@@ -1,5 +1,9 @@
 import { defineType, defineField } from 'sanity';
-import { ROLES } from '@/lib/content/roles';
+// Relative, not '@/…': the Studio is built by Vite via `sanity deploy`, which
+// does not read the tsconfig path alias Next uses. An '@/' import here fails
+// the Studio build while leaving the website build green, so the Studio
+// silently keeps serving whatever schema was last published.
+import { ROLES } from '../../content/roles';
 
 export default defineType({
   name: 'member',
