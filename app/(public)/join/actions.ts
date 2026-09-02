@@ -10,6 +10,7 @@ export async function submitMemberAction(prevState: any, formData: FormData) {
     // Extract fields from FormData
     const name = formData.get('name') as string;
     const jobTitle = formData.get('jobTitle') as string;
+    const role = formData.get('role') as string;
     const company = formData.get('company') as string;
     const linkedIn = formData.get('linkedIn') as string;
     const photo = formData.get('photo') as File;
@@ -34,6 +35,7 @@ export async function submitMemberAction(prevState: any, formData: FormData) {
     const validationResult = serverMemberSubmissionSchema.safeParse({
       name,
       jobTitle,
+      role,
       company,
       linkedIn,
       _honey,
@@ -99,6 +101,7 @@ export async function submitMemberAction(prevState: any, formData: FormData) {
         current: slug,
       },
       jobTitle,
+      role: validationResult.data.role,
       company: company || undefined,
       linkedIn: linkedIn || undefined,
       photo: {

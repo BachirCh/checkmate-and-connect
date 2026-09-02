@@ -1,9 +1,11 @@
 import { z } from 'zod';
+import { ROLE_VALUES } from '@/lib/content/roles';
 
 // Client-side validation schema (with File instanceof check)
 export const memberSubmissionSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters').max(100, 'Name must be less than 100 characters'),
   jobTitle: z.string().min(2, 'Job title must be at least 2 characters').max(100, 'Job title must be less than 100 characters'),
+  role: z.enum(ROLE_VALUES, { message: 'Pick the role that fits you best' }),
   company: z.string().max(100, 'Company must be less than 100 characters').optional().or(z.literal('')),
   linkedIn: z
     .string()
@@ -29,6 +31,7 @@ export type MemberSubmissionData = z.infer<typeof memberSubmissionSchema>;
 export const serverMemberSubmissionSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters').max(100, 'Name must be less than 100 characters'),
   jobTitle: z.string().min(2, 'Job title must be at least 2 characters').max(100, 'Job title must be less than 100 characters'),
+  role: z.enum(ROLE_VALUES, { message: 'Pick the role that fits you best' }),
   company: z.string().max(100, 'Company must be less than 100 characters').optional().or(z.literal('')),
   linkedIn: z
     .string()

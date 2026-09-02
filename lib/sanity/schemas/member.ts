@@ -1,4 +1,5 @@
 import { defineType, defineField } from 'sanity';
+import { ROLES } from '@/lib/content/roles';
 
 export default defineType({
   name: 'member',
@@ -34,6 +35,17 @@ export default defineType({
       name: 'jobTitle',
       title: 'Job Title',
       type: 'string',
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'role',
+      title: 'Role',
+      type: 'string',
+      description: 'Picks the chess-piece artwork shown on the members grid.',
+      options: {
+        list: ROLES.map((r) => ({ title: r.label, value: r.value })),
+        layout: 'radio',
+      },
       validation: (Rule) => Rule.required(),
     }),
     defineField({

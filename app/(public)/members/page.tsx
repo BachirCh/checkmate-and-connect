@@ -31,7 +31,7 @@ export default async function MembersPage() {
   // opt in through /join and only appear once an organiser approves them.
   const members: DirectoryMember[] = await client.fetch(
     `*[_type == "member" && status == "approved"] | order(approvedAt desc) {
-      _id, name, photo, jobTitle, company, linkedIn
+      _id, name, photo, jobTitle, role, company, linkedIn
     }`
   );
 

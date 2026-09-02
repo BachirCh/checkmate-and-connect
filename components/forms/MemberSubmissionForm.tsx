@@ -8,8 +8,10 @@ import {
   type MemberSubmissionData,
 } from "@/lib/validations/member-submission";
 import { submitMemberAction } from "@/app/(public)/join/actions";
-import FormField, { fieldClass } from "./FormField";
+import FormField, { fieldClass, selectClass } from "./FormField";
 import ImageUpload from "./ImageUpload";
+import { Icon } from "@/components/ui/Icon";
+import { ROLES } from "@/lib/content/roles";
 
 export default function MemberSubmissionForm() {
   const [state, formAction, isPending] = useActionState(
@@ -36,6 +38,7 @@ export default function MemberSubmissionForm() {
     const formData = new FormData();
     formData.append("name", data.name);
     formData.append("jobTitle", data.jobTitle);
+    formData.append("role", data.role);
     formData.append("company", data.company || "");
     formData.append("linkedIn", data.linkedIn || "");
     formData.append("photo", data.photo);
@@ -101,6 +104,38 @@ export default function MemberSubmissionForm() {
               getFieldError("jobTitle") ? "jobTitle-error" : undefined
             }
           />
+        </FormField>
+
+        <FormField
+          label="Role"
+          name="role"
+          required
+          hint="Sets the chess piece on your directory card."
+          error={getFieldError("role")}
+        >
+          <div className="relative">
+            <select
+              id="role"
+              defaultValue=""
+              {...register("role")}
+              className={selectClass}
+              aria-describedby={getFieldError("role") ? "role-error" : undefined}
+            >
+              <option value="" disabled>
+                Pick one
+              </option>
+              {ROLES.map((role) => (
+                <option key={role.value} value={role.value}>
+                  {role.label}
+                </option>
+              ))}
+            </select>
+            <Icon
+              name="caret-down"
+              size={18}
+              className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-muted"
+            />
+          </div>
         </FormField>
 
         <FormField
