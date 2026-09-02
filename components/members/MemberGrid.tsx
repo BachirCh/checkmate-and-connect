@@ -39,27 +39,44 @@ export function MemberGrid({ members }: { members: DirectoryMember[] }) {
       {members.map((member) => {
         const role = isRole(member.role) ? member.role : null;
         const art = role ? roleArt(role) : null;
+        const artHover = role ? roleArt(role, 'hover') : null;
         const src = member.photo
           ? urlFor(member.photo).width(560).height(560).fit('crop').auto('format').url()
           : null;
 
         return (
-          <li key={member._id}>
-            <div className="aspect-square overflow-hidden rounded-card bg-raised">
-              {art ? (
-                <img
-                  src={art.src}
-                  srcSet={art.srcSet}
-                  // The piece is decoration for a role already written below,
-                  // so naming the role here would have a screen reader say it
-                  // twice.
-                  alt=""
-                  width={560}
-                  height={560}
-                  loading="lazy"
-                  decoding="async"
-                  className="h-full w-full object-cover"
-                />
+          <li key={member._id} className="group/card">
+            <div className="relative aspect-square overflow-hidden rounded-card bg-raised">
+              {art && artHover ? (
+                <>
+                  {/*
+                    Both frames are stacked and crossfaded on hover. The piece
+                    is decoration for a role already written below, so naming
+                    the role in alt text would have a screen reader say it
+                    twice — and the hover frame is the same piece again.
+                  */}
+                  <img
+                    src={art.src}
+                    srcSet={art.srcSet}
+                    alt=""
+                    width={560}
+                    height={560}
+                    loading="lazy"
+                    decoding="async"
+                    className="h-full w-full object-cover transition-opacity duration-200 group-hover/card:opacity-0 motion-reduce:transition-none"
+                  />
+                  <img
+                    src={artHover.src}
+                    srcSet={artHover.srcSet}
+                    alt=""
+                    aria-hidden
+                    width={560}
+                    height={560}
+                    loading="lazy"
+                    decoding="async"
+                    className="absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-200 group-hover/card:opacity-100 motion-reduce:transition-none"
+                  />
+                </>
               ) : src ? (
                 <img
                   src={src}

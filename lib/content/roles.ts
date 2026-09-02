@@ -29,10 +29,17 @@ export function roleLabel(role: Role): string {
   return ROLES.find((r) => r.value === role)?.label ?? role;
 }
 
-/** 1x and 2x sources for a role's card artwork. */
-export function roleArt(role: Role) {
+/**
+ * 1x and 2x sources for a role's card artwork.
+ *
+ * `hover` is the same piece tilted. Both frames are in the DOM and crossfaded
+ * with CSS so the grid stays a server component and the second frame is
+ * already decoded before anyone points at it.
+ */
+export function roleArt(role: Role, variant: 'rest' | 'hover' = 'rest') {
+  const name = variant === 'hover' ? `${role}-hover` : role;
   return {
-    src: `/img/role-${role}-560.webp`,
-    srcSet: `/img/role-${role}-560.webp 1x, /img/role-${role}-1120.webp 2x`,
+    src: `/img/role-${name}-560.webp`,
+    srcSet: `/img/role-${name}-560.webp 1x, /img/role-${name}-1120.webp 2x`,
   };
 }
