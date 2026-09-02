@@ -26,10 +26,11 @@ export default defineType({
       name: 'photo',
       title: 'Photo',
       type: 'image',
+      description:
+        'Optional, and no longer collected at /join — the members grid shows the role\'s chess piece. Only older submissions have one.',
       options: {
         hotspot: true,
       },
-      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'jobTitle',

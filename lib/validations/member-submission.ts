@@ -15,13 +15,6 @@ export const memberSubmissionSchema = z.object({
       (val) => !val || val === '' || (val.startsWith('http') && val.includes('linkedin.com')),
       'LinkedIn URL must be a valid URL from linkedin.com'
     ),
-  photo: z
-    .instanceof(File, { message: 'Photo is required' })
-    .refine((file) => file.size <= 5 * 1024 * 1024, 'Photo must be less than 5MB')
-    .refine(
-      (file) => ['image/jpeg', 'image/png', 'image/webp'].includes(file.type),
-      'Photo must be JPEG, PNG, or WebP'
-    ),
   _honey: z.string().optional(),
 });
 

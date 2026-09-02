@@ -9,7 +9,6 @@ import {
 } from "@/lib/validations/member-submission";
 import { submitMemberAction } from "@/app/(public)/join/actions";
 import FormField, { fieldClass, selectClass } from "./FormField";
-import ImageUpload from "./ImageUpload";
 import { Icon } from "@/components/ui/Icon";
 import { ROLES } from "@/lib/content/roles";
 
@@ -23,15 +22,11 @@ export default function MemberSubmissionForm() {
   const {
     register,
     handleSubmit,
-    setValue,
-    watch,
     formState: { errors },
   } = useForm<MemberSubmissionData>({
     resolver: zodResolver(memberSubmissionSchema),
     mode: "onBlur",
   });
-
-  const photoValue = watch("photo");
 
   const onSubmit = async (data: MemberSubmissionData) => {
     // Create FormData and append all fields
@@ -41,7 +36,6 @@ export default function MemberSubmissionForm() {
     formData.append("role", data.role);
     formData.append("company", data.company || "");
     formData.append("linkedIn", data.linkedIn || "");
-    formData.append("photo", data.photo);
     formData.append("_honey", data._honey || "");
 
     // Call the server action inside a transition
@@ -169,15 +163,6 @@ export default function MemberSubmissionForm() {
             }
           />
         </FormField>
-
-        <ImageUpload
-          label="Profile Photo"
-          name="photo"
-          required
-          error={getFieldError("photo")}
-          value={photoValue}
-          onChange={(file) => setValue("photo", file as any)}
-        />
 
         {/* Honeypot field - hidden from users */}
         <div className="sr-only" aria-hidden="true">

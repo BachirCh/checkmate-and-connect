@@ -47,18 +47,18 @@ export function MemberGrid({ members }: { members: DirectoryMember[] }) {
         return (
           <li key={member._id} className="group/card">
             <div className="relative aspect-square overflow-hidden rounded-card bg-raised">
-              {art && artHover ? (
+              {role && art && artHover ? (
                 <>
                   {/*
                     Both frames are stacked and crossfaded on hover. The piece
-                    is decoration for a role already written below, so naming
-                    the role in alt text would have a screen reader say it
-                    twice — and the hover frame is the same piece again.
+                    is the only thing on the card naming the role now that the
+                    text label is gone, so it carries that in alt text; the
+                    hover frame is the same piece again and stays silent.
                   */}
                   <img
                     src={art.src}
                     srcSet={art.srcSet}
-                    alt=""
+                    alt={roleLabel(role)}
                     width={560}
                     height={560}
                     loading="lazy"
@@ -100,9 +100,6 @@ export function MemberGrid({ members }: { members: DirectoryMember[] }) {
             </div>
 
             <h2 className="mt-5 text-feature font-semibold text-ink">{member.name}</h2>
-            {role ? (
-              <p className="mt-1 text-caption font-medium text-lime">{roleLabel(role)}</p>
-            ) : null}
             <p className="mt-1 text-caption text-muted">
               {member.jobTitle}
               {member.company ? ` · ${member.company}` : ''}

@@ -42,11 +42,23 @@ export default function MemberRow({ member }: MemberRowProps) {
     <tr className="border-b border-gray-800 hover:bg-gray-900 transition-colors">
       {/* Photo */}
       <td className="p-4">
-        <img
-          src={urlFor(member.photo).width(50).height(50).url()}
-          alt={member.name}
-          className="w-12 h-12 rounded-full object-cover"
-        />
+        {/* Photos are no longer collected at /join, so only older members
+            have one. Fall back to the initial rather than calling urlFor on
+            an undefined asset, which throws. */}
+        {member.photo ? (
+          <img
+            src={urlFor(member.photo).width(50).height(50).url()}
+            alt={member.name}
+            className="w-12 h-12 rounded-full object-cover"
+          />
+        ) : (
+          <div
+            aria-hidden
+            className="grid w-12 h-12 place-items-center rounded-full bg-gray-800 font-medium text-gray-400"
+          >
+            {member.name.trim().charAt(0).toUpperCase()}
+          </div>
+        )}
       </td>
 
       {/* Name/Title */}

@@ -13,7 +13,6 @@ export async function submitMemberAction(prevState: any, formData: FormData) {
     const role = formData.get('role') as string;
     const company = formData.get('company') as string;
     const linkedIn = formData.get('linkedIn') as string;
-    const photo = formData.get('photo') as File;
     const _honey = formData.get('_honey') as string;
 
     // SPAM PROTECTION LAYER 1: Honeypot check
@@ -55,37 +54,6 @@ export async function submitMemberAction(prevState: any, formData: FormData) {
       };
     }
 
-    // Validate photo separately (File validation)
-    if (!photo || !(photo instanceof File) || photo.size === 0) {
-      return {
-        success: false,
-        error: 'Photo is required.',
-        fieldErrors: { photo: 'Photo is required' },
-      };
-    }
-
-    if (photo.size > 5 * 1024 * 1024) {
-      return {
-        success: false,
-        error: 'Photo must be less than 5MB.',
-        fieldErrors: { photo: 'Photo must be less than 5MB' },
-      };
-    }
-
-    if (!['image/jpeg', 'image/png', 'image/webp'].includes(photo.type)) {
-      return {
-        success: false,
-        error: 'Photo must be JPEG, PNG, or WebP.',
-        fieldErrors: { photo: 'Photo must be JPEG, PNG, or WebP' },
-      };
-    }
-
-    // Upload photo to Sanity CDN
-    const imageAsset = await writeClient.assets.upload('image', photo, {
-      filename: photo.name,
-      contentType: photo.type,
-    });
-
     // Generate slug from name
     const slug = name
       .toLowerCase()
@@ -104,13 +72,6 @@ export async function submitMemberAction(prevState: any, formData: FormData) {
       role: validationResult.data.role,
       company: company || undefined,
       linkedIn: linkedIn || undefined,
-      photo: {
-        _type: 'image',
-        asset: {
-          _type: 'reference',
-          _ref: imageAsset._id,
-        },
-      },
       status: 'pending',
       submittedAt: new Date().toISOString(),
     });
