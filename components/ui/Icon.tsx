@@ -7,7 +7,21 @@
  * 3 MiB ceiling.
  *
  * Paths are Phosphor Regular 2.1.1 (MIT), viewBox 0 0 256 256.
+ *
+ * `chess-pawn` is the exception: Phosphor has no chess piece, and the brand
+ * pawn is the logo mark (pawn plus C monogram), which is identity rather than
+ * an icon. So it is drawn here on the same 256 grid and stroked at 16 — the
+ * weight Phosphor Regular reads at — so it sits beside the others evenly.
  */
+
+/** Drawn for stroke rendering, not fill. See the note above. */
+const STROKE_PATHS = {
+  'chess-pawn': [
+    'M128,32a32,32,0,1,1-32,32A32,32,0,0,1,128,32Z',
+    'M102,90c4,32-8,56-30,80h112c-22-24-34-48-30-80',
+    'M56,178a8,8,0,0,1,8-8h128a8,8,0,0,1,8,8v26a8,8,0,0,1-8,8H64a8,8,0,0,1-8-8Z',
+  ],
+} as const;
 
 const PATHS = {
   'users-three':
@@ -40,7 +54,7 @@ const PATHS = {
     'M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z',
 } as const;
 
-export type IconName = keyof typeof PATHS;
+export type IconName = keyof typeof PATHS | keyof typeof STROKE_PATHS;
 
 type IconProps = {
   name: IconName;
@@ -63,7 +77,21 @@ export function Icon({ name, size = 24, className, title }: IconProps) {
       focusable="false"
     >
       {title ? <title>{title}</title> : null}
-      <path d={PATHS[name]} />
+      {name in STROKE_PATHS ? (
+        STROKE_PATHS[name as keyof typeof STROKE_PATHS].map((d) => (
+          <path
+            key={d}
+            d={d}
+            fill="none"
+            stroke="currentColor"
+            strokeWidth={16}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        ))
+      ) : (
+        <path d={PATHS[name as keyof typeof PATHS]} />
+      )}
     </svg>
   );
 }

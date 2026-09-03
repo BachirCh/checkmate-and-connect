@@ -53,7 +53,7 @@ const SECTIONS = [
     heading: 'How a Wednesday runs',
     body: [
       `Doors open at ${site.event.startHour}:00 at ${site.event.venueName}. The first stretch is open networking, which is the part most people actually come for. Somewhere in the middle there is usually a talk or a workshop from someone who has built the thing they are talking about, which tends to be more useful than a panel about building things.`,
-      "Then the room goes back to talking. There are chess boards and games on the tables, which exist to give people who do not know anyone an easy way in. Nobody has to play.",
+      `Then the room goes back to talking. Chess games and other ice breakers are out on the tables from ${site.event.startHour}:00 onwards, to give people who do not know anyone an easy way in. Nobody has to play.`,
     ],
   },
   {
