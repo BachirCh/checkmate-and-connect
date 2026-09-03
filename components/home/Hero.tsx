@@ -25,7 +25,7 @@ const SLIDES: HeroSlide[] = [
   {
     src: '/img/hero-image1-1200.webp',
     src2x: '/img/hero-image1-2400.webp',
-    alt: 'Members playing a game theory exercise on a whiteboard while a talk plays on the screen behind them.',
+    alt: 'A member smiling across a chess board mid-game at Commons Zerktouni, hand resting on his chin.',
   },
   {
     src: '/img/hero-image2-1200.webp',

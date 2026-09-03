@@ -36,7 +36,7 @@ const FEATURES: Feature[] = [
     detail: 'practical sessions from people who did it',
   },
   {
-    icon: 'chess-pawn',
+    icon: 'chess-knight',
     title: 'Chess games and fun',
     detail: 'chess boards and ice breakers on every table',
   },

@@ -8,19 +8,29 @@
  *
  * Paths are Phosphor Regular 2.1.1 (MIT), viewBox 0 0 256 256.
  *
- * `chess-pawn` is the exception: Phosphor has no chess piece, and the brand
- * pawn is the logo mark (pawn plus C monogram), which is identity rather than
- * an icon. So it is drawn here on the same 256 grid and stroked at 16 — the
- * weight Phosphor Regular reads at — so it sits beside the others evenly.
+ * `chess-knight` is the exception: Phosphor has no chess piece. Rather than
+ * hand-draw a horse head, it is lifted from lucide-react (ISC), already a
+ * dependency — copied rather than imported so the whole icon set stays one
+ * inlined component and no second icon runtime reaches the bundle.
+ *
+ * It is stroke-rendered on lucide's own 24 grid. Stroke is 1.75, not lucide's
+ * default 2: 2/24 is visibly heavier than Phosphor Regular's 16/256, and these
+ * sit side by side in the features grid. Checked at the 40px they render at.
  */
 
-/** Drawn for stroke rendering, not fill. See the note above. */
-const STROKE_PATHS = {
-  'chess-pawn': [
-    'M128,32a32,32,0,1,1-32,32A32,32,0,0,1,128,32Z',
-    'M102,90c4,32-8,56-30,80h112c-22-24-34-48-30-80',
-    'M56,178a8,8,0,0,1,8-8h128a8,8,0,0,1,8,8v26a8,8,0,0,1-8,8H64a8,8,0,0,1-8-8Z',
-  ],
+/** Stroke-rendered, and on their own grid. See the note above. */
+const STROKE_ICONS = {
+  'chess-knight': {
+    viewBox: '0 0 24 24',
+    strokeWidth: 1.75,
+    paths: [
+      'M5 20a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v1a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1z',
+      'M16.5 18c1-2 2.5-5 2.5-9a7 7 0 0 0-7-7H6.635a1 1 0 0 0-.768 1.64L7 5l-2.32 5.802a2 2 0 0 0 .95 2.526l2.87 1.456',
+      'm15 5 1.425-1.425',
+      'm17 8 1.53-1.53',
+      'M9.713 12.185 7 18',
+    ],
+  },
 } as const;
 
 const PATHS = {
@@ -54,7 +64,7 @@ const PATHS = {
     'M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z',
 } as const;
 
-export type IconName = keyof typeof PATHS | keyof typeof STROKE_PATHS;
+export type IconName = keyof typeof PATHS | keyof typeof STROKE_ICONS;
 
 type IconProps = {
   name: IconName;
@@ -65,26 +75,27 @@ type IconProps = {
 };
 
 export function Icon({ name, size = 24, className, title }: IconProps) {
+  const stroke = STROKE_ICONS[name as keyof typeof STROKE_ICONS];
+
   return (
     <svg
       width={size}
       height={size}
-      viewBox="0 0 256 256"
-      fill="currentColor"
+      viewBox={stroke ? stroke.viewBox : '0 0 256 256'}
+      fill={stroke ? 'none' : 'currentColor'}
       className={className}
       role={title ? 'img' : undefined}
       aria-hidden={title ? undefined : true}
       focusable="false"
     >
       {title ? <title>{title}</title> : null}
-      {name in STROKE_PATHS ? (
-        STROKE_PATHS[name as keyof typeof STROKE_PATHS].map((d) => (
+      {stroke ? (
+        stroke.paths.map((d) => (
           <path
             key={d}
             d={d}
-            fill="none"
             stroke="currentColor"
-            strokeWidth={16}
+            strokeWidth={stroke.strokeWidth}
             strokeLinecap="round"
             strokeLinejoin="round"
           />
