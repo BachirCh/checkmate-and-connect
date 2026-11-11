@@ -2,6 +2,7 @@ import member from './member';
 import eventFeedback from './eventFeedback';
 import logo from './logo';
 import pastEvent from './pastEvent';
+import presence from './presence';
 import talkProposal from './talkProposal';
 import testimonial from './testimonial';
 import upcomingPost from './upcomingPost';
@@ -11,6 +12,7 @@ export const schemas = [
   eventFeedback,
   logo,
   pastEvent,
+  presence,
   talkProposal,
   testimonial,
   upcomingPost,

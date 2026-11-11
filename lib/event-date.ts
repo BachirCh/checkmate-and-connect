@@ -75,3 +75,18 @@ export function currentSessionISO(from: Date = new Date()): string {
 export function currentSessionSlug(from: Date = new Date()): string {
   return toEventSlug(currentSessionISO(from));
 }
+
+/**
+ * Today's session if today is a Wednesday in Casablanca, otherwise null.
+ *
+ * What /presence keys off: check-in is only open on the day itself, so unlike
+ * currentSessionISO() this does not reach back to last week's Wednesday.
+ */
+export function todaysSessionISO(from: Date = new Date()): string | null {
+  const session = currentSessionISO(from);
+  const CASABLANCA_OFFSET_HOURS = 1;
+  const today = new Date(from.getTime() + CASABLANCA_OFFSET_HOURS * 3600_000)
+    .toISOString()
+    .slice(0, 10);
+  return session === today ? session : null;
+}
