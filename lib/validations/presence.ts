@@ -21,6 +21,11 @@ export const presenceSchema = z.object({
     .trim()
     .min(1, 'Tell us where you work.')
     .max(100, 'Please keep this under 100 characters.'),
+  // Must be ticked. Checked again on the server — the checkbox alone is only
+  // a courtesy, a crafted request would skip it.
+  agreedToTerms: z.boolean().refine((agreed) => agreed === true, {
+    message: 'Please agree to the Terms & Conditions.',
+  }),
   _honey: z.string().optional(),
 });
 

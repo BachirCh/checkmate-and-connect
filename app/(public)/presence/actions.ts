@@ -4,6 +4,7 @@ import { writeClient } from '@/lib/sanity/write-client';
 import { presenceSchema } from '@/lib/validations/presence';
 import { checkHoneypot, rateLimit } from '@/lib/spam-protection';
 import { todaysSessionISO } from '@/lib/event-date';
+import { TERMS_VERSION } from '@/lib/content/terms';
 
 export type PresenceState =
   | { ok: true }
@@ -18,6 +19,7 @@ export async function submitPresenceAction(
     const fullName = ((formData.get('fullName') as string) ?? '').trim();
     const role = ((formData.get('role') as string) ?? '').trim();
     const company = ((formData.get('company') as string) ?? '').trim();
+    const agreedToTerms = formData.get('agreedToTerms') === 'true';
     const _honey = (formData.get('_honey') as string) ?? '';
 
     if (checkHoneypot({ _honey })) {
@@ -37,7 +39,7 @@ export async function submitPresenceAction(
       return { ok: false, error: 'Too busy right now. Please try again in a minute.' };
     }
 
-    const result = presenceSchema.safeParse({ fullName, role, company, _honey });
+    const result = presenceSchema.safeParse({ fullName, role, company, agreedToTerms, _honey });
 
     if (!result.success) {
       const fieldErrors: Record<string, string> = {};
@@ -47,7 +49,14 @@ export async function submitPresenceAction(
           fieldErrors[field] = issue.message;
         }
       });
-      return { ok: false, error: 'Please fill in all three fields.', fieldErrors };
+      const onlyTerms = Object.keys(fieldErrors).every((field) => field === 'agreedToTerms');
+      return {
+        ok: false,
+        error: onlyTerms
+          ? 'Please agree to the Terms & Conditions to check in.'
+          : 'Please fill in all three fields and agree to the Terms & Conditions.',
+        fieldErrors,
+      };
     }
 
     await writeClient.create({
@@ -55,6 +64,7 @@ export async function submitPresenceAction(
       fullName: result.data.fullName,
       role: result.data.role,
       company: result.data.company,
+      termsVersion: TERMS_VERSION,
       eventDate,
       submittedAt: new Date().toISOString(),
     });

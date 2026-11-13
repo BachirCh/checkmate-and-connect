@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useActionState, useTransition } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -25,6 +26,7 @@ export default function PresenceForm() {
   } = useForm<PresenceData>({
     resolver: zodResolver(presenceSchema),
     mode: 'onBlur',
+    defaultValues: { agreedToTerms: false },
   });
 
   const onSubmit = (data: PresenceData) => {
@@ -32,6 +34,7 @@ export default function PresenceForm() {
     formData.append('fullName', data.fullName);
     formData.append('role', data.role);
     formData.append('company', data.company);
+    formData.append('agreedToTerms', String(data.agreedToTerms));
     formData.append('_honey', data._honey || '');
 
     startTransition(() => {
@@ -108,6 +111,49 @@ export default function PresenceForm() {
             aria-invalid={errors.company ? true : undefined}
           />
         </FormField>
+
+        {/* The terms open in a new tab so a half-filled form survives the read. */}
+        <div>
+          <label
+            htmlFor="agreedToTerms"
+            className="flex cursor-pointer touch-manipulation items-start gap-3.5"
+          >
+            <span className="relative mt-0.5 flex h-6 w-6 shrink-0">
+              <input
+                type="checkbox"
+                id="agreedToTerms"
+                {...register('agreedToTerms')}
+                aria-invalid={errors.agreedToTerms ? true : undefined}
+                aria-describedby={errors.agreedToTerms ? 'agreedToTerms-error' : undefined}
+                className="peer h-6 w-6 cursor-pointer appearance-none rounded-badge border border-line bg-raised transition-colors checked:border-lime checked:bg-lime aria-[invalid=true]:border-negative focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lime"
+              />
+              <Icon
+                name="check"
+                size={16}
+                className="pointer-events-none absolute left-1 top-1 text-canvas opacity-0 peer-checked:opacity-100"
+              />
+            </span>
+            <span className="text-caption leading-[22px] text-secondary">
+              I agree to the{' '}
+              <Link
+                href="/terms"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-medium text-ink underline underline-offset-4 transition-colors hover:text-lime focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lime"
+              >
+                Terms &amp; Conditions
+              </Link>
+              <abbr title="required" aria-label="required" className="ml-1 text-lime no-underline">
+                *
+              </abbr>
+            </span>
+          </label>
+          {errors.agreedToTerms ? (
+            <p id="agreedToTerms-error" role="alert" className="mt-2 text-micro text-negative">
+              {errors.agreedToTerms.message}
+            </p>
+          ) : null}
+        </div>
 
         {/* Honeypot */}
         <div className="sr-only" aria-hidden="true">

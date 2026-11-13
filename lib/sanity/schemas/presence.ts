@@ -30,6 +30,13 @@ export default defineType({
       validation: (Rule) => Rule.required().max(100),
     }),
     defineField({
+      name: 'termsVersion',
+      title: 'Terms version agreed',
+      description: 'The version of the Terms & Conditions ticked at check-in.',
+      type: 'string',
+      readOnly: true,
+    }),
+    defineField({
       name: 'eventDate',
       title: 'Session date',
       type: 'date',

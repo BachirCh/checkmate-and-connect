@@ -12,6 +12,7 @@ const COLUMNS = [
       { label: 'Members', href: '/members' },
       { label: 'Join the directory', href: '/join' },
       { label: 'Suggest a talk', href: '/speak' },
+      { label: 'Terms & Conditions', href: '/terms' },
     ],
   },
   {
